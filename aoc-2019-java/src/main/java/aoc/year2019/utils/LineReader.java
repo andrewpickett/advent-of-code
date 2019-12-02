@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class LineReader {
 
@@ -24,5 +25,9 @@ public final class LineReader {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	public static List<Integer> readLinesAsInts(final String filePath) {
+		return readLines(filePath).stream().map(Integer::valueOf).collect(Collectors.toList());
 	}
 }

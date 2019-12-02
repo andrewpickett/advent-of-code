@@ -29,5 +29,5 @@ def part_two():
 
 if __name__ == '__main__':
 	ir.read_lines('./input.txt')
-	print(part_one())
-	print(part_two())
+	print(part_one())  # 3382284
+	print(part_two())  # 5070541
