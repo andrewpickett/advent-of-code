@@ -1,6 +1,9 @@
+data = [int(x) for x in open("input.txt").readline().split('-')]
+
+
 def part_one():
 	counter = 0
-	for i in range(125730, 579381):
+	for i in range(data[0], data[1]):
 		if check_number_for_validity(str(i)):
 			counter += 1
 	return counter
@@ -8,7 +11,7 @@ def part_one():
 
 def part_two():
 	counter = 0
-	for i in range(125730, 579381):
+	for i in range(data[0], data[1]):
 		if check_number_for_validity(str(i), True):
 			counter += 1
 	return counter
