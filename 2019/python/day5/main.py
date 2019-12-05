@@ -14,6 +14,10 @@ def calculate_output(d, input_val):
 	while i < len(d):
 		op = d[i]
 		str_op = str(op).zfill(5)
+		# Looks complicated, but really it's just evaluating the index if we have parameter mode instruction...otherwise
+		# it's just using the "normal" index. I also check that the index doesn't go out of bounds...
+		# And only the first two parameters can really be variable. If there is a third parameter, it's an output
+		# parameter, which means it can never be in 'immediate' mode
 		first_param_idx = d[i+1] if (i+1 < len(d)) and (0 if op <= 99 else int(str_op[2])) == 0 else i+1
 		second_param_idx = d[i+2] if (i+2 < len(d)) and (0 if op <= 99 else int(str_op[1])) == 0 else i+2
 		if op == 99:
@@ -24,26 +28,26 @@ def calculate_output(d, input_val):
 
 
 def perform_operation(d, i, op, first_param_idx, second_param_idx, input_val):
-	if op == 1:
+	if op == 1:  # Addition
 		d[d[i+3]] = d[first_param_idx] + d[second_param_idx]
 		return 4
-	elif op == 2:
+	elif op == 2:  # Multiplication
 		d[d[i+3]] = d[first_param_idx] * d[second_param_idx]
 		return 4
-	elif op == 3:
+	elif op == 3:  # Input
 		d[d[i+1]] = input_val
 		return 2
-	elif op == 4:
+	elif op == 4:  # Output
 		print(d[first_param_idx])
 		return 2
-	elif op == 5:
+	elif op == 5:  # Jump if true
 		return d[second_param_idx] - i if d[first_param_idx] != 0 else 3
-	elif op == 6:
+	elif op == 6:  # Jump if false
 		return d[second_param_idx] - i if d[first_param_idx] == 0 else 3
-	elif op == 7:
+	elif op == 7:  # test if less than
 		d[d[i+3]] = 1 if d[first_param_idx] < d[second_param_idx] else 0
 		return 4
-	elif op == 8:
+	elif op == 8:  # test if equals
 		d[d[i+3]] = 1 if d[first_param_idx] == d[second_param_idx] else 0
 		return 4
 
