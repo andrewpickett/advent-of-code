@@ -1,4 +1,4 @@
-data = map(x -> parse(Int64, x), readlines("day1/input.txt"))
+data = map(x -> parse(Int64, x), readlines("input.txt"))
 
 calc_spec_fuel(val) = convert(Int64, floor(val / 3)) - 2
 part_one() = sum(map(calc_spec_fuel, data))

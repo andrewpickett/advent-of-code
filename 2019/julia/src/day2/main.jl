@@ -1,44 +1,35 @@
-data = map(x -> parse(Int64, x), readlines("day2/input.txt"))
+data = map(x -> parse(Int64, x), split(readline("input.txt"), ','))
 
 function create_data_list(noun, verb)
-   op_data = copy(data)
-   op_data[1] = noun
-   op_data[2] = verb
-   return op_data
+	op_data = copy(data)
+	op_data[2] = noun
+	op_data[3] = verb
+	return op_data
 end
 
-function calculate_output(d):
-    for i in 0:4:length(d)
-	 	if d[i] == 99
-			return d[0]
-		end
-		d[d[i+3]] = d[]
-    end
+calculate_output(d) = for i in 1:4:length(d)
+	if d[i] == 99
+		return d[1]
+	end
+	outIdx = d[i + 3] + 1
+	in1Idx = d[i + 1] + 1
+	in2Idx = d[i + 2] + 1
+	d[outIdx] = d[i] == 1 ? d[in1Idx] + d[in2Idx] : d[in1Idx] * d[in2Idx]
 end
-#
-#
-# def part_one():
-# 	return calculate_output(create_data_list(12, 2))
-#
-#
-# def part_two():
-# 	for noun in range(99):
-# 		for verb in range(99):
-# 			if calculate_output(create_data_list(noun, verb)) == 19690720:
-# 				return noun * 100 + verb
-#
-# def calculate_output(d):
-# 	for i in range(0, len(d), 4):
-# 		op, in1, in2, out = d[i], d[i+1], d[i+2], d[i+3]
-# 		if op == 99:
-# 			return d[0]
-# 		d[out] = d[in1] + d[in2] if op == 1 else d[in1] * d[in2]
-#
-#
+
+part_one() = calculate_output(create_data_list(12, 2))
+
+part_two() = for noun in 1:100
+	for verb in 1:100
+		if calculate_output(create_data_list(noun, verb)) == 19690720
+			return noun * 100 + verb
+		end
+	end
+end
 
 function main()
-   println(part_one())
-   println(part_two())
+	println(part_one())
+	println(part_two())
 end
 
 main()
