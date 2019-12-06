@@ -1,50 +1,46 @@
-data = [x.strip() for x in open("input.txt").readlines()]
+data = [tuple(x.strip().split(')')) for x in open("input.txt").readlines()]
 
 planets = {}
 
 
-class OrbitTreeNode:
-	def __init__(self, name):
-		self.name = name
+class TreeNode:
+	def __init__(self):
 		self.parent_node = None
-		self.child_nodes = set()
+		self.orbit_chain = []
 
 	def add_child(self, child):
-		self.child_nodes.add(child)
 		child.parent_node = self
 
-	def get_orbit_chain(self):
-		chain = []
+	def build_orbit_chain(self):
 		ancestor = self.parent_node
 		while ancestor:
-			chain.append(ancestor)
+			self.orbit_chain.append(ancestor)
 			ancestor = ancestor.parent_node
-		return chain
 
 
 def build_orbit_tree():
 	orbitals = {}
-	for orbit in data:
-		objects = orbit.split(')')
-		parent = objects[0]
-		child = objects[1]
+	for d in data:
+		orbitals[d[0]] = TreeNode() if d[0] not in orbitals else orbitals[d[0]]
+		orbitals[d[1]] = TreeNode() if d[1] not in orbitals else orbitals[d[1]]
+		orbitals[d[0]].add_child(orbitals[d[1]])
 
-		orbitals[parent] = OrbitTreeNode(parent) if parent not in orbitals else orbitals[parent]
-		orbitals[child] = OrbitTreeNode(child) if child not in orbitals else orbitals[child]
-		orbitals[parent].add_child(orbitals[child])
+	for orbital in orbitals.values():
+		orbital.build_orbit_chain()
+
 	return orbitals
 
 
 def part_one():
-	return sum(len(planets[x].get_orbit_chain()) for x in planets)
+	return sum(len(planets[x].orbit_chain) for x in planets)
 
 
 def part_two():
-	my_chain = planets['YOU'].get_orbit_chain()
-	san_chain = planets['SAN'].get_orbit_chain()
+	my_chain = planets['YOU'].orbit_chain
+	san_chain = planets['SAN'].orbit_chain
 
 	common_ancestor = None
-	for i, elem in enumerate(my_chain):
+	for _, elem in enumerate(my_chain):
 		if elem in san_chain:
 			common_ancestor = elem
 			break
