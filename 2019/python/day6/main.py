@@ -53,5 +53,5 @@ def part_two():
 
 if __name__ == '__main__':
 	planets = build_orbit_tree()
-	print(part_one())  #
-	print(part_two())  #
+	print(part_one())  # 308790
+	print(part_two())  # 472
