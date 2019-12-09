@@ -11,7 +11,7 @@ def part_one():
 		next_input = 0
 		machines = []
 		for phase in series:
-			machines.append(IntcodeOpMachine(list(data), in_val = next_input, phase_setting=int(phase)))
+			machines.append(IntcodeOpMachine(list(data), in_val=next_input, phase_setting=int(phase)))
 
 		for machine in machines:
 			machine.in_val = next_input
