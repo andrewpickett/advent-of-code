@@ -8,6 +8,17 @@ class IntcodeOpMachine:
 		self.set_phase = False
 		self.halted = False
 		self.relative_base = 0
+		self.op_map = {
+			1: self.op_add,
+			2: self.op_multiply,
+			3: self.op_input,
+			4: self.op_output,
+			5: self.op_jump_if_true,
+			6: self.op_jump_if_false,
+			7: self.op_less_than,
+			8: self.op_equals,
+			9: self.op_relative_base
+		}
 
 	def run_until_halt(self):
 		exit_code = 0
@@ -32,32 +43,7 @@ class IntcodeOpMachine:
 		param1_idx = self.get_param_index(param1_mode, self.pointer + 1)
 		param2_idx = self.get_param_index(param2_mode, self.pointer + 2) if op in [1, 2, 5, 6, 7, 8] else 0
 		param3_idx = self.get_param_index(param3_mode, self.pointer + 3) if op in [1, 2, 7, 8] else 0
-		if op == 1:
-			self.instructions[param3_idx] = self.instructions[param1_idx] + self.instructions[param2_idx]
-			self.pointer += 4
-		elif op == 2:
-			self.instructions[param3_idx] = self.instructions[param1_idx] * self.instructions[param2_idx]
-			self.pointer += 4
-		elif op == 3:
-			self.instructions[param1_idx] = self.phase_setting if not self.set_phase and self.phase_setting >= 0 else self.in_val
-			self.set_phase = True
-			self.pointer += 2
-		elif op == 4:
-			self.output.append(self.instructions[param1_idx])
-			self.pointer += 2
-		elif op == 5:
-			self.pointer = self.instructions[param2_idx] if self.instructions[param1_idx] else self.pointer + 3
-		elif op == 6:
-			self.pointer = self.instructions[param2_idx] if not self.instructions[param1_idx] else self.pointer + 3
-		elif op == 7:
-			self.instructions[param3_idx] = 1 if self.instructions[param1_idx] < self.instructions[param2_idx] else 0
-			self.pointer += 4
-		elif op == 8:
-			self.instructions[param3_idx] = 1 if self.instructions[param1_idx] == self.instructions[param2_idx] else 0
-			self.pointer += 4
-		elif op == 9:
-			self.relative_base += self.instructions[param1_idx]
-			self.pointer += 2
+		self.op_map[op]((param1_idx, param2_idx, param3_idx))
 
 	def get_param_index(self, mode, base_idx):
 		if mode == 0:
@@ -72,3 +58,38 @@ class IntcodeOpMachine:
 	def resize_array_if_needed(self, base_idx):
 		if base_idx >= len(self.instructions):
 			self.instructions.extend([0] * (base_idx - len(self.instructions) + 1))
+
+	def op_add(self, params):
+		self.instructions[params[2]] = self.instructions[params[0]] + self.instructions[params[1]]
+		self.pointer += 4
+
+	def op_multiply(self, params):
+		self.instructions[params[2]] = self.instructions[params[0]] * self.instructions[params[1]]
+		self.pointer += 4
+
+	def op_input(self, params):
+		self.instructions[params[0]] = self.phase_setting if not self.set_phase and self.phase_setting >= 0 else self.in_val
+		self.set_phase = True
+		self.pointer += 2
+
+	def op_output(self, params):
+		self.output.append(self.instructions[params[0]])
+		self.pointer += 2
+
+	def op_jump_if_true(self, params):
+		self.pointer = self.instructions[params[1]] if self.instructions[params[0]] else self.pointer + 3
+
+	def op_jump_if_false(self, params):
+		self.pointer = self.instructions[params[1]] if not self.instructions[params[0]] else self.pointer + 3
+
+	def op_less_than(self, params):
+		self.instructions[params[2]] = 1 if self.instructions[params[0]] < self.instructions[params[1]] else 0
+		self.pointer += 4
+
+	def op_equals(self, params):
+		self.instructions[params[2]] = 1 if self.instructions[params[0]] == self.instructions[params[1]] else 0
+		self.pointer += 4
+
+	def op_relative_base(self, params):
+		self.relative_base += self.instructions[params[0]]
+		self.pointer += 2
