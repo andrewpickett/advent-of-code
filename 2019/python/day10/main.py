@@ -39,16 +39,12 @@ def part_one():
 						equation += ' (B)'
 				tots[start_point].add(equation)
 
-	# pp(tots)
 	max_val = 0
 	max_pos = (0, 0)
 	for point in tots:
 		if len(tots[point]) > max_val:
 			max_val = len(tots[point])
 			max_pos = point
-	# print()
-
-	# print("{} at {}".format(max_val, max_pos))
 	return max_val
 
 
@@ -57,8 +53,5 @@ def part_two():
 
 
 if __name__ == '__main__':
-	#
-	# print(Fraction(10/2))
-	# print(Fraction(20/4))
-	print(part_one())  # 3460311188
-	# print(part_two())  # 42202
+	print(part_one())  # 347
+	print(part_two())  # 
