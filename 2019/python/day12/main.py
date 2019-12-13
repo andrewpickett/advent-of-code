@@ -6,21 +6,19 @@ data = [x[1:-2] for x in open("input.txt").readlines()]
 orig_universe = []
 
 
+def _compare_velocity(a, b):
+	return 0 if a == b else ((a - b) // abs(a - b))
+
+
 class Planet:
 	def __init__(self, position, velocity=(0, 0, 0,)):
 		self.position = position
 		self.velocity = velocity
 
-	def _compare_velocity(self, a, b):
-		return 0 if a == b else ((a - b) / abs(a - b))
-
 	def update_velocity(self, other):
-		# x_val = self.velocity[0] - self._compare_velocity(self.position[0], other.position[0])
-		# y_val = self.velocity[1] - self._compare_velocity(self.position[1], other.position[1])
-		# z_val = self.velocity[2] - self._compare_velocity(self.position[2], other.position[2])
-		x_val = self.velocity[0] - 1 if self.position[0] > other.position[0] else (self.velocity[0] + 1 if self.position[0] < other.position[0] else self.velocity[0])
-		y_val = self.velocity[1] - 1 if self.position[1] > other.position[1] else (self.velocity[1] + 1 if self.position[1] < other.position[1] else self.velocity[1])
-		z_val = self.velocity[2] - 1 if self.position[2] > other.position[2] else (self.velocity[2] + 1 if self.position[2] < other.position[2] else self.velocity[2])
+		x_val = self.velocity[0] - _compare_velocity(self.position[0], other.position[0])
+		y_val = self.velocity[1] - _compare_velocity(self.position[1], other.position[1])
+		z_val = self.velocity[2] - _compare_velocity(self.position[2], other.position[2])
 		self.velocity = (x_val, y_val, z_val,)
 
 	def apply_velocity(self):
@@ -34,25 +32,6 @@ class Planet:
 
 	def get_total_energy(self):
 		return self.get_potential_energy() * self.get_kinetic_enerty()
-
-	def __eq__(self, other):
-		if other:
-			return self.position == other.position and self.velocity == other.velocity
-		return False
-
-	def __ne__(self, other):
-		return not self.__eq__(other)
-
-	def __hash__(self):
-		return has(self.__repr__())
-
-	def __repr__(self):
-		return "pos=<x={}, y={}, z={}>, vel=<x={}, y={}, z={}>".format(str(self.position[0]).rjust(3),
-																							str(self.position[1]).rjust(3),
-																							str(self.position[2]).rjust(3),
-																							str(self.velocity[0]).rjust(3),
-																							str(self.velocity[1]).rjust(3),
-																							str(self.velocity[2]).rjust(3))
 
 
 def populate_planets():
@@ -121,4 +100,4 @@ def part_two():
 if __name__ == '__main__':
 	populate_planets()
 	print(part_one())  # 9958
-	print(part_two())  #
+	print(part_two())  # 318382803780324
