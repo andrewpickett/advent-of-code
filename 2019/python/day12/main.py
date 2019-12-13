@@ -16,10 +16,7 @@ class Planet:
 		self.velocity = velocity
 
 	def update_velocity(self, other):
-		x_val = self.velocity[0] - _compare_velocity(self.position[0], other.position[0])
-		y_val = self.velocity[1] - _compare_velocity(self.position[1], other.position[1])
-		z_val = self.velocity[2] - _compare_velocity(self.position[2], other.position[2])
-		self.velocity = (x_val, y_val, z_val,)
+		self.velocity = tuple(self.velocity[i] - _compare_velocity(self.position[i], other.position[i]) for i in range(3))
 
 	def apply_velocity(self):
 		self.position = tuple(x + y for x, y in zip(self.position, self.velocity))
