@@ -55,4 +55,4 @@ def part_two():
 
 if __name__ == '__main__':
 	print(part_one())  # 462
-	print(part_two())  #
+	print(part_two())  # 23981

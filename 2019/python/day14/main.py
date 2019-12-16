@@ -2,49 +2,49 @@ data = [x.strip() for x in open("input.txt").readlines()]
 
 
 def part_one():
-	recipes, counts = build_reaction_map(list(data))
-	return produce(recipes, 1, 'FUEL', counts)
+	reactions, curr_inventory = build_reaction_map(list(data))
+	return perform_reaction(reactions, 1, 'FUEL', curr_inventory)
 
 
 def build_reaction_map(lines):
-	recipes = {}
-	counts = {'ORE': 0}
+	reactions = {}
+	curr_inventory = {'ORE': 0}
 	for line in lines:
 		parts = line.split(' => ')
 		ins = [(int(y[0]), y[1]) for y in [x.strip().split(' ') for x in parts[0].split(',')]]
 		outs = [(int(y[0]), y[1]) for y in [x.strip().split(' ') for x in parts[1].split(',')]]
-		recipes[outs[0][1]] = (ins, outs)
-		counts[outs[0][1]] = 0
-	return recipes, counts
+		reactions[outs[0][1]] = (ins, outs)
+		curr_inventory[outs[0][1]] = 0
+	return reactions, curr_inventory
 
 
-def produce(recipes, num, what, counts):
-	if what == 'ORE':
-		return num
-	elif what == 'FUEL':
-		for k in counts.keys():
-			counts[k] = 0
-	recipe = recipes[what]
-	missing = num - counts[what]
+def perform_reaction(reactions, quantity, material, curr_inventory):
+	if material == 'ORE':
+		return quantity
+	elif material == 'FUEL':
+		for k in curr_inventory.keys():
+			curr_inventory[k] = 0
+	recipe = reactions[material]
+	missing = quantity - curr_inventory[material]
 	if missing <= 0:
 		return 0
-	(num2, rem2) = divmod(missing, recipe[1][0][0])
-	if rem2 > 0:
-		num2 += 1
+	(num, rem) = divmod(missing, recipe[1][0][0])
+	if rem > 0:
+		num += 1
 	for ins in recipe[0]:
-		produce(recipes, ins[0]*num2, ins[1], counts)
-		counts[ins[1]] -= ins[0]*num2
-	counts[what] += recipe[1][0][0]*num2
-	return -counts['ORE']
+		perform_reaction(reactions, ins[0] * num, ins[1], curr_inventory)
+		curr_inventory[ins[1]] -= ins[0] * num
+	curr_inventory[material] += recipe[1][0][0] * num
+	return -curr_inventory['ORE']
 
 
 def part_two():
-	recipes, counts = build_reaction_map(list(data))
+	reactions, curr_inventory = build_reaction_map(list(data))
 	trying = 1
 	goal = 1000000000000
 	maxtry = mintry = 0
 	while True:
-		res = produce(recipes, trying, 'FUEL', counts)
+		res = perform_reaction(reactions, trying, 'FUEL', curr_inventory)
 		if res > goal:
 			break
 		mintry = trying
@@ -53,7 +53,7 @@ def part_two():
 
 	while maxtry - mintry > 1:
 		newtry = (mintry + maxtry) // 2
-		res = produce(recipes, newtry, 'FUEL', counts)
+		res = perform_reaction(reactions, newtry, 'FUEL', curr_inventory)
 		if res > goal:
 			maxtry = newtry
 		else:
