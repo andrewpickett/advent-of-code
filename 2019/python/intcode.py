@@ -25,7 +25,7 @@ class IntcodeOpMachine:
 		while exit_code != 99:
 			exit_code = self.run()
 
-	def run(self):
+	def run(self, request_input=False):
 		while True:
 			op = self.instructions[self._pointer]
 			str_op = str(op).zfill(5)
@@ -38,6 +38,8 @@ class IntcodeOpMachine:
 			self._perform_operation(op, int(str_op[2]), int(str_op[1]), int(str_op[0]))
 			if op == 4:
 				return 4
+			elif op == 3 and request_input:
+				return 3
 
 	def _perform_operation(self, op, param1_mode, param2_mode, param3_mode):
 		param1_idx = self._get_param_index(param1_mode, self._pointer + 1)
