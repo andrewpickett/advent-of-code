@@ -11,32 +11,19 @@ DIRS = {
 }
 
 
-def determine_next_direction(ship_map, curr_pos, step_history):
-	d = DIRS[str(step_history[-1])]
+def determine_next_direction(ship_map, curr_pos, last_dir, last_output):
+	d = DIRS[str(last_dir)]
 	if ship_map[curr_pos[1] + d['y']][curr_pos[0] + d['x']] == ' ':
 		return d['code']
-	d = DIRS[str(((step_history[-1] + 1) % 4) + 1)]
+	d = DIRS[str(((last_dir + 1) % 4) + 1)]
 	if ship_map[curr_pos[1] + d['y']][curr_pos[0] + d['x']] == ' ':
 		return d['code']
 
-	# prev_dir = step_history.pop()
-	# if prev_dir == 1:
-	# 	return 2
-	# if prev_dir == 2:
-	# 	return 1
-	# if prev_dir == 3:
-	# 	return 4
-	# if prev_dir == 4:
-	# 	return 3
-	#
-	# if ship_map[curr_pos[1]][curr_pos[0] + 1] == '.':
-	# 	return 4
-	# if ship_map[curr_pos[1] + 1][curr_pos[0]] == '.':
-	# 	return 2
-	# if ship_map[curr_pos[1]][curr_pos[0] - 1] == '.':
-	# 	return 3
-	# if ship_map[curr_pos[1] - 1][curr_pos[0]] == '.':
-	# 	return 1
+	valid_moves = [1, 2, 3, 4]
+	if last_output == 0:
+		valid_moves.remove(last_dir)
+
+	return valid_moves[random.randint(0, len(valid_moves) - 1)]
 
 
 def get_next_position(curr_pos, in_val):
@@ -44,29 +31,29 @@ def get_next_position(curr_pos, in_val):
 
 
 def part_one():
-	ship_map = [[' ' for i in range(2000)] for i in range(2000)]
+	ship_map = [[' ' for i in range(3000)] for i in range(3000)]
 	curr_pos = (len(ship_map) // 2, len(ship_map[0]) // 2,)
-	# curr_pos = (0, 0,)
 	ship_map[curr_pos[1]][curr_pos[0]] = 'D'
 	# draw_map(ship_map)
-	# step_history = [1]
 
 	machine = IntcodeOpMachine(list(data), in_val=1)
 	exit_code = 0
+	last_dir = 1
+	last_output = 1
 	while exit_code != 99:
-		machine.in_val = random.randint(1, 4)
+		machine.in_val = determine_next_direction(ship_map, curr_pos, last_dir, last_output)
+		last_dir = machine.in_val
 		next_pos = get_next_position(curr_pos, machine.in_val)
 		exit_code = machine.run(request_input=True)
 		if exit_code == 3:
 			continue
 		elif exit_code == 4:
 			resp = machine.output[-1]
+			last_output = resp
 			if resp == 0:
 				ship_map[next_pos[1]][next_pos[0]] = '#'
 				continue
 			elif resp == 1:
-				# if ship_map[next_pos[1]][next_pos[0]] == ' ':
-				# 	step_history.append(machine.in_val)
 				ship_map[next_pos[1]][next_pos[0]] = 'D'
 				ship_map[curr_pos[1]][curr_pos[0]] = '.'
 				curr_pos = (next_pos[0], next_pos[1],)

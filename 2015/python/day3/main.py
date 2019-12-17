@@ -1,3 +1,5 @@
+from aoc_utils import run_with_timer
+
 data = [x for x in open('input.txt').readline().strip()]
 
 DIRS = {
@@ -33,5 +35,5 @@ def move(direction, pos):
 
 
 if __name__ == '__main__':
-	print(part_one())  # 2565
-	print(part_two())  # 2639
+	run_with_timer(part_one)  # 2565
+	run_with_timer(part_two)  # 2639

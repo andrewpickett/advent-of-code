@@ -1,3 +1,5 @@
+from aoc_utils import run_with_timer
+
 data = [x for x in open('input.txt').readline()]
 
 
@@ -11,9 +13,8 @@ def part_two():
 		floor += 1 if direction == '(' else -1
 		if floor < 0:
 			return i + 1
-	return 0
 
 
 if __name__ == '__main__':
-	print(part_one())  # 138
-	print(part_two())  # 1771
+	run_with_timer(part_one)  # 138
+	run_with_timer(part_two)  # 1771

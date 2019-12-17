@@ -1,3 +1,5 @@
+from aoc_utils import run_with_timer
+
 data = [tuple(map(int, x.split('x'))) for x in open('input.txt').readlines()]
 
 
@@ -10,5 +12,5 @@ def part_two():
 
 
 if __name__ == '__main__':
-	print(part_one())  # 1588178
-	print(part_two())  # 3783758
+	run_with_timer(part_one)  # 1588178
+	run_with_timer(part_two)  # 3783758
