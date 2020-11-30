@@ -1,4 +1,4 @@
-from intcode import IntcodeOpMachine
+from intcode_new import IntcodeOpMachine
 
 data = [int(x) for x in open("input.txt").readline().split(',')]
 
@@ -26,7 +26,7 @@ def run_robot(machine, grid, curr_pos=(0, 0,)):
 	direction = 0
 	counter = 0
 	while exit_code != 99:
-		machine.in_val = 1 if grid[curr_pos[0]][curr_pos[1]] == 'W' else 0
+		machine.add_input(1 if grid[curr_pos[0]][curr_pos[1]] == 'W' else 0)
 		machine.run()
 		out_val1 = machine.output[-1]
 		exit_code = machine.run()

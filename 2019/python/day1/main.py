@@ -1,4 +1,4 @@
-import math
+from aoc_utils import run_with_timer
 
 data = [int(x.strip()) for x in open("input.txt").readlines()]
 
@@ -12,16 +12,14 @@ def part_two():
 
 
 def calc_spec_fuel(val):
-	return math.floor(val / 3) - 2
+	return (val // 3) - 2
 
 
 def calc_total_fuel(start):
 	n = calc_spec_fuel(start)
-	if n <= 0:
-		return 0
-	return n + calc_total_fuel(n)
+	return 0 if n <= 0 else n + calc_total_fuel(n)
 
 
 if __name__ == '__main__':
-	print(part_one())  # 3382284
-	print(part_two())  # 5070541
+	run_with_timer(part_one)  # 3382284
+	run_with_timer(part_two)  # 5070541

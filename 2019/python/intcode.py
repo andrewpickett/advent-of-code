@@ -5,6 +5,7 @@ class IntcodeOpMachine:
 		self.in_val = in_val
 		self.phase_setting = phase_setting
 		self.halted = False
+		self._received_next_input = True
 		self._pointer = 0
 		self._set_phase = False
 		self._relative_base = 0
@@ -32,14 +33,14 @@ class IntcodeOpMachine:
 			if op == 99:
 				self.halted = True
 				return 99
+			elif op == 3 and request_input:
+				return 3
 			elif op > 99:
 				op = int(str_op[3]) * 10 + int(str_op[4])
 
 			self._perform_operation(op, int(str_op[2]), int(str_op[1]), int(str_op[0]))
 			if op == 4:
 				return 4
-			elif op == 3 and request_input:
-				return 3
 
 	def _perform_operation(self, op, param1_mode, param2_mode, param3_mode):
 		param1_idx = self._get_param_index(param1_mode, self._pointer + 1)

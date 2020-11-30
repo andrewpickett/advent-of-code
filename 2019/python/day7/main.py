@@ -1,4 +1,4 @@
-from intcode import IntcodeOpMachine
+from intcode_new import IntcodeOpMachine
 from itertools import permutations, cycle
 
 data = [int(x) for x in open("input.txt").readline().split(',')]
@@ -11,10 +11,10 @@ def part_one():
 		next_input = 0
 		machines = []
 		for phase in series:
-			machines.append(IntcodeOpMachine(list(data), in_val=next_input, phase_setting=int(phase)))
+			machines.append(IntcodeOpMachine(list(data), input_vals=[int(phase), next_input]))
 
 		for machine in machines:
-			machine.in_val = next_input
+			machine.input_vals[1] = next_input
 			machine.run_until_halt()
 			next_input = machine.output[-1]
 
@@ -30,13 +30,13 @@ def part_two():
 		next_input = 0
 		machines = []
 		for phase in series:
-			machines.append(IntcodeOpMachine(list(data), in_val=next_input, phase_setting=int(phase)))
+			machines.append(IntcodeOpMachine(list(data), input_vals=[int(phase), next_input]))
 
 		active_machines = []
 		for machine in cycle(machines):
 			if machine not in active_machines and not machine.halted:
 				active_machines.append(machine)
-			machine.in_val = next_input
+			machine.input_vals[1] = next_input
 			exit_code = machine.run()
 			next_input = machine.output[-1]
 

@@ -1,4 +1,4 @@
-from intcode import IntcodeOpMachine
+from intcode_new import IntcodeOpMachine
 
 data = [int(x) for x in open("input.txt").readline().split(',')]
 
@@ -8,7 +8,7 @@ def part_one():
 
 
 def part_one_with_finished_machine():
-	machine = IntcodeOpMachine(list(data), in_val=1)
+	machine = IntcodeOpMachine(list(data), input_vals=[1])
 	machine.run_until_halt()
 	return machine.output
 
@@ -18,7 +18,7 @@ def part_two():
 
 
 def part_two_with_finished_machine():
-	machine = IntcodeOpMachine(list(data), in_val=5)
+	machine = IntcodeOpMachine(list(data), input_vals=[5])
 	machine.run_until_halt()
 	return machine.output[0]
 

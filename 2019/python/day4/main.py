@@ -1,3 +1,5 @@
+from aoc_utils import run_with_timer
+
 data = [int(x) for x in open("input.txt").readline().split('-')]
 
 
@@ -22,5 +24,5 @@ def check_number_for_validity(num, additional_check=False):
 
 
 if __name__ == '__main__':
-	print(part_one())  # 2081
-	print(part_two())  # 1411
+	run_with_timer(part_one)  # 2081
+	run_with_timer(part_two)  # 1411

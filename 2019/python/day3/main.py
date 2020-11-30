@@ -1,5 +1,7 @@
 import sys
 
+from aoc_utils import run_with_timer
+
 data = [x.strip() for x in open("input.txt").readlines()]
 
 
@@ -86,5 +88,5 @@ def determine_crossing(w1_start, w1_end, w2_start, w2_end):
 
 
 if __name__ == '__main__':
-	print(part_one())  # 2129
-	print(part_two())  # 134662
+	run_with_timer(part_one)  # 2129
+	run_with_timer(part_two)  # 134662

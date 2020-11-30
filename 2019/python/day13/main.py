@@ -1,4 +1,4 @@
-from intcode import IntcodeOpMachine
+from intcode_new import IntcodeOpMachine
 
 data = [int(x) for x in open("input.txt").readline().split(',')]
 
@@ -22,12 +22,10 @@ def part_two():
 	machine = IntcodeOpMachine(list_data)
 	ball_pos = 0
 	paddle_pos = 0
-	exit_code = 0
 	while True:
-		machine.in_val = compare_vals(ball_pos, paddle_pos)
-		exit_code = machine.run(request_input=True)
+		exit_code = machine.run(dynamic_input=True)
 		if exit_code == 3:
-			continue
+			machine.add_input(compare_vals(ball_pos, paddle_pos))
 		elif exit_code == 4:
 			i = (i + 1) % 3
 			if i == 0:

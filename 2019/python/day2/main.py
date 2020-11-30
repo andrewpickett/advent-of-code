@@ -1,4 +1,5 @@
-from intcode import IntcodeOpMachine
+from aoc_utils import run_with_timer
+from intcode_new import IntcodeOpMachine
 
 data = [int(x) for x in open("input.txt").readline().split(',')]
 
@@ -23,7 +24,7 @@ def create_data_list(noun, verb):
 
 def calculate_output(d):
 	for i in range(0, len(d), 4):
-		op, in1, in2, out = d[i], d[i+1], d[i+2], d[i+3]
+		op, in1, in2, out = d[i], d[i + 1], d[i + 2], d[i + 3]
 		if op == 99:
 			return d[0]
 		d[out] = d[in1] + d[in2] if op == 1 else d[in1] * d[in2]
@@ -46,9 +47,9 @@ def part_two_with_finished_machine():
 
 if __name__ == '__main__':
 	print("Solution without the final machine.")
-	print(part_one())  # 3716293
-	print(part_two())  # 6429
+	run_with_timer(part_one)  # 3716293
+	run_with_timer(part_two)  # 6429
 	print()
 	print("Solution using the final machine.")
-	print(part_one_with_finished_machine())  # 3716293
-	print(part_two_with_finished_machine())  # 6429
+	run_with_timer(part_one_with_finished_machine)  # 3716293
+	run_with_timer(part_two_with_finished_machine)  # 6429
