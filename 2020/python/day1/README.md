@@ -18,7 +18,7 @@ After about 6 minutes, my answer finally submitted and I moved to part 2.
 
 Part 2 was just another straightforward extension on part one.
 Once again, I decided to just brute force it with 3 loops.
-I g the answer in about a minute and successfully finished Day 1!
+I got the answer in about a minute and successfully finished Day 1!
 
 # Results
 
