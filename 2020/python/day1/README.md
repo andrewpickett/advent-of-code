@@ -24,5 +24,5 @@ I g the answer in about a minute and successfully finished Day 1!
 
 |    | Answer     | Attempts  | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
 | ------ |-----------:| ---------:| -------------------:| ----:| ----:|
-| Part One    | 197451     | 1         | <1               | 00:00:42  | 43   |
-| Part Two    | 138233720  | 1         | 100            | 00:01:14 | 340  |
+| **Part One**  | 197451     | 1  | <1  | 00:00:42  | 43   |
+| **Part Two**  | 138233720  | 1  | 94  | 00:01:14  | 340  |

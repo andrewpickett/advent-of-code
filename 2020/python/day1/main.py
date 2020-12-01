@@ -12,8 +12,8 @@ def part_one():
 
 def part_two():
 	for i, first in enumerate(data):
-		for j, second in enumerate(data[i:]):
-			for third in data[j:]:
+		for j, second in enumerate(data[i+1:]):
+			for third in data[j+1:]:
 				if first + second + third == 2020:
 					return first * second * third
 
