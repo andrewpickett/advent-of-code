@@ -19,24 +19,12 @@ public class Puzzle extends AocPuzzle<List<Puzzle.InputData>, Integer> {
 
 	@Override
 	public Integer partOne() {
-		int numValid = 0;
-		for (InputData d : input) {
-			long cnt = d.getPassword().chars().filter(c -> c == d.getLetter()).count();
-			numValid += (d.getMin() <= cnt && cnt <= d.getMax()) ? 1 : 0;
-		}
-		return numValid;
+		return (int) input.stream().filter(InputData::isValidPartOnePassword).count();
 	}
 
 	@Override
 	public Integer partTwo() {
-		int numValid = 0;
-		for (InputData d : input) {
-			int currCount = 0;
-			currCount += (d.getPassword().charAt(d.getMin()-1) == d.getLetter()) ? 1 : 0;
-			currCount += (d.getPassword().charAt(d.getMax()-1) == d.getLetter()) ? 1 : 0;
-			numValid += (currCount == 1) ? 1 : 0;
-		}
-		return numValid;
+		return (int) input.stream().filter(InputData::isValidPartTwoPassword).count();
 	}
 
 	@Override
@@ -49,6 +37,31 @@ public class Puzzle extends AocPuzzle<List<Puzzle.InputData>, Integer> {
 		private int max;
 		private char letter;
 		private String password;
+
+		private InputData(int min, int max, char letter, String password) {
+			setMin(min);
+			setMax(max);
+			setLetter(letter);
+			setPassword(password);
+		}
+
+		public int getLetterCount() {
+			return (int) getPassword().chars().filter(c -> c == getLetter()).count();
+		}
+
+		public boolean isValidPartOnePassword() {
+			int count = getLetterCount();
+			return getMin() <= count && count <= getMax();
+		}
+
+		public boolean isValidPartTwoPassword() {
+			return (getPassword().charAt(getMin()-1) == getLetter()) ^ (getPassword().charAt(getMax()-1) == getLetter());
+		}
+
+		public static InputData parse(String input) {
+			String[] line = input.split(" ");
+			return new InputData(Integer.parseInt(line[0].split("-")[0]), Integer.parseInt(line[0].split("-")[1]), line[1].substring(0, 1).charAt(0), line[2]);
+		}
 
 		public int getMin() {
 			return min;
@@ -80,16 +93,6 @@ public class Puzzle extends AocPuzzle<List<Puzzle.InputData>, Integer> {
 
 		public void setPassword(String password) {
 			this.password = password;
-		}
-
-		public static InputData parse(String input) {
-			InputData d = new InputData();
-			String[] line = input.split(" ");
-			d.setMin(Integer.parseInt(line[0].split("-")[0]));
-			d.setMax(Integer.parseInt(line[0].split("-")[1]));
-			d.setLetter(line[1].substring(0, 1).charAt(0));
-			d.setPassword(line[2]);
-			return d;
 		}
 	}
 }
