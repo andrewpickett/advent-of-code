@@ -1,30 +1,15 @@
 from aoc_utils import run_with_timer
 
-
-def get_parts_from_line(line):
-	return {
-		"min": int(line[0].split('-')[0]),
-		"max": int(line[0].split('-')[1]),
-		"letter": str(line[1][:-1]),
-		"password": str(line[2])
-	}
-
-
-data = [get_parts_from_line(y) for y in [x.split() for x in open("input.txt").readlines()]]
+# data will be a list of each line stored as a list in this order: [min, max, letter, password]
+data = [[int(y[0].split('-')[0]), int(y[0].split('-')[1]), y[1][:-1], y[2]] for y in [x.split() for x in open("input.txt").readlines()]]
 
 
 def part_one():
-	return sum(1 for x in data if x["min"] <= x["password"].count(x["letter"]) <= x["max"])
+	return sum(1 for x in data if x[0] <= x[3].count(x[2]) <= x[1])
 
 
 def part_two():
-	num_valid = 0
-	for x in data:
-		curr_count = 0
-		curr_count = curr_count + 1 if x["password"][x["min"]-1] == x["letter"] else curr_count
-		curr_count = curr_count + 1 if x["password"][x["max"]-1] == x["letter"] else curr_count
-		num_valid = num_valid + 1 if curr_count == 1 else num_valid
-	return num_valid
+	return sum(1 for x in data if (x[3][x[0]-1] == x[2]) ^ (x[3][x[1]-1] == x[2]))
 
 
 if __name__ == '__main__':

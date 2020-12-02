@@ -23,8 +23,8 @@ subtract 1 from the indexes (in 0-based languages) in order to do a valid check.
 
 
 # Results
-Overall, I still don't like my solution as I think it could be a lot cleaner and simpler,
-but it works just fine.
+I went back later in the day and rewrote part 2 to use the `sum` operation as well and acutally
+used the `XOR` operator (`^`) to get the solution down to one line as well!
 
 |    | Answer     | Attempts  | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
 | ------ |-----------:| ---------:| -------------------:| ----:| ----:|
