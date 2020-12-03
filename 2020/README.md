@@ -18,8 +18,8 @@ If I get REALLY ambitious, I may build a UI/Rest service to run each puzzle in w
 
 # Results
 
-|    | Part One Exec. Time (ms)     | Part Two Exec. Time (ms)  |
-| ------ |-----------:| ---------:|
-| **Day 1**   | Python - 0 <br />Java - 4 | Python - 94 <br />Java - 14 |
-| **Day 2**  | Python - 0 <br />Java - 12 | Python - 0 <br />Java - 0 |
-| **Day 3**  | Python - TBD <br />Java - TBD | Python - TBD <br />Java - TBD |
+|            | Part One Exec. Time (ms)       | Part Two Exec. Time (ms)       |
+| ---------- | ----------------------------- :| ----------------------------- :|
+| **Day 1**  | Python - 0 <br />Java - 4      | Python - 94 <br />Java - 14    |
+| **Day 2**  | Python - 0 <br />Java - 12     | Python - 0 <br />Java - 0      |
+| **Day 3**  | Python - TBD <br />Java - TBD  | Python - TBD <br />Java - TBD  |
