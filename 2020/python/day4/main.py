@@ -14,29 +14,21 @@ def validate_presence(pport):
 
 
 def validate_data(pport):
-	fields = [x for x in pport.split() if x[0:3] != 'cid']
-	fields.sort()
-	for x in fields:
-		y = x.split(':')
-		if y[0] == 'byr' and (not date_match.match(y[1]) or not int(y[1]) in range(1920, 2003)):
-			return False
-		elif y[0] == 'iyr' and (not date_match.match(y[1]) or not int(y[1]) in range(2010, 2021)):
-			return False
-		elif y[0] == 'eyr' and (not date_match.match(y[1]) or not int(y[1]) in range(2020, 2031)):
-			return False
-		elif y[0] == 'hgt':
-			if hgt_match.match(y[1]):
-				hgt = y[1][0:-2]
-				if ('cm' in y[1] and int(hgt) not in range(150, 194)) or ('in' in y[1] and int(hgt) not in range(59, 77)):
-					return False
-			else:
-				return False
-		elif y[0] == 'hcl' and not hex_match.match(y[1]):
-			return False
-		elif y[0] == 'ecl' and y[1] not in ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']:
-			return False
-		elif y[0] == 'pid' and not pid_match.match(y[1]):
-			return False
+	f = dict(x.split(':') for x in pport.split())
+	if not date_match.match(f['byr']) or not int(f['byr']) in range(1920, 2003):
+		return False
+	if not date_match.match(f['iyr']) or not int(f['iyr']) in range(2010, 2021):
+		return False
+	if not date_match.match(f['eyr']) or not int(f['eyr']) in range(2020, 2031):
+		return False
+	if not hgt_match.match(f['hgt']) or ('cm' in f['hgt'] and int(f['hgt'][:-2]) not in range(150, 194)) or ('in' in f['hgt'] and int(f['hgt'][:-2]) not in range(59, 77)):
+		return False
+	if not hex_match.match(f['hcl']):
+		return False
+	if f['ecl'] not in ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']:
+		return False
+	if not pid_match.match(f['pid']):
+		return False
 	return True
 
 
