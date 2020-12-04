@@ -6,7 +6,7 @@ data = open("input.txt").read().split('\n\n')
 date_match = re.compile('^\d{4}$')
 hgt_match = re.compile('^\d+(cm|in)$')
 pid_match = re.compile('^\d{9}$')
-hex_match = re.compile('^[#][0-9a-f]{6}$')
+hex_match = re.compile('^[#][\da-f]{6}$')
 
 
 def validate_presence(pport):
