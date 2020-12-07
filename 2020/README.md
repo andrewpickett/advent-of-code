@@ -22,4 +22,8 @@ If I get REALLY ambitious, I may build a UI/Rest service to run each puzzle in w
 | ---------- | ----------------------------- :| ----------------------------- :|
 | **Day 1**  | Python - 0 <br />Java - 4      | Python - 94 <br />Java - 14    |
 | **Day 2**  | Python - 0 <br />Java - 12     | Python - 0 <br />Java - 0      |
-| **Day 3**  | Python - TBD <br />Java - TBD  | Python - TBD <br />Java - TBD  |
+| **Day 3**  | Python - 1 <br />Java - 1      | Python - 1 <br />Java - 1      |
+| **Day 4**  | Python - 0 <br />Java - TBD    | Python - 1 <br />Java - TBD    |
+| **Day 5**  | Python - 1 <br />Java - TBD    | Python - 1 <br />Java - TBD    |
+| **Day 6**  | Python - 1 <br />Java - TBD    | Python - 4 <br />Java - TBD    |
+| **Day 7**  | Python - 2 <br />Java - TBD    | Python - 2 <br />Java - TBD    |
