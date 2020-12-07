@@ -10,7 +10,7 @@ In reading the puzzle, the first thing that came to my mind was a tree-like stru
                 /       \
         3xBAG 2           5xBAG 3
        /       \                 \
-   2xBAG 4  1xBAG 5           __1x BAG 6____
+   2xBAG 4  1xBAG 5           ___1xBAG 6____
                |             /      |       \
             4xBAG 7    1xBAG 8   2xBAG 9  7xBAG 10
 ```
