@@ -15,15 +15,3 @@ of both different languages.
 If I get around to it, I may try some other languages, like Go, Rust, or something like that.
 
 If I get REALLY ambitious, I may build a UI/Rest service to run each puzzle in whatever language...but we'll see.
-
-# Results
-
-|            | Part One Exec. Time (ms)       | Part Two Exec. Time (ms)       |
-| ---------- | ----------------------------- :| ----------------------------- :|
-| **Day 1**  | Python - 0 <br />Java - 4      | Python - 94 <br />Java - 14    |
-| **Day 2**  | Python - 0 <br />Java - 12     | Python - 0 <br />Java - 0      |
-| **Day 3**  | Python - 1 <br />Java - 1      | Python - 1 <br />Java - 1      |
-| **Day 4**  | Python - 0 <br />Java - TBD    | Python - 1 <br />Java - TBD    |
-| **Day 5**  | Python - 1 <br />Java - TBD    | Python - 1 <br />Java - TBD    |
-| **Day 6**  | Python - 1 <br />Java - TBD    | Python - 4 <br />Java - TBD    |
-| **Day 7**  | Python - 2 <br />Java - TBD    | Python - 2 <br />Java - TBD    |
