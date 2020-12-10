@@ -68,6 +68,7 @@ I stopped and went to bed.
 Ok, so this morning with a much clearer head, I re-visited what I had and started over.
 
 Back to the pattern I was on to up top:
+* One 1 in a row gives 1 possiblity
 * Two 1s in a row gives 2 possibilities
 * Three 1s in a row gives 4 possiblities
 * Four 1s in a row gives 7 possibilities -- I wrote them out by hand to verify
@@ -85,7 +86,7 @@ array and multiply them all together to get the total! If I have a difference ar
 (e.g. `[3, 1, 1, 3, 1, 1, 3]`), it would be 2*2=4 total possibilities.
 
 I tried some harder examples that I could validate via brute force listing (e.g.
-`[3, 1, 1, 1, 3, 1, 1, 1, 1, 3, 1, 3, 1, 1, 3, 3]` which would give `4*7*2=56`) and it seemed to be working
+`[3, 1, 1, 1, 3, 1, 1, 1, 1, 3, 1, 3, 1, 1, 3, 3]` which would give `4*7*1*2=56`) and it seemed to be working
 
 I plugged in my input got a huge number in under 1 ms entered it...and it was wrong.
 
