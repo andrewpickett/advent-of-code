@@ -10,8 +10,7 @@ def get_adapter_list():
 
 
 def trib(n):
-	trib_nums = [1, 1, 2]
-	return trib_nums[n] if len(trib_nums)-1 >= n else trib(n-1) + trib(n-2) + trib(n-3)
+	return [1, 1, 2][n] if n <= 2 else trib(n-1) + trib(n-2) + trib(n-3)
 
 
 def count_ways(diff_list):
