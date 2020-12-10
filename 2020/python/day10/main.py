@@ -15,11 +15,11 @@ def trib(n):
 	return trib_nums[n] if len(trib_nums)-1 >= n else trib(n-1) + trib(n-2) + trib(n-3)
 
 
-def count_ways(diff_str):
+def count_ways(diff_list):
 	curr_len = 0
 	total = 1
-	for i in diff_str:
-		if i == '1':
+	for i in diff_list:
+		if i == 1:
 			curr_len += 1
 		else:
 			total *= trib(curr_len)
@@ -36,7 +36,7 @@ def part_one():
 def part_two():
 	adapters = get_adapter_list()
 	diff_list = [adapters[i+1] - adapters[i] for i in range(len(adapters) - 1)]
-	return count_ways(''.join([str(i) for i in diff_list]))
+	return count_ways(diff_list)
 
 
 if __name__ == '__main__':
