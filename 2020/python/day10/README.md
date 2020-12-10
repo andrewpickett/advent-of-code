@@ -71,12 +71,12 @@ Back to the pattern I was on to up top:
 * Two 1s in a row gives 2 possibilities
 * Three 1s in a row gives 4 possiblities
 * Four 1s in a row gives 7 possibilities -- I wrote them out by hand to verify
-* Five 1s in a row gives 13 possibilities
+* Five 1s in a row gives 13 possibilities -- I also wrote these out by hand
 
 ...So what's the pattern here? What would six 1s in a row give? I pretty quickly noticed that it was a "tribonacci"
 sequence:
 
-```trib(n) = trib(n-1) + trib(n-1) + trib(n-3)```
+```trib(n) = trib(n-1) + trib(n-2) + trib(n-3)```
 
 So six 1s would give 24, seven 1s would give 44...etc.
 
