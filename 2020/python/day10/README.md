@@ -68,9 +68,9 @@ I stopped and went to bed.
 Ok, so this morning with a much clearer head, I re-visited what I had and started over.
 
 Back to the pattern I was on to up top:
-* One 1 in a row gives 1 possiblity
+* One 1 in a row gives 1 possibility
 * Two 1s in a row gives 2 possibilities
-* Three 1s in a row gives 4 possiblities
+* Three 1s in a row gives 4 possibilities
 * Four 1s in a row gives 7 possibilities -- I wrote them out by hand to verify
 * Five 1s in a row gives 13 possibilities -- I also wrote these out by hand
 
