@@ -4,9 +4,8 @@ data = [int(x.strip()) for x in open("input.txt").readlines()]
 
 
 def get_adapter_list():
-	adapters = [0] + data.copy()
+	adapters = [0] + data.copy() + [(max(data) + 3)]
 	adapters.sort()
-	adapters.append(adapters[-1] + 3)
 	return adapters
 
 
