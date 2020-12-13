@@ -79,7 +79,7 @@ was just a stab in the dark and wasn't going to gain me anything.
 
 It was pretty clear that the approach for iterating would HAVE to be exponential, not linear in order to
 find the answer. I just wasn't seeing how. I also had a nagging thought I had seen math problems/theorems
-like this before, but I could for the life of me remember what they were.
+like this before, but I couldn't for the life of me remember what they were.
 
 So I went to bed.
 
