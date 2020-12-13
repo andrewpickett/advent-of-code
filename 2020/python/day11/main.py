@@ -64,27 +64,22 @@ def get_distanced_neighbors(seat_map, row, col):
 	return neighbors
 
 
-def take_step(seat_map, neighbor_func, neighbor_count):
-	new_seat_map = [row[:] for row in seat_map]
-	for row in range(len(seat_map)):
-		for col in range(len(seat_map[row])):
-			neighbors = neighbor_func(seat_map, row, col)
-			if seat_map[row][col] == 'L' and '#' not in neighbors:
-				new_seat_map[row][col] = '#'
-			elif seat_map[row][col] == '#' and neighbors.count('#') >= neighbor_count:
-				new_seat_map[row][col] = 'L'
-	return new_seat_map
-
-
 def run_until_equillibrium(f, seat_map, neighbor_count):
+	points_to_check = [(row, col) for row in range(len(seat_map)) for col in range(len(seat_map[row])) if seat_map[row][col] != '.']
 	while True:
-		new_seat_map = take_step(seat_map, f, neighbor_count)
-		if new_seat_map == seat_map:
-			seat_map = new_seat_map
+		points_to_switch = []
+		for point in points_to_check:
+			neighbors = f(seat_map, point[0], point[1])
+			if not int(seat_map[point[0]][point[1]]) and not any(neighbors):
+				points_to_switch.append(point)
+			elif int(seat_map[point[0]][point[1]]) and sum(neighbors) >= neighbor_count:
+				points_to_switch.append(point)
+		for point in points_to_switch:
+			seat_map[point[0]][point[1]] = (int(seat_map[point[0]][point[1]]) + 1) % 2
+
+		if len(points_to_switch) == 0:
 			break
-		else:
-			seat_map = new_seat_map
-	return sum(x.count('#') for x in seat_map)
+	return sum(x for x in seat_map)
 
 
 def part_one():
@@ -96,5 +91,5 @@ def part_two():
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  # 2319 -- took 2724 ms
-	run_with_timer(part_two)  # 2117 -- took 24046 ms
+	run_with_timer(part_one)  # 2319 -- took 2077 ms
+	run_with_timer(part_two)  # 2117 -- took 17833 ms
