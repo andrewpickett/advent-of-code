@@ -3,8 +3,36 @@
 ### Part 1
 > _What is the Manhattan distance between that location and the ship's starting position?_
 
+Nothing tricky here: Parse out the first letter as the command and the remainder of each line as the amount.
+
+You just need to keep track of the directon you're facing as well as your current position. Rotations
+are the only part that could cause a bit of confusion here. So I just break each rotatoin direction down
+into a series of 90 degree rotations. When you rotate a point 90 degrees clockwise, you just
+swap the `x` and `y` coordinates and negate the new `x`. So to turn 270, you just do that 3 times, effectively
+swapping the `x` and `y` coordinates, but negating the new `y`.
+
+Either way, turning left is just the opposite.
+
 ### Part 2
 > _What is the Manhattan distance between that location and the ship's starting position?_
+
+Alright, so this one isn't really much harder...except instead of keeping track of a direction you're facing
+the "direction" is an arbitrary point (called the waypoint). Also, instead of moving the ship on the
+cardinal directions, you move that waypoint instead.
+
+I thought I had it solved really quickly, but it told me I was wrong. I realized I had made a typo in my rotation
+code, got a different answer, and it was wrong again..
+
+At this point, middle-of-the-night-debug-brain kicked in and I just started changing a bunch of stuff for
+no apparent reason.
+
+Long story short, the problem was in my original way of doing rotations. I was trying to be all crafty with
+using modulos in order to calculate the quadrant that the rotation puts the waypoint in...and even though
+it looked like it should be all correct, when I reverted back to just handling each rotation case by
+itself, it all worked. So...I spent about 90 minutes tracking down a bug that really shouldn't have
+been there to begin with.
+
+Really, though, nothing too tricky here.
 
 # Results
 
