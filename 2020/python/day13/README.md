@@ -104,6 +104,10 @@ would not have been as intuitive or easy to understand. So...I think you could d
 approach if you want...now that you have the name of this sort of problem, I'm sure coding it wouldn't be
 too much work.
 
+All in all, I'm pretty happy with how it went on this puzzle. I'm happy I figured out a solution that
+performed so well using just my intuition...and I'm also proud of the fact that I recognized the class
+of problem to arrive at another way of solving it.
+
 # Results
 
 |    | Answer     | Attempts  | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
