@@ -97,9 +97,10 @@ a trillion pretty quickly.
 In fact, I was shocked when I ran it, got an answer of over 500 trillion in under 1ms!!
 
 For what it's worth, the next day I remembered where I had seen this sort of problem before:
-The Chinese Remainder Theorem.
+[The Chinese Remainder Theorem](https://crypto.stanford.edu/pbc/notes/numbertheory/crt.html).
 
-I re-looked it up, and it ABSOLUTELY would have been another option to solve this. I feel like the code
+I'm not sure how that popped into my head considering I haven't thought about it since college
+(15 years ago), but I re-looked it up, and it ABSOLUTELY would have been another option to solve this. I feel like the code
 would not have been as intuitive or easy to understand. So...I think you could definitely use that
 approach if you want...now that you have the name of this sort of problem, I'm sure coding it wouldn't be
 too much work.
