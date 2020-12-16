@@ -4,18 +4,11 @@ data = [int(x.strip()) for x in open("input.txt").readlines()]
 
 
 def part_one():
-	for i, first in enumerate(data):
-		for second in data[i+1:]:
-			if first + second == 2020:
-				return first * second
+	return next(first*second for i, first in enumerate(data) for second in data[i+1:] if first + second == 2020)
 
 
 def part_two():
-	for i, first in enumerate(data):
-		for j, second in enumerate(data[i+1:]):
-			for third in data[j+1:]:
-				if first + second + third == 2020:
-					return first * second * third
+	return next(first*second*third for i, first in enumerate(data) for j, second in enumerate(data[i+1:]) for third in data[j+1:] if first + second + third == 2020)
 
 
 if __name__ == '__main__':
