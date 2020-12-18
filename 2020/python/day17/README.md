@@ -15,7 +15,8 @@
 
 # Original Puzzle
 
---- Day 17: Conway Cubes ---
+### --- Day 17: Conway Cubes ---
+
 As your flight slowly drifts through the sky, the Elves at the Mythical Information Bureau at the North
 Pole contact you. They'd like some help debugging a malfunctioning experimental energy source aboard
 one of their super-secret imaging satellites.
