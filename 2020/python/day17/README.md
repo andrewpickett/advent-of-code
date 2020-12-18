@@ -1,10 +1,49 @@
 # Approach
+So, this was basically an extension on [Day 11](../day11/)...and I mentioned on that day that I really
+dislike manipulating multi-dimensional arrays. Well...now instead of 2d arrays, this puzzle required
+3d.
+
+Honestly, this write-up is pretty lack-luster as I really don't like this puzzle...I didn't like
+solving it, I really dislike my code...and I just don't want to think about it anymore...
 
 ### Part 1
 > _How many cubes are left in the active state after the sixth cycle?_
 
+I figured I'd just push through and brute force this one at first and see how it went.
+
+The first piece was just parsing the input data into the multi-dimensional array...and since the contents
+that we cared about would be "growing" in all directions, I figured I would want to "start" the input
+in the middle of the array instead of the standard index of 0.
+
+Alright, so I wrote it up with a padding of what I thought was an appropriate amount, and ran it all against
+the example. The answer I got didn't match what it was supposed to (it was off by a couple), but I was
+stubborn and thought I was right...so I took a shot and ran it against the input.
+
+It ran for quite some time (~20 seconds or so), and came back with an answer. I plugged it in, and it was
+RIGHT!
+
+See...told you I was right, and their example was wrong...right? RIGHT?!?
+
 ### Part 2
 > _How many cubes are left in the active state after the sixth cycle?_
+
+Now, while I was writing the first part, I wrote it the whole time thinking that it would be expanding
+the scale of the problem somehow, but I never dreamed it would be going to a fourth dimension.
+
+So, it was 1:00am when I loaded it up...I read "hypercube" and "4d" and immediately thought, "nope...not
+happening right now".
+
+I finally had time to come back to the puzzle the next night. I decided to try to just add one more dimension
+to all of my arrays, but keep everything else the exact same and see what would happen.
+
+Well, it ran for a LONG time (~20-30 minutes) and finally came back. I plugged the answer in, and it was
+wrong. I tried it with the sample, and it also was wrong...
+
+Apparently my algorithm was just lucky and was never actually right after all.
+
+Long story short, I realized I had a bug with my array indexing (ended too soon), but I also realized I
+was creating an array many times too big as it needed to be. So I resized them and fixed the bug and
+solved the problem.
 
 # Results
 

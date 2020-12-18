@@ -3,8 +3,44 @@
 ### Part 1
 > _Evaluate the expression on each line of the homework; what is the sum of the resulting values?_
 
+Well, it's been about 15 years since I wrote a lexical parser, and the last time I did, it was a BEAST.
+
+Luckily the rules for this "language" were really simple, and the tokens were very easy to evaluate.
+
+So, the basic idea here is keeping a stack of statements that need evaluated. As you look at the tokens,
+when you run across a '(', that signifies a new statement that will need to be evaluated before the one
+you are currently running. So that means adding a new stack to the current stack. You do this for every
+'(' that you run into. When you hit a ')', that means you need to pop the last statement off of the stack
+and evaluate it. Again, do this for every ')' you run across. Using the example they gave
+(`1 + (2 * 3) + (4 * (5 + 6))`), this is how it looks internally:
+```
+[[1, +, [2, *, 3], +, [4, *, [5, +, 6]]]
+```
+So you can see each of the stacks nested in the other stacks. So you just need to evaluate the stack
+whenever you pop it...which would look something like this:
+```
+[[1, +, [2, *, 3], +, [4, *, [5, +, 6]]]
+[[1, +, 6, +, [4, *, [5, +, 6]]]
+[[1, +, 6, +, [4, *, 11]]
+[[1, +, 6, +, 44]]
+[51]
+```
+Since there is no precedence to the operators, it's pretty easy to just evaluate left to right once there
+are no remaining sub-sets (aka statements) to evaluate.
+
+Then just sum all of them together and return the value.
+
 ### Part 2
 > _What do you get if you add up the results of evaluating the homework problems using these new rules?_
+
+While it sounds like it will complicate matters, it really doesn't change much. You still create the
+stack of stacks, it's just your evaluation function changes. The way I decided to implement it is
+once you have a "flat" statement, just find all of the '+' and evaluate them one at a time, replacing
+the 3 elements (a + b) with one (the actual sum). Continue to do this until there are no more
+addition operators left in your flat statement
+
+Once you do that, you know you're left with just a flat statement of multiplication that you need to
+evaluate. That can be done with a comprehension and that is that.
 
 # Results
 
