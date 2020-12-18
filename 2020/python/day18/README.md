@@ -46,8 +46,8 @@ evaluate. That can be done with a comprehension and that is that.
 
 |    | Answer     | Attempts  | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
 | ------ |-----------:| ---------:| -------------------:| ----:| ----:|
-| **Part One**  | 1890866893020  | 1  | 6  | 00:00:00  | 2183  |
-| **Part Two**  | 34646237037193  | 1  | 8  | 00:00:00  | 1576  |
+| **Part One**  | 1890866893020  | 1  | 6  | 00:41:05  | 2183  |
+| **Part Two**  | 34646237037193  | 1  | 8  | 00:11:44  | 1576  |
 
 # Original Puzzle
 
