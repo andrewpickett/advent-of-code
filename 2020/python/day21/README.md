@@ -3,7 +3,23 @@
 ### Part 1
 > _How many times do any of those ingredients appear?_
 
-TODO
+Alright, so, this puzzle certainly sounded very simple at first. As I started writing different ways of storing the
+input (2 sets, one dict, one list, etc), nothing was completely working how I wanted.
+
+Basically I realized that I had to take an allergen listed, find all of the lines that had that allergen, then see
+if there were any words common on ALL of those lines. If ever there was only ONE common word across all of the lines,
+then I knew what the allergen --> ingredient mapping was.
+
+So, I basically just took a stab at writing that using some sets and loops, and using the union funcitonality of Python
+`set`s and tried it on the input. It worked, so I just figured, why not TRY it on my actual input.
+
+Lo-and-behold, it worked right away. I fully expected my implementation to end up in an infinite loop on the puzzle input
+because I just say "keep doing this until there are no more unmatched allergens". In the end, though, it neatly found
+a map of ingredient to allergen.
+
+Then I just removed all of those ingredients form the input, and counted how many remaining there were.
+
+...little did I know...
 
 ### Part 2
 > _What is your canonical dangerous ingredient list?_
