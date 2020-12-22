@@ -1,7 +1,7 @@
 import math
 from aoc_utils import run_with_timer
 
-data = [x.strip() for x in open("sample.txt").readlines()]
+data = [x.strip() for x in open("input.txt").readlines()]
 
 
 def get_tiles_as_binary():
@@ -36,27 +36,12 @@ def find_corners(edge_vals):
 	return [int(k) for k, v in edge_vals.items() if sum(1 for x in v[:4] for k2, v2 in edge_vals.items() if k2 != k and x in v2) == 2]
 
 
-def map_tiles(edge_vals):
-	edge_map = {}
-	for k, v in edge_vals.items():
-		edge_map[k] = set()
-		for x in v[:4]:
-			for k2, v2 in edge_vals.items():
-				if k != k2 and x in v2:
-					print(k, '(', v.index(x), ') -->', k2, '(', v2.index(x), ')')
-					edge_map[k].add((k2, v2.index(x)))
-	return edge_map
-
-
 def part_one():
 	return math.prod(corner for corner in find_corners(get_edge_values(get_tiles_as_binary())))
 
 
 def part_two():
-	edge_map = map_tiles(get_edge_values(get_tiles_as_binary()))
-	# Grab a corner and we'll start from there...
-	corner = [k for k, v, in edge_map.items() if len(v) == 2][0]
-
+	pass
 
 
 if __name__ == '__main__':

@@ -3,14 +3,28 @@
 ### Part 1
 > _What do you get if you multiply together the IDs of the four corner tiles?_
 
+I don't know why, but when I saw the input, I immediately thought "binary". Since for this part, we only cared about
+the edges of the tiles, I went ahead and converted each edge of every tile to a number by converting the string of
+`.` and `#` to `0` and `1`. This gave me 4 numbers for each tile. In order to find the corners, I just needed
+to find the tiles that had 2 numbers that didn't match any other numbers.
+
+Now, the fact that any of the squares could be rotated any direction caused me a bit of a headache, because I did have to
+actually assign 8 numbers to each tile (the 4 original, and then the 4 reversed to account for rotations)...But when
+actually CHECKING that, I only had to check the original 4 against all 8 of every other.
+
+Long story short, I was able to find the 4 tiles really quickly and get the result without actually doing anything with
+the full arrays of tiles as they were. Win!
+
 ### Part 2
 > _How many # are not part of a sea monster?_
+
+TODO
 
 # Results
 
 |    | Answer     | Attempts  | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
 | ------ |-----------:| ---------:| -------------------:| ----:| ----:|
-| **Part One**  |   |   |   | 00:00:00  |   |
+| **Part One**  | 7492183537913  | 1  | 25  | ~00:45:00  | 7854  |
 | **Part Two**  |   |   |   | 00:00:00  |   |
 
 # Original Puzzle
