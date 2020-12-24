@@ -17,6 +17,7 @@ and if you are on an even row or not.
 
 Here's a helpful diagram to show the coordinate differences from the center tile to each of its neighbors:
 ![](hexmap.png)
+
 The left is in the case where the center tile is on an "even" row, and the right is if the tile is on an "odd" row.
 
 To help with performance and readability, I utilized sets for all of the point lists, because we could use Python's
