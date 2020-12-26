@@ -18,14 +18,53 @@ the full arrays of tiles as they were. Win!
 ### Part 2
 > _How many # are not part of a sea monster?_
 
-TODO
+This part sucked.
+
+So...I was really proud of my part 1 solution, and because it was all mathy and didn't actually do much with the
+arrays, I was determined to figure out how to do part 2 with as little array manipulation as I could. So I probably spent
+5 or 6 hours trying to complete just the first part of this puzzle using my existing soluation for part 1. I tried
+everything to get all my tiles lined up and arranged as the full image using just the integer values for all of
+the edges...and I just kept getting error after error.
+
+So, I decided to scrap it completely and go with a straight object-oriented approach to solving it: Create a tile object
+and perform rotations, neighbor checks, etc, within that object.
+
+Now, I haven't done a lot of OO work within Python, so I kept fumbling over stupid errors (static variables instead of
+instance, etc)...but after another 5 or 6 hours, I came up with a pretty slick solution to build my full image:
+
+* Find the corners, just like we did in part 1.
+* Pick any one of them and find all of its neighbors (based on matching the edges).
+* Rotate that tile until it aligns to the upper left corner of the image.
+* Now, I have the upper left tile in place, and I know its right and bottom neighbors.
+* Take the right neighbor and find all of its neighbors.
+* Do this until you no longer have any right neighbors...we now have the full top row done.
+* Go back to the first tile and find its bottom neighbor...and then repeat going to the right and down until the entire
+image is filled.
+
+Now, by now you should know my distaste for multidimensional arrays, so instead of storing the image as a 2d array, I
+decided to store it as just a basic array.
+
+Ok, first hurdle complete. Removing the borders was easy (especially since I did it OO). So that wasn't a problem.
+Now, combine the whole thing into ONE array of rows. That took a little chicken scratch to map out, but in the end,
+I had one array of strings, each entry being a row of the final image.
+
+To find the sea monsters, I started with the left most point of the sea monster and labeled it point `(0,0)`.
+I went through and labeled all the other points in relation to it.
+
+Traverse through my entire image and whenever I get to a `#`, I check to see if every other point in the sea monster
+is also a `#`. If all are, I count it as a found monster and keep going until I check the whole image.
+
+Now, I wrap all of this in rotation/flipping logic in order to find which orientation actually had any sea monsters,
+but thats the basic idea.
+
+Finally done, after about 15 hours or so...ugh.
 
 # Results
 
 |    | Answer     | Attempts  | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
 | ------ |-----------:| ---------:| -------------------:| ----:| ----:|
 | **Part One**  | 7492183537913  | 1  | 25  | ~00:45:00  | 7854  |
-| **Part Two**  |   |   |   | 00:00:00  |   |
+| **Part Two**  | 2323  | 1  | 1105  | ~15:00:00  | 10654  |
 
 # Original Puzzle
 

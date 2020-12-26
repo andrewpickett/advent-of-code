@@ -1,26 +1,23 @@
 from aoc_utils import run_with_timer
 
-data = [int(x.strip()) for x in open("input.txt").readlines()]
+card_public_key, door_public_key = [int(x.strip()) for x in open("input.txt").readlines()]
+
+
+def transform_val(val, subject_number):
+	return (val * subject_number) % 20201227
 
 
 def part_one():
 	subject_number = 7
-
-	card_public_key = data[0]
-	door_public_key = data[1]
-
 	door_loop_size = 0
-
 	val = 1
 	while val != door_public_key:
-		val *= subject_number
-		val %= 20201227
+		val = transform_val(val, subject_number)
 		door_loop_size += 1
 
 	val = 1
-	for i in range(door_loop_size):
-		val *= card_public_key
-		val %= 20201227
+	for _ in range(door_loop_size):
+		val = transform_val(val, card_public_key)
 	return val
 
 
