@@ -240,7 +240,7 @@ def part_two():
 
 if __name__ == '__main__':
 	run_with_timer(part_one)  # 7492183537913 -- took 48 ms
-	run_with_timer(part_two)  # 2323??
+	run_with_timer(part_two)  # 2323 -- took 1105 ms
 
 
 # These methods are no longer used, as I removed them when I rewrote it...but keeping them because I liked it.
