@@ -27,3 +27,5 @@ function partTwo(data) {
 	}
 	return total;
 }
+
+module.exports = { parseData, partOne, partTwo }

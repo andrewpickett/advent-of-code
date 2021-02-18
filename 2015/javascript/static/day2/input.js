@@ -1000,3 +1000,4 @@ data = `
 24x25x17
 14x6x11
 `
+module.exports = data
