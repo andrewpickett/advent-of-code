@@ -15,8 +15,9 @@
 	<script type="text/javascript" src="puzzle.js"></script>
 	<script>
 		function run() {
-			document.getElementById("partOne").innerText = runWithTimer(partOne, data.trim());
-			document.getElementById("partTwo").innerText = runWithTimer(partTwo, data.trim());
+			const d = parseData(data);
+			document.getElementById("partOne").innerText = runWithTimer(partOne, d);
+			document.getElementById("partTwo").innerText = runWithTimer(partTwo, d);
 		}
 	</script>
 </body>
