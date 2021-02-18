@@ -14,5 +14,4 @@ function partTwo(data) {
 			return i + 1;
 		}
 	}
-	return "NO ANSWER FOUND";
 }
