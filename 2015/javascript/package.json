@@ -1,0 +1,13 @@
+{
+	"name": "advent-of-code-2015",
+	"version": "1.0.0",
+	"main": "app.js",
+	"scripts": {
+		"start": "node app.js"
+	},
+	"author": "Andrew J. Pickett",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.17.1"
+	}
+}

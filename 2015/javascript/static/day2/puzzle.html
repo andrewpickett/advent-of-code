@@ -1,0 +1,23 @@
+<html lang="en">
+<head>
+	<title>Day 2</title>
+	<style>
+		#partOne, #partTwo {
+			font-family: consolas, "Courier New", monospace;
+		}
+	</style>
+</head>
+<body onload="run()">
+	<div id="partOne"></div>
+	<div id="partTwo"></div>
+	<script type="text/javascript" src="../runWithTimer.js"></script>
+	<script type="text/javascript" src="input.js"></script>
+	<script type="text/javascript" src="puzzle.js"></script>
+	<script>
+		function run() {
+			document.getElementById("partOne").innerText = runWithTimer(partOne, data.trim());
+			document.getElementById("partTwo").innerText = runWithTimer(partTwo, data.trim());
+		}
+	</script>
+</body>
+</html>
