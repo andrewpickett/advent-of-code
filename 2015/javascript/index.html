@@ -2,6 +2,9 @@
 <head>
 	<title>Advent of Code - 2015 - JavaScript</title>
 	<style>
+		a, a:visited {
+			color: #0000ff;
+		}
 		#dayWrapper, #resultsWrapper {
 			padding: 20px;
 		}
@@ -38,14 +41,14 @@
 	<div id="dayWrapper">
 		<div class="header">Day</div>
 		<div>
-			<div class="day"><a href="#" onclick="run(this)">1</a></div>
-			<div class="day"><a href="#" onclick="run(this)">2</a></div>
-			<div class="day"><a href="#" onclick="run(this)">3</a></div>
-			<div class="day"><a href="#" onclick="run(this)">4</a></div>
-			<div class="day"><a href="#" onclick="run(this)">5</a></div>
+			<div class="day"><a href="#" onclick="return run(this)">1</a></div>
+			<div class="day"><a href="#" onclick="return run(this)">2</a></div>
+			<div class="day"><a href="#" onclick="return run(this)">3</a></div>
+			<div class="day"><a href="#" onclick="return run(this)">4</a></div>
+			<div class="day"><a href="#" onclick="return run(this)">5</a></div>
 			<div style="clear: both;"></div>
 		</div>
-		<div><a href="#" onclick="clearAnswers(this)">[clear]</a></div>
+		<div><a href="#" onclick="return clearAnswers(this)">[clear]</a></div>
 	</div>
 	<div id="resultsWrapper">
 		<div class="header">Results</div>
@@ -101,6 +104,7 @@
 			document.getElementById("partOneTime").innerHTML = '&nbsp;';
 			document.getElementById("partTwoAnswer").innerHTML = '&nbsp;';
 			document.getElementById("partTwoTime").innerHTML = '&nbsp;';
+			return false;
 		}
 	</script>
 </body>
