@@ -1,19 +1,20 @@
 let express = require('express');
 let path = require('path');
-let fs = require('fs')
 
 let app = express();
 
 app.use(express.static(path.join(__dirname, 'static')))
 
 app.get('/', function (req, res) {
-	let resVal = '';
-	fs.readdirSync(path.join(__dirname, 'static')).forEach(file => {
-		if (!file.endsWith('.js')) {
-			resVal += '<a href="/' + file + '/puzzle.html">' + file + '</a><br />';
-		}
-	});
-	res.send(resVal)
+	res.sendFile(path.resolve(__dirname, 'index.html'));
+});
+
+app.get('/day/:day/part/:part', function(req, res) {
+	res.setHeader('Content-Type', 'application/json');
+
+	let p = path.join(__dirname, 'day' + req.params.day + '/puzzle');
+	let puzzle = require(p);
+	res.json(puzzle.run(parseInt(req.params.part)));
 });
 
 app.listen(3000, function () {

@@ -1,0 +1,107 @@
+<html lang="en">
+<head>
+	<title>Day 4</title>
+	<style>
+		#dayWrapper, #resultsWrapper {
+			padding: 20px;
+		}
+		.header {
+			font-weight: bolder;
+			font-size: 2em;
+		}
+		.day {
+			float: left;
+			padding: 3px;
+			width: 10px;
+		}
+		.part {
+			float: left;
+			font-weight: bolder;
+			padding-right: 30px;
+			width: 50px;
+		}
+		.answer {
+			float: left;
+			text-align: right;
+			width: 150px;
+			font-family: Consolas, "Courier New", monospace;
+		}
+		.time {
+			float: left;
+			text-align: right;
+			width: 150px;
+			font-family: Consolas, "Courier New", monospace;
+		}
+	</style>
+</head>
+<body>
+	<div id="dayWrapper">
+		<div class="header">Day</div>
+		<div>
+			<div class="day"><a href="#" onclick="run(this)">1</a></div>
+			<div class="day"><a href="#" onclick="run(this)">2</a></div>
+			<div class="day"><a href="#" onclick="run(this)">3</a></div>
+			<div class="day"><a href="#" onclick="run(this)">4</a></div>
+			<div class="day"><a href="#" onclick="run(this)">5</a></div>
+			<div style="clear: both;"></div>
+		</div>
+		<div><a href="#" onclick="clearAnswers(this)">[clear]</a></div>
+	</div>
+	<div id="resultsWrapper">
+		<div class="header">Results</div>
+		<div>
+			<div class="part">&nbsp;</div>
+			<div class="answer"><b>Result</b></div>
+			<div class="time"><b>Time (ms)</b></div>
+			<div style="clear: both;"></div>
+		</div>
+		<div>
+			<div class="part">Part 1</div>
+			<div class="answer" id="partOneAnswer"></div>
+			<div class="time" id="partOneTime"></div>
+			<div style="clear: both;"></div>
+		</div>
+		<div>
+			<div class="part">Part 2</div>
+			<div class="answer" id="partTwoAnswer"></div>
+			<div class="time" id="partTwoTime"></div>
+			<div style="clear: both;"></div>
+		</div>
+	</div>
+	<script>
+		const loading = document.createElement('img');
+		loading.src = './images/loading.gif';
+
+		function run(elem) {
+			clearAnswers();
+			let day = parseInt(elem.innerText);
+			getAnswer(day, 1);
+			getAnswer(day, 2);
+			return false;
+		}
+
+		function getAnswer(day, part) {
+			let pname = "part" + (part === 1 ? "One" : "Two");
+			document.getElementById(pname + "Answer").innerHTML = loading.outerHTML;
+
+			let myheaders = new Headers();
+			myheaders.append('pragma', 'no-cache');
+			myheaders.append('cache-control', 'no-cache');
+			fetch("day/" + day + "/part/" + part, { method: 'GET', headers: myheaders })
+				.then(function(response) {
+					return response.json();
+				}).then(function(jsonResponse) {
+					document.getElementById(pname + "Answer").innerHTML = jsonResponse.result;
+					document.getElementById(pname + "Time").innerHTML = jsonResponse.millis;
+				});
+		}
+
+		function clearAnswers() {
+			document.getElementById("partOneAnswer").innerHTML = '&nbsp;';
+			document.getElementById("partOneTime").innerHTML = '&nbsp;';
+			document.getElementById("partTwoAnswer").innerHTML = '&nbsp;';
+			document.getElementById("partTwoTime").innerHTML = '&nbsp;';
+		}
+	</script>
+</body>
+</html>

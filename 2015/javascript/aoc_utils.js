@@ -3,6 +3,7 @@ function runWithTimer(f, data) {
 	let result = f(data)
 	let end = Date.now()
 
-	return result + ' -- ' + (end-start) + ' ms'
-
+	return { "result": result, "millis": (end-start) }
 }
+
+module.exports = { runWithTimer }

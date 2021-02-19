@@ -1,3 +1,11 @@
+let utils = require('../aoc_utils')
+let data = require('./input')
+
+function run(part) {
+	const d = parseData(data);
+	return (part === 1) ? utils.runWithTimer(partOne, d) : utils.runWithTimer(partTwo, d);
+}
+
 function parseData(data) {
 	let d = [];
 	let lines = data.trim().split('\n');
@@ -28,4 +36,4 @@ function partTwo(data) {
 	return total;
 }
 
-module.exports = { parseData, partOne, partTwo }
+module.exports = { run, parseData, partOne, partTwo }
