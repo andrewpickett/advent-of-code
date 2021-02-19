@@ -28,10 +28,10 @@ function partOne(data) {
 	let visited_houses = new Set();
 	visited_houses.add(curr_pos[0] + ' ' + curr_pos[1]);
 
-	for (let i = 0; i < data.length; i++) {
-		let pos = movePosition(curr_pos, data.charAt(i));
+	[...data].forEach(e => {
+		let pos = movePosition(curr_pos, e);
 		visited_houses.add(pos[0] + ' ' + pos[1]);
-	}
+	});
 	return visited_houses.size;
 }
 
@@ -42,8 +42,8 @@ function partTwo(data) {
 	visited_houses.add(santa_pos[0] + ' ' + santa_pos[1]);
 	visited_houses.add(robo_pos[0] + ' ' + robo_pos[1]);
 
-	for (let i = 0; i < data.length; i++) {
-		let pos = movePosition(i % 2 === 0 ? santa_pos : robo_pos, data.charAt(i));
+	for (const [i, e] of [...data].entries()) {
+		let pos = movePosition(i % 2 === 0 ? santa_pos : robo_pos, e);
 		visited_houses.add(pos[0] + ' ' + pos[1]);
 	}
 	return visited_houses.size;

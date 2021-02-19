@@ -2,7 +2,7 @@ const puzzle = require('./puzzle')
 const data = require('./input')
 
 test('partOne examples', () => {
-	expect(puzzle.partOne(null)).toBe(-1);
+	expect(puzzle.partOne(['ugknbfddgicrmopn', 'aaa', 'jchzalrnumimnmhp', 'haegwjzuvuyypxyu', 'dvszwmarrgswjxmb'])).toBe(2);
 });
 
 test('partOne', () => {
@@ -11,7 +11,7 @@ test('partOne', () => {
 });
 
 test('partTwo examples', () => {
-	expect(puzzle.partTwo(null)).toBe(-1);
+	expect(puzzle.partTwo(['qjhvhtzxzqqjkmpb', 'xxyxx', 'uurcxstgmygtbstg', 'ieodomkazucvgmuy'])).toBe(2);
 });
 
 test('partTwo', () => {

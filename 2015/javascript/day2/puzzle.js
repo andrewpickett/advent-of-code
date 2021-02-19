@@ -8,31 +8,29 @@ function run(part) {
 
 function parseData(data) {
 	let d = [];
-	let lines = data.trim().split('\n');
-	for (let i = 0; i < lines.length; i++) {
+	data.trim().split('\n').forEach(line => {
 		let dimInts = [];
-		let dims = lines[i].split('x');
-		for (let j = 0; j < dims.length; j++) {
-			dimInts.push(parseInt(dims[j]));
-		}
+		line.split('x').forEach(dim => {
+			dimInts.push(parseInt(dim));
+		});
 		d.push(dimInts);
-	}
+	});
 	return d;
 }
 
 function partOne(data) {
 	let total = 0;
-	for (let i = 0; i < data.length; i++) {
-		total += 2*data[i][0]*data[i][1] + 2*data[i][1]*data[i][2] + 2*data[i][2]*data[i][0] + (data[i].reduce((a,b) => a*b) / Math.max(...data[i]));
-	}
+	data.forEach(e => {
+		total += 2*e[0]*e[1] + 2*e[1]*e[2] + 2*e[2]*e[0] + (e.reduce((a,b) => a*b) / Math.max(...e));
+	})
 	return total;
 }
 
 function partTwo(data) {
 	let total = 0;
-	for (let i = 0; i < data.length; i++) {
-		total += 2*((data[i].reduce((a,b) => a+b) - Math.max(...data[i]))) + data[i].reduce((a,b,) => a*b)
-	}
+	data.forEach(e => {
+		total += 2*((e.reduce((a,b) => a+b) - Math.max(...e))) + e.reduce((a,b,) => a*b)
+	})
 	return total;
 }
 
