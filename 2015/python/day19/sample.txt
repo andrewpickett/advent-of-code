@@ -1,0 +1,7 @@
+e => Hi
+e => O
+Hi => HiO
+Hi => OHi
+O => HiHi
+
+HiOHi
