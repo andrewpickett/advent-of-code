@@ -43,6 +43,11 @@
 			pointer-events: none;
 			cursor: default;
 		}
+		.too_long {
+			color: #ff0000;
+			font-size: 9px;
+			vertical-align: super;
+		}
 	</style>
 </head>
 <body>
@@ -52,13 +57,13 @@
 			<div class="day"><a href="#" onclick="return run(this)">1</a></div>
 			<div class="day"><a href="#" onclick="return run(this)">2</a></div>
 			<div class="day"><a href="#" onclick="return run(this)">3</a></div>
-			<div class="day"><a href="#" onclick="return run(this)">4</a></div>
+			<div class="day"><a href="#" onclick="return run(this)">4</a><span class="too_long">*</span></div>
 			<div class="day"><a href="#" onclick="return run(this)">5</a></div>
 			<div class="day"><a href="#" onclick="return run(this)">6</a></div>
 			<div class="day"><a href="#" onclick="return run(this)">7</a></div>
 			<div class="day"><a href="#" onclick="return run(this)">8</a></div>
 			<div class="day"><a href="#" onclick="return run(this)">9</a></div>
-			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">10</a></div>
+			<div class="day"><a href="#" onclick="return run(this)">10</a></div>
 			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">11</a></div>
 			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">12</a></div>
 			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">13</a></div>
