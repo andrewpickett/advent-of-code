@@ -2,7 +2,7 @@ let utils = require('../aoc_utils')
 let fs = require('fs')
 
 function run(part) {
-	const d = parseData(fs.readFileSync(__dirname + "/input.txt'", 'utf8'));
+	const d = parseData(fs.readFileSync(__dirname + "/input.txt", 'utf8'));
 	return (part === 1) ? utils.runWithTimer(partOne, d) : utils.runWithTimer(partTwo, d);
 }
 
