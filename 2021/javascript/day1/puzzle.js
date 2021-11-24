@@ -11,17 +11,11 @@ function parseData(data) {
 }
 
 function partOne(data) {
-	return (data.match(/\(/g) || []).length - (data.match(/\)/g) || []).length;
+	return
 }
 
 function partTwo(data) {
-	let curr_floor = 0
-	for (const [i, e] of [...data].entries()) {
-		curr_floor += e === '(' ? 1 : -1;
-		if (curr_floor < 0) {
-			return i + 1;
-		}
-	}
+	return
 }
 
 module.exports = { run, parseData, partOne, partTwo }
