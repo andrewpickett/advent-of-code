@@ -12,9 +12,6 @@
     "md5": "^2.3.0"
   },
   "devDependencies": {
-    "jest": "^26.6.3"
-  },
-  "keywords": [],
-  "license": "ISC",
-  "description": ""
+    "jest": "^27.3.1"
+  }
 }
