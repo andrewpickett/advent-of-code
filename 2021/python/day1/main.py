@@ -1,6 +1,6 @@
 from aoc_utils import run_with_timer
 
-data = []
+data = [int(x.strip()) for x in open("input.txt").readlines()]
 
 
 def part_one():

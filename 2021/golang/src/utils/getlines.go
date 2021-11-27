@@ -1,15 +1,13 @@
-package aoc2021utils
+package utils
 
 import (
 	"bufio"
 	"log"
 	"os"
-	"path/filepath"
 )
 
 func GetLines(f string) []string {
-	abs, _ := filepath.Abs(f)
-	file, err := os.Open(abs)
+	file, err := os.Open(f)
 	if err != nil {
 		log.Fatal(err)
 	}

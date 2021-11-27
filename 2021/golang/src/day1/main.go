@@ -1,8 +1,8 @@
 package main
 
 import (
-	"aoc2021utils"
 	"fmt"
+	"utils"
 )
 
 func getData(lines []string) []string {
@@ -10,10 +10,13 @@ func getData(lines []string) []string {
 }
 
 func partOne(data []string) int {
+	for _, e := range data {
+		fmt.Println(e)
+	}
 	return 1119
 }
 
 func main() {
-	var data = getData(aoc2021utils.GetLines("2021/golang/src/day1/input.txt"))
+	var data = getData(utils.GetLines("input.txt"))
 	fmt.Println(partOne(data))
 }
