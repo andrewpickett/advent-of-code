@@ -1,22 +1,24 @@
 package main
 
 import (
-	"fmt"
 	"utils"
 )
+
+var data = getData(utils.GetLines("input.txt"))
 
 func getData(lines []string) []string {
 	return lines
 }
 
-func partOne(data []string) int {
-	for _, e := range data {
-		fmt.Println(e)
-	}
-	return 1119
+func partOne() string {
+	return ""
+}
+
+func partTwo() string {
+	return ""
 }
 
 func main() {
-	var data = getData(utils.GetLines("input.txt"))
-	fmt.Println(partOne(data))
+	utils.RunWithTimer(partOne) // main.partOne --  -- took 0 ms
+	utils.RunWithTimer(partTwo) // main.partTwo --  -- took 0 ms
 }

@@ -1,10 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"strconv"
 	"utils"
 )
+
+var data = getData(utils.GetLines("input.txt"))
 
 func getData(lines []string) []int {
 	var data []int
@@ -15,32 +16,31 @@ func getData(lines []string) []int {
 	return data
 }
 
-func partOne(data []int) int {
+func partOne() string {
 	for i := 0; i < len(data)-1; i++ {
 		for j := i + 1; j < len(data); j++ {
 			if data[i]+data[j] == 2020 {
-				return data[i] * data[j]
+				return strconv.Itoa(data[i] * data[j])
 			}
 		}
 	}
-	return 0
+	return ""
 }
 
-func partTwo(data []int) int {
+func partTwo() string {
 	for i := 0; i < len(data)-2; i++ {
 		for j := i + 1; j < len(data)-1; j++ {
 			for k := j + 1; k < len(data); k++ {
 				if data[i]+data[j]+data[k] == 2020 {
-					return data[i] * data[j] * data[k]
+					return strconv.Itoa(data[i] * data[j] * data[k])
 				}
 			}
 		}
 	}
-	return 0
+	return ""
 }
 
 func main() {
-	var data = getData(utils.GetLines("input.txt"))
-	fmt.Println(partOne(data))
-	fmt.Println(partTwo(data))
+	utils.RunWithTimer(partOne) // main.partOne -- 197451 -- took 0 ms
+	utils.RunWithTimer(partTwo) // main.partTwo -- 138233720 -- took 1 ms
 }
