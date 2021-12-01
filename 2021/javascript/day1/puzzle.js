@@ -7,15 +7,31 @@ function run(part) {
 }
 
 function parseData(data) {
-	return data.trim();
+	let d = [];
+	data.trim().split('\n').forEach(line => {
+		d.push(parseInt(line));
+	});
+	return d;
 }
 
 function partOne(data) {
-	return
+	let count = 0;
+	for (let i = 1; i < data.length; i++) {
+		if (data[i] > data[i-1]) {
+			count++;
+		}
+	}
+	return count;
 }
 
 function partTwo(data) {
-	return
+	let count = 0;
+	for (let i = 3; i < data.length; i++) {
+		if (data[i] + data[i-1] + data[i-2] > data[i-1] + data[i-2] + data[i-3]) {
+			count++;
+		}
+	}
+	return count;
 }
 
 module.exports = { run, parseData, partOne, partTwo }
