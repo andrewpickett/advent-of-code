@@ -26,7 +26,7 @@ was a pretty big load on the server at the time with people submitting. So after
 |    | Answer     | Attempts  | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
 | ------ |-----------:| ---------:| -------------------:| ----:| ----:|
 | **Part One**  | 1766 | 1 | 0 | 00:02:42  | 1173 |
-| **Part Two**  | 1797 | 1 | 0 | 00:06:03  | 968 |
+| **Part Two**  | 1797 | 1 | 0 | 00:03:21  | 968 |
 
 # Original puzzle
 ### --- Day 1: Sonar Sweep ---
