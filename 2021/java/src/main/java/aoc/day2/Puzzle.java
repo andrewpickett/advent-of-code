@@ -8,7 +8,7 @@ import java.util.List;
 
 import static aoc.utils.LineReader.readLines;
 
-public class Puzzle extends AocPuzzle<List<List<String>>, Integer> {
+public class Puzzle extends AocPuzzle<List<Instruction>, Integer> {
 
 	public static void main(String[] args) {
 		new Puzzle("day2/input.txt").runWithTimers();
@@ -20,54 +20,79 @@ public class Puzzle extends AocPuzzle<List<List<String>>, Integer> {
 
 	@Override
 	public Integer partOne() {
-		int dist = 0;
-		int depth = 0;
-		for (List<String> d : input) {
-			switch (d.get(0)) {
-				case "forward":
-					dist += Integer.parseInt(d.get(1));
-					break;
-				case "down":
-					depth += Integer.parseInt(d.get(1));
-					break;
-				case "up":
-					depth -= Integer.parseInt(d.get(1));
-					break;
+		Position p = new Position();
+		for (Instruction d : input) {
+			switch (d.direction()) {
+				case "forward" -> p.moveForward(d.amount());
+				case "down" -> p.moveDown(d.amount());
+				case "up" -> p.moveUp(d.amount());
 			}
 		}
-		return dist * depth;
+		return p.calculate();
 	}
 
 	@Override
 	public Integer partTwo() {
-		int dist = 0;
-		int depth = 0;
-		int aim = 0;
-		for (List<String> d : input) {
-			switch (d.get(0)) {
-				case "forward":
-					dist += Integer.parseInt(d.get(1));
-					depth += aim * Integer.parseInt(d.get(1));
-					break;
-				case "down":
-					aim += Integer.parseInt(d.get(1));
-					break;
-				case "up":
-					aim -= Integer.parseInt(d.get(1));
-					break;
+		Position p = new Position();
+		for (Instruction d : input) {
+			switch (d.direction()) {
+				case "forward" -> {
+					p.moveForward(d.amount());
+					p.moveDown(p.getAim() * d.amount());
+				}
+				case "down" -> p.aimDown(d.amount());
+				case "up" -> p.aimUp(d.amount());
 			}
 		}
-		return dist * depth;
+		return p.calculate();
 	}
 
 
 	@Override
-	public List<List<String>> getInput(String location) {
+	public List<Instruction> getInput(String location) {
 		List<String> lines = readLines(location);
-		List<List<String>> retVal = new ArrayList<>();
+		List<Instruction> retVal = new ArrayList<>();
 		for (String line : lines) {
-			retVal.add(Arrays.asList(line.split(" ")));
+			String[] parts = line.split(" ");
+			retVal.add(new Instruction(parts[0], Integer.parseInt(parts[1])));
 		}
 		return retVal;
 	}
+}
+
+class Position {
+	private int horizontal;
+	private int depth;
+	private int aim;
+
+	public void moveForward(int amount) {
+		horizontal += amount;
+	}
+
+	public void moveDown(int amount) {
+		depth += amount;
+	}
+
+	public void moveUp(int amount) {
+		depth -= amount;
+	}
+
+	public void aimDown(int amount) {
+		aim += amount;
+	}
+
+	public void aimUp(int amount) {
+		aim -= amount;
+	}
+
+	public int calculate() {
+		return horizontal * depth;
+	}
+
+	public int getAim() {
+		return aim;
+	}
+}
+
+record Instruction(String direction, int amount) {
 }
