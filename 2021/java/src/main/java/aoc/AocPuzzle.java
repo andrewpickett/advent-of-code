@@ -1,13 +1,18 @@
 package aoc;
 
 public abstract class AocPuzzle<S, T> {
-	protected final S input;
+	protected S input;
 	public abstract T partOne();
 	public abstract T partTwo();
-	public abstract S getInput(String location);
+	public abstract S getInput();
+	public abstract String getInputLocation();
 
-	public AocPuzzle(String inputLocation) {
-		input = getInput(inputLocation);
+	public AocPuzzle() {
+		this.input = getInput();
+	}
+
+	public AocPuzzle(S input) {
+		this.input = input;
 	}
 
 	public void runPartOneWithTimer() {

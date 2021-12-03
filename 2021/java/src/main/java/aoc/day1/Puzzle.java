@@ -12,11 +12,15 @@ import static aoc.utils.LineReader.readLinesAsInts;
 public class Puzzle extends AocPuzzle<List<Measurement>, Integer> {
 
 	public static void main(String[] args) {
-		new Puzzle("day1/input.txt").runWithTimers();
+		new Puzzle().runWithTimers();
 	}
 
-	public Puzzle(String inputLocation) {
-		super(inputLocation);
+	public Puzzle() {
+		super();
+	}
+
+	public Puzzle(List<Measurement> input) {
+		super(input);
 	}
 
 	@Override
@@ -42,8 +46,13 @@ public class Puzzle extends AocPuzzle<List<Measurement>, Integer> {
 	}
 
 	@Override
-	public List<Measurement> getInput(String location) {
-		return readLinesAsInts(location).stream().map(item -> new Measurement(item)).collect(Collectors.toList());
+	public List<Measurement> getInput() {
+		return readLinesAsInts(getInputLocation()).stream().map(item -> new Measurement(item)).toList();
+	}
+
+	@Override
+	public String getInputLocation() {
+		return "day1/input.txt";
 	}
 }
 

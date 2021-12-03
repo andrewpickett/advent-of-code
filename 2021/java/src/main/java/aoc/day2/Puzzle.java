@@ -11,11 +11,15 @@ import static aoc.utils.LineReader.readLines;
 public class Puzzle extends AocPuzzle<List<Instruction>, Integer> {
 
 	public static void main(String[] args) {
-		new Puzzle("day2/input.txt").runWithTimers();
+		new Puzzle().runWithTimers();
 	}
 
-	public Puzzle(String inputLocation) {
-		super(inputLocation);
+	public Puzzle() {
+		super();
+	}
+
+	public Puzzle(List<Instruction> instructions) {
+		super(instructions);
 	}
 
 	@Override
@@ -49,14 +53,19 @@ public class Puzzle extends AocPuzzle<List<Instruction>, Integer> {
 
 
 	@Override
-	public List<Instruction> getInput(String location) {
-		List<String> lines = readLines(location);
+	public List<Instruction> getInput() {
+		List<String> lines = readLines(getInputLocation());
 		List<Instruction> retVal = new ArrayList<>();
 		for (String line : lines) {
 			String[] parts = line.split(" ");
 			retVal.add(new Instruction(parts[0], Integer.parseInt(parts[1])));
 		}
 		return retVal;
+	}
+
+	@Override
+	public String getInputLocation() {
+		return "day2/input.txt";
 	}
 }
 
