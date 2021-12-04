@@ -3,7 +3,13 @@
 > _What will your final score be if you choose that board?_
 
 The first challenge with a puzzle like this is just parsing the input data into some sort of data model that makes sense.
-Obviously I wanted to separate the called numbers from the boards themselves, so getting the data became a mutli-step
+
+First instinct with this puzzle was to go with an Object Oriented approach (board object, that can check for winning state, calculate score, etc)...
+and I still think that's the best way to actually implement this (so when I do the Java solution, that's how I'll do it)...
+But because I'm not quite as fast with OO in Python, I decided to just script it this time. I may go back and refactor
+it later.
+
+Anyways...Obviously I wanted to separate the called numbers from the boards themselves, so getting the data became a mutli-step
 process:
 1. Parse all of the lines of the file
 2. Read the first line into a list of numbers
