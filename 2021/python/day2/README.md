@@ -20,10 +20,10 @@ I solved this faster.
 
 # Results
 
-|    | Answer     | Attempts  | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
-| ------ |-----------:| ---------:| -------------------:| ----:| ----:|
-| **Part One**  | 1660158 | 1 | 0 | 00:04:08  | 2209 |
-| **Part Two**  | 1604592846 | 1 | 0 | 00:01:47  | 1439 |
+|              |     Answer | Attempts | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
+|--------------|-----------:|---------:|----------------:|----------------------:|-----:|
+| **Part One** |    1660158 |        1 |               0 |              00:04:08 | 2209 |
+| **Part Two** | 1604592846 |        1 |               0 |              00:01:47 | 1439 |
 
 # Original puzzle
 

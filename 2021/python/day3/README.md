@@ -35,10 +35,10 @@ a little. Ran the code again, got the same number, and called it an evening.
 
 # Results
 
-|    | Answer     | Attempts  | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
-| ------ |-----------:| ---------:| -------------------:| ----:| ----:|
-| **Part One**  | 2595824 | 2 | 0 | 00:07:02  | 1386 |
-| **Part Two**  | 2135254 | 2 | 2 | 00:24:12  | 2660 |
+|              |  Answer | Attempts | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
+|--------------|--------:|---------:|----------------:|----------------------:|-----:|
+| **Part One** | 2595824 |        2 |               0 |              00:07:02 | 1386 |
+| **Part Two** | 2135254 |        2 |               2 |              00:24:12 | 2660 |
 
 # Original puzzle
 
