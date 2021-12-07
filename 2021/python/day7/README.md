@@ -17,8 +17,8 @@ I plugged that in, and it just worked great!
 
 |              |    Answer | Attempts | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
 |--------------|----------:|---------:|----------------:|----------------------:|-----:|
-| **Part One** |    356992 |        1 |             806 |              00:00:00 |      |
-| **Part Two** | 101268110 |        1 |            1413 |              00:00:00 |      |
+| **Part One** |    356992 |        1 |             806 |              00:05:01 | 1463 |
+| **Part Two** | 101268110 |        1 |            1413 |              00:01:39 |  743 |
 
 # Original puzzle
 
