@@ -1,16 +1,24 @@
 from aoc_utils import run_with_timer
+import sys
 
-data = []
+data = [int(x) for x in open("input.txt").readline().strip().split(",")]
+
+
+def calc_fuel(fun):
+	curr_min = sys.maxsize
+	for x in range(max(data)+1):
+		curr_min = min(sum(fun(x, y) for y in data), curr_min)
+	return curr_min
 
 
 def part_one():
-	return
+	return calc_fuel(lambda x, y: abs(y-x))
 
 
 def part_two():
-	return
+	return calc_fuel(lambda x, y: (abs(y-x)*(abs(y-x)+1))//2)
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  #
-	run_with_timer(part_two)  #
+	run_with_timer(part_one)  # 356992 -- took 806 ms
+	run_with_timer(part_two)  # 101268110 -- took 1413 ms
