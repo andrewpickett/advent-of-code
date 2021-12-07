@@ -5,7 +5,7 @@ data = [int(x) for x in open("input.txt").readline().strip().split(",")]
 
 
 def calc_fuel(fun):
-	return min(min(sum(fun(x, y) for y in data), sys.maxsize) for x in range(max(data)+1))
+	return min(min([sum(fun(x, y) for y in data)]) for x in range(max(data)+1))
 
 
 def part_one():
