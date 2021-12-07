@@ -1,5 +1,4 @@
 from aoc_utils import run_with_timer
-import sys
 
 data = [int(x) for x in open("input.txt").readline().strip().split(",")]
 
