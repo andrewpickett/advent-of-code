@@ -25,8 +25,8 @@ of the scores. Just sort, and get the middle result.
 
 |              |     Answer | Attempts | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
 |--------------|-----------:|---------:|----------------:|----------------------:|-----:|
-| **Part One** |     216297 |        1 |               5 |              00:11:36 | 2053 |
-| **Part Two** | 2165057169 |        1 |              12 |              00:05:18 | 1223 |
+| **Part One** |     216297 |        1 |               1 |              00:11:36 | 2053 |
+| **Part Two** | 2165057169 |        1 |               1 |              00:05:18 | 1223 |
 
 # Original puzzle
 
