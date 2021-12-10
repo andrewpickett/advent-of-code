@@ -9,17 +9,6 @@ def run_with_timer(f):
 	return result
 
 
-def find_neighbors_in_2d_array(a, row, col, include_diagonals=False):
-	neighbors = []
-	for y in range(-1, 2):
-		for x in range(-1, 2):
-			if (y == 0 and x == 0) or (abs(y) + abs(x) > 1 and not include_diagonals):
-				continue
-			if 0 <= row+y < len(a) and 0 <= col + x < len(a[y]):
-				neighbors.append({"col": col+x, "row": row+y, "val": a[row+y][col+x]})
-	return neighbors
-
-
 class Point:
 	def __init__(self, row, col, value=None):
 		self.col = col
@@ -54,9 +43,6 @@ class Point:
 
 class Grid:
 	def __init__(self, height=0, width=0, values=None):
-		'''
-		:param values: Expected to be in form array of arrays: [  [val, val, val...], [val, val, val...], ...  ]
-		'''
 		if height > 0 and width > 0 and values:
 			raise RuntimeError("Cannot define both the dimensions and default values. One or the other are required.")
 			return
