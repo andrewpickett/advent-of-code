@@ -25,6 +25,9 @@ class Point:
 	def __eq__(self, other):
 		return self.row == other.row and self.col == other.col
 
+	def __hash__(self):
+		return hash(str(self.row) + "_" + str(self.col))
+
 	def get_row(self):
 		return self.row
 
@@ -33,6 +36,9 @@ class Point:
 
 	def get_value(self):
 		return self.value
+
+	def set_value(self, value):
+		self.value = value
 
 	def set_neighbors(self, neighbors):
 		self.neighbors = neighbors
@@ -71,6 +77,9 @@ class Grid:
 		for row in self.data:
 			for col in row:
 				self.set_neighbors_for_point(p=col, include_diagonals=include_diagonals)
+
+	def get_row(self, row):
+		return self.data[row]
 
 	def get_point(self, row, col):
 		return self.data[row][col]
