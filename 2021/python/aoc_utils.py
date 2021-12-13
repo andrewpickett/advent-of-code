@@ -30,9 +30,15 @@ class Point:
 
 	def get_row(self):
 		return self.row
+	
+	def set_row(self, row):
+		return self.row
 
 	def get_col(self):
 		return self.col
+	
+	def set_col(self, col):
+		self.col = col
 
 	def get_value(self):
 		return self.value
@@ -48,7 +54,7 @@ class Point:
 
 
 class Grid:
-	def __init__(self, height=0, width=0, values=None):
+	def __init__(self, height=0, width=0, values=None, default_value=""):
 		if height > 0 and width > 0 and values:
 			raise RuntimeError("Cannot define both the dimensions and default values. One or the other are required.")
 			return
@@ -58,7 +64,7 @@ class Grid:
 		for r in range(self.height):
 			row = []
 			for c in range(self.width):
-				row.append(Point(r, c, '' if not values else values[r][c]))
+				row.append(Point(r, c, default_value if not values else values[r][c]))
 			self.data.append(row)
 
 	def set_neighbors_for_point(self, p=None, row=-1, col=-1, include_diagonals=False):
