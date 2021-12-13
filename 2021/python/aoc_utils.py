@@ -32,7 +32,7 @@ class Point:
 		return self.row
 	
 	def set_row(self, row):
-		return self.row
+		self.row = row
 
 	def get_col(self):
 		return self.col
