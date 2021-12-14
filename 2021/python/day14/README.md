@@ -26,14 +26,20 @@ Step 1:           NC        CN
 Step 2:        NB    BC  CC    NC
 ```
 So now I have a count of all of the letter PAIRS in the final string. I don't know what the final string actually is, but
-I don't need to. I then take my counts and for each individual letter, count the total number of times it appears in my
-count map. So for the above, my resulting count map looked like this:
+I don't need to. For example, given the sample input (`NNCB`), after 10 steps, instead of a 3000 character string, I end
+up having a pair count like this:
+```
+{'NB': 796, 'BB': 812, 'BN': 735, 'BC': 120, 'CC': 60, 'CN': 102, 'NC': 42, 'CB': 115, 'BH': 81, 'HC': 76, 'HH': 32, 'HN': 27, 'NH': 27, 'CH': 21, 'HB': 26}
+```
+
+I then take my counts and for each individual letter, count the total number of times it appears in my
+count map. So for the above smaller example, my resulting count map would look like this:
 ```
 {"NC":1, "NB":1, "CC":1, "NC":1}
 ```
 N appears 3 times, C appears 4 times, B appears 1 time. Now, the key here is knowing that the pairs overlap, so every letter
 is getting double counted **except for the first and last in the final string!** So, we take our number for each letter
-and divide it by 2...and if it's an odd number (of which there should be exactly 2), just round up.
+and divide it by 2...and if it's an odd number (of which there should be exactly 0 or 2), just round up.
 
 With this method, we never build exponentially long strings, don't have to keep track of much except for pairs of letters
 and it runs REALLY fast.
