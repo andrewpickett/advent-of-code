@@ -19,39 +19,39 @@ def build_map():
 
 
 def count_ways_to_node(m, current_path, full_paths, second_visit):
-    last_node = current_path[-1]
-    if last_node == 'end':
-        full_paths.add('-'.join(current_path))
-        return
-    if last_node.islower():
-        if not second_visit:
-            if sum(1 for x in current_path if x == last_node) == 2 and last_node != 'start':
-                second_visit = True
-                for x in m:
-                    m[x] = list(filter(lambda y: y.isupper() or (y.islower() and y not in current_path), m[x]))
-        else:
-            for x in m:
-                if last_node in m[x]:
-                    m[x].remove(last_node)
-    if len(m[last_node]) > 0:
-        for x in m[last_node]:
-            next_path = current_path.copy()
-            next_path.append(x)
-            count_ways_to_node(copy.deepcopy(m), next_path, full_paths, second_visit)
+	last_node = current_path[-1]
+	if last_node == 'end':
+		full_paths.add('-'.join(current_path))
+		return
+	if last_node.islower():
+		if not second_visit:
+			if sum(1 for x in current_path if x == last_node) == 2 and last_node != 'start':
+				second_visit = True
+				for x in m:
+					m[x] = list(filter(lambda y: y.isupper() or (y.islower() and y not in current_path), m[x]))
+		else:
+			for x in m:
+				if last_node in m[x]:
+					m[x].remove(last_node)
+	if len(m[last_node]) > 0:
+		for x in m[last_node]:
+			next_path = current_path.copy()
+			next_path.append(x)
+			count_ways_to_node(copy.deepcopy(m), next_path, full_paths, second_visit)
 
 
 def part_one():
-    m = build_map()
-    full_paths = set()
-    count_ways_to_node(copy.deepcopy(m), ['start'], full_paths, True)
-    return len(full_paths)
+	m = build_map()
+	full_paths = set()
+	count_ways_to_node(copy.deepcopy(m), ['start'], full_paths, True)
+	return len(full_paths)
 
 
 def part_two():
-    m = build_map()
-    full_paths = set()
-    count_ways_to_node(copy.deepcopy(m), ['start'], full_paths, False)
-    return len(full_paths)
+	m = build_map()
+	full_paths = set()
+	count_ways_to_node(copy.deepcopy(m), ['start'], full_paths, False)
+	return len(full_paths)
 
 
 if __name__ == '__main__':
