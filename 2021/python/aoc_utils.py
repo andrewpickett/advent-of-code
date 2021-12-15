@@ -30,13 +30,13 @@ class Point:
 
 	def get_row(self):
 		return self.row
-	
+
 	def set_row(self, row):
 		self.row = row
 
 	def get_col(self):
 		return self.col
-	
+
 	def set_col(self, col):
 		self.col = col
 
@@ -95,6 +95,9 @@ class Grid:
 
 	def get_width(self):
 		return self.width
+
+	def get_points(self):
+		return [pt for row in range(len(self.data)) for pt in self.data[row]]
 
 	def __str__(self):
 		out_val = "["
