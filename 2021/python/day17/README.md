@@ -1,6 +1,6 @@
 # Approach
 ### Part 1
-> __
+> _What is the highest y position it reaches on this trajectory?_
 
 This did not feel like a day 17 puzzle. When I read it, I immediately started thinking it could be solved purely
 mathematically. The first thought I had was that in order to get the highest y value, it would have to be entering
