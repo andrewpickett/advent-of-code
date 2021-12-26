@@ -12,5 +12,6 @@ def part_two():
 
 
 if __name__ == '__main__':
+	# Read the README.md for explanation here.
 	run_with_timer(part_one)  #
 	run_with_timer(part_two)  #
