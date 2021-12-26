@@ -37,7 +37,7 @@ Again, I plan on coming back to this and solving it programmatically some day...
 
 # Original puzzle
 
-###--- Day 23: Amphipod ---
+### --- Day 23: Amphipod ---
 
 A group of amphipods notice your fancy submarine and flag you down. "With such an impressive shell," one amphipod says, "surely you can help us with a question that has stumped our best scientists."
 
@@ -137,7 +137,7 @@ Finally, the last Amber amphipod moves into its room, using `8` energy:
 ```
 What is the least energy required to organize the amphipods?
 
-###--- Part Two ---
+### --- Part Two ---
 
 As you prepare to give the amphipods your solution, you notice that the diagram they handed you was actually folded up. As you unfold it, you discover an extra part of the diagram.
 
