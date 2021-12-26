@@ -44,8 +44,8 @@ def replace_all_individually(molecule, replacee, replacements):
 
 def replacement_step(molecule, molmap):
 	unique_molecules = set(x for x in [replace_all_individually(molecule, replacee, replacements) for replacee, replacements in molmap.items()])
-	# for replacee, replacement in molmap.items():
-	# 	unique_molecules.update(replace_all_individually(molecule, replacee, replacement))
+	for replacee, replacement in molmap.items():
+		unique_molecules.update(replace_all_individually(molecule, replacee, replacement))
 	return len(unique_molecules)
 
 
