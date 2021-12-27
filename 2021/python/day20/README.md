@@ -2,19 +2,47 @@
 ### Part 1
 > _How many pixels are lit in the resulting image?_
 
-TODO: Write this up
+Well, I don't know why I didn't use my Grid class here...I'm sure I thought about it, but honestly, I can't really remember
+even attempting to use it. So, oh well...I parsed the input into the two pieces (the reference string and the grid) and just
+approached it very directly:
+1. Extend the board's borders by 2 all the way around (I actually extended it by 3 initially, because I figured any extra wouldn't hurt, but we'll get to that in a minute...),
+so that we can have the initial border's pixels included in a 3x3 square.
+2. Then just go through and calculate all of the new pixels (not directly overwriting it), and writing them to a new board.
+
+This ended up working pretty well. It took a bit longer to run than I wanted, because I assumed the next step would
+be to run it many, many more times, but I figured it was good enough for now.
 
 ### Part 2
 > _Start again with the original input image and apply the image enhancement algorithm 50 times. How many pixels are lit in the resulting image?_
 
-TODO: Write this up
+So, exactly like I thought, we needed to run the algorithm a whole bunch more times. Alright, well, I ran the code, and it
+came back in about 15 seconds...plugged it in...and it was incorrect.
+
+Great...how?? I reviewed the code and it all seemed to work the way I thought it should. It worked on all of the examples given...
+worked on part 1...why isn't it working on part 2?
+
+Well, I spent a decent amount of time debugging, and I decided to output the grid after every step. I did notice that
+my resulting image had a mostly solid border around the full edge of it, so I figured maybe my extra padding was causing some
+sort of issue.
+
+I changed it to a padding of 2, instead of 3 (since that's all that's really needed), and got a different answer. So I gave that a shot
+and it was still incorrect -- but it was still correct with the sample and part 1. So, seriously...what is going on here?!?!
+
+Well, after more and more debugging and analyzing and printing of the grids at every step of the process, I noticed that
+the "border" that was showing up was only caused if the input string started with a "#" and every other round.
+
+So I tried adding a simple check what the first character of the input string was and output the grid. There was no
+border any more and the code still worked with the samples and part 1, so I entered the answer given and it worked just fine.
+
+Very tricky little part to this seemingly simple puzzle...it caused a LOT of headache, but in the end it was still a pretty
+fun little puzzle.
 
 # Results
 
 |              | Answer | Attempts | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
 |--------------|-------:|---------:|----------------:|----------------------:|-----:|
 | **Part One** |   5432 |        1 |              33 |              00:52:43 | 1803 |
-| **Part Two** |  16016 |        1 |            2010 |             ~01:00:00 | 9021 |
+| **Part Two** |  16016 |        3 |            2010 |             ~01:00:00 | 9021 |
 
 # Original puzzle
 
