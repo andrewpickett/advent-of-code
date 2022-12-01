@@ -1,0 +1,17 @@
+{
+	"name": "advent-of-code-2022",
+	"version": "1.0.0",
+	"main": "app.js",
+	"scripts": {
+		"start": "node app.js",
+		"test": "jest"
+	},
+	"author": "Andrew J. Pickett",
+	"dependencies": {
+		"express": "^4.17.1",
+		"md5": "^2.3.0"
+	},
+	"devDependencies": {
+		"jest": "^27.3.1"
+	}
+}

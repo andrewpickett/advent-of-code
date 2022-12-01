@@ -1,0 +1,144 @@
+<html lang="en">
+<head>
+	<title>Advent of Code - 2022 - JavaScript</title>
+	<style>
+		body {
+			background-color: #303030;
+			color: #ffffff;
+		}
+		a, a:visited {
+			color: #0000ff;
+		}
+		#dayWrapper, #resultsWrapper {
+			padding: 20px;
+		}
+		.header {
+			font-weight: bolder;
+			font-size: 2em;
+		}
+		.day {
+			float: left;
+			padding: 5px;
+		}
+		.part {
+			float: left;
+			font-weight: bolder;
+			padding-right: 30px;
+			width: 50px;
+		}
+		.answer {
+			float: left;
+			text-align: right;
+			width: 150px;
+			font-family: Consolas, "Courier New", monospace;
+		}
+		.time {
+			float: left;
+			text-align: right;
+			width: 150px;
+			font-family: Consolas, "Courier New", monospace;
+		}
+		a.incomplete {
+			color: #666666;
+			pointer-events: none;
+			cursor: default;
+		}
+		.too_long {
+			color: #ff0000;
+			font-size: 9px;
+			vertical-align: super;
+		}
+	</style>
+</head>
+<body>
+	<div id="dayWrapper">
+		<div class="header">Day</div>
+		<div>
+			<div class="day"><a href="#" onclick="return run(this)">1</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">2</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">3</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">4</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">5</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">6</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">7</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">8</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">9</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">10</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">11</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">12</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">13</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">14</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">15</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">16</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">17</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">18</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">19</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">20</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">21</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">22</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">23</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">24</a></div>
+			<div class="day"><a href="#" class="incomplete" onclick="return run(this)">25</a></div>
+			<div style="clear: both;"></div>
+		</div>
+		<div><a href="#" onclick="return clearAnswers(this)">[clear]</a></div>
+	</div>
+	<div id="resultsWrapper">
+		<div class="header">Results</div>
+		<div>
+			<div class="part">&nbsp;</div>
+			<div class="answer"><b>Result</b></div>
+			<div class="time"><b>Time (ms)</b></div>
+			<div style="clear: both;"></div>
+		</div>
+		<div>
+			<div class="part">Part 1</div>
+			<div class="answer" id="partOneAnswer"></div>
+			<div class="time" id="partOneTime"></div>
+			<div style="clear: both;"></div>
+		</div>
+		<div>
+			<div class="part">Part 2</div>
+			<div class="answer" id="partTwoAnswer"></div>
+			<div class="time" id="partTwoTime"></div>
+			<div style="clear: both;"></div>
+		</div>
+	</div>
+	<script>
+		const loading = document.createElement('img');
+		loading.src = './images/loading.gif';
+
+		function run(elem) {
+			clearAnswers();
+			let day = parseInt(elem.innerText);
+			getAnswer(day, 1);
+			getAnswer(day, 2);
+			return false;
+		}
+
+		function getAnswer(day, part) {
+			let pname = "part" + (part === 1 ? "One" : "Two");
+			document.getElementById(pname + "Answer").innerHTML = loading.outerHTML;
+
+			let myheaders = new Headers();
+			myheaders.append('pragma', 'no-cache');
+			myheaders.append('cache-control', 'no-cache');
+			fetch("day/" + day + "/part/" + part, { method: 'GET', headers: myheaders })
+				.then(function(response) {
+					return response.json();
+				}).then(function(jsonResponse) {
+					document.getElementById(pname + "Answer").innerHTML = jsonResponse.result;
+					document.getElementById(pname + "Time").innerHTML = jsonResponse.millis;
+				});
+		}
+
+		function clearAnswers() {
+			document.getElementById("partOneAnswer").innerHTML = '&nbsp;';
+			document.getElementById("partOneTime").innerHTML = '&nbsp;';
+			document.getElementById("partTwoAnswer").innerHTML = '&nbsp;';
+			document.getElementById("partTwoTime").innerHTML = '&nbsp;';
+			return false;
+		}
+	</script>
+</body>
+</html>
