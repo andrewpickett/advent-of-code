@@ -25,8 +25,21 @@ was a pretty big load on the server at the time with people submitting. So after
 
 |              | Answer | Attempts | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
 |--------------|-------:|---------:|----------------:|----------------------:|-----:|
-| **Part One** |   1766 |        1 |               0 |              00:02:42 | 1173 |
-| **Part Two** |   1797 |        1 |               0 |              00:03:21 |  968 |
+| **Part One** |   1766 |        1 |               1 |              00:02:42 | 1173 |
+| **Part Two** |   1797 |        1 |               2 |              00:03:21 |  968 |
+
+# Optimizations
+
+I originally wrote this using list comprehensions. While those are really good for creating new lists, they aren't the best
+for performing calculations. So I tried just going with straight for-loops, which did improve performance a little bit, but
+not drastically.
+
+| Attempt | Part One Runtime (ms) | Part Two Runtime (ms) | Number Test Runs |
+|--------:|----------------------:|----------------------:|-----------------:|
+|       1 |                 0.661 |                 2.004 |             5000 |
+|       2 |                 0.717 |                 1.742 |             5000 |
+
+TOTAL RUNTIME: 1.378 ms
 
 # Original puzzle
 ### --- Day 1: Sonar Sweep ---

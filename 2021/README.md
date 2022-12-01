@@ -25,3 +25,13 @@ how long it took me, etc.
 
 I will be writing the execution time of all of my solutions, just because I'm curious the speed
 of both different languages.
+
+# Optimizations
+I have decided this year to also work a bit on optimizing the solutions. I'm going to see how low I can get individual
+puzzles, but also the overall total. The first step will be to just try to optimize in Python, and then try some other
+languages to see if one is better than another a specific type of problem.
+
+As such, I will have a separate file with different implementations in it so I can test. I will leave the original
+solutions in their own file so that my original thought processes can still be documented/followed.
+
+I'll add separate optimization analysis to my writeups as necessary as well.

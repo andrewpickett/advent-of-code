@@ -1,3 +1,4 @@
+import os, psutil
 import time
 
 
@@ -6,6 +7,18 @@ def run_with_timer(f):
 	result = f()
 	etime = time.time_ns()
 	print("{} -- {} -- took {} ms".format(f.__name__, result, (etime - stime) // 1000000))
+	return result
+
+
+def perf_test(f, runs):
+	process = psutil.Process(os.getpid())
+	start_mem = process.memory_info().rss
+	stime = time.time_ns()
+	for i in range(runs):
+		result = f()
+	etime = time.time_ns()
+	end_mem = process.memory_info().rss
+	print("{} -- {} -- took {} ns average over {} runs with {} memory".format(f.__name__, result, (etime - stime) // runs, runs, (end_mem - start_mem)))
 	return result
 
 

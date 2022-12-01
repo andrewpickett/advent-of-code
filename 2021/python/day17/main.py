@@ -11,6 +11,7 @@ region = {
 
 
 def get_valid_initial_velocities():
+
 	valid_coords = []
 	yrange = abs(region["ye"]) + 1
 	for x_init in range(math.floor(math.sqrt(region["xs"] * 2)), region["xe"] + 1):
