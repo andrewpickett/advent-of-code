@@ -7,16 +7,61 @@ parse the contents until the ending `)`. Then just move your pointer however far
 
 Output the length of the resulting string.
 
+**NOTE:** I ended up completely refactoring and redoing this part of the puzzle after implementing part 2. I explain the
+new way in that writeup below...so for reference, this was my original part 1 code that matches my description above:
+
+```python
+def part_one():
+	new_str = ""
+	i = 0
+	while i < len(data):
+		if data[i] == "(":
+			close_idx = data[i:].find(")")
+			parts = data[i+1:i+close_idx].split("x")
+			new_str += data[i+close_idx+1:i+close_idx+1+int(parts[0])] * int(parts[1])
+			i += 1+close_idx+int(parts[0])
+		else:
+			new_str += data[i]
+			i += 1
+	return len(new_str)
+```
+
 ### Part 2
 > _What is the decompressed length of the file using this improved format?_
 
+Ok, so it was obvious this was going to happen. This was the first puzzle that required a less-than-immediately-obvious
+way to solve, simply due to the size of the data. I tried kicking off my original to part one, knowing -- because it explicitly
+said so in the puzzle -- that it would probably never come back or my computer would crap out on it.
+
+I was right.
+
+So, I immediately recognized what needed to be done: recursively decompress the portions of the string, and only keep track of the
+lengths instead of the actual string itself.
+
+So, then it was just matter of actually implementing it. The idea is something like this:
+
+Given an input string, let's call the substring BEFORE the first "(" `X`. We then have some marker (e.g. `MxN`) within parentheses.
+We can use those to get the next substring which we'll call `Y`, which are the next `M` characters
+after the ")". Finally, we have the last section of the string which is everything AFTER `Y`, so we'll call it `Z`.
+
+Since we know there are no parentheses in `X`, we can move on to recursively calculating `Y` and `Z` because both of those
+COULD have more markers in them. So we just need to call the same decompression on both of those. Our base case is simply when
+a string has no parentheses, we can just return the length of that string.
+
+The total length of the decompressed string then is `len(X) + (N * decompress(Y)) + decompress(Z)`
+
+By doing that, each of those decompress calls will result in a recursive total of the substrings until it all bubbles back up
+and it returns the final total.
+
+Once I had this working for part two, I just updated the recursive function to have the option to recurse or just take one layer, which
+allowed me to rewrite part one use it. That cleaned up the code quite a bit.
 
 # Results
 
-|              | Answer | Attempts | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
-|--------------|-------:|---------:|----------------:|----------------------:|-----:|
-| **Part One** | 107035 |        1 |               0 |                   N/A |  N/A |
-| **Part Two** |        |          |                 |                   N/A |  N/A |
+|              |      Answer | Attempts | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
+|--------------|------------:|---------:|----------------:|----------------------:|-----:|
+| **Part One** |      107035 |        1 |               0 |                   N/A |  N/A |
+| **Part Two** | 11451628995 |        1 |               1 |                   N/A |  N/A |
 
 
 # Original puzzle
@@ -37,3 +82,15 @@ For example:
 * `X(8x2)(3x3)ABCY` becomes `X(3x3)ABC(3x3)ABCY` (for a decompressed length of `18`), because the decompressed data from the `(8x2)` marker (the `(3x3)ABC`) is skipped and not processed further.
 
 ### --- Part Two ---
+Apparently, the file actually uses version two of the format.
+
+In version two, the only difference is that markers within decompressed data are decompressed. This, the documentation explains, provides much more substantial compression capabilities, allowing many-gigabyte files to be stored in only a few kilobytes.
+
+For example:
+
+* `(3x3)XYZ` still becomes `XYZXYZXYZ`, as the decompressed section contains no markers.
+* `X(8x2)(3x3)ABCY` becomes `XABCABCABCABCABCABCY`, because the decompressed data from the `(8x2)` marker is then further decompressed, thus triggering the `(3x3)` marker twice for a total of six `ABC` sequences.
+* `(27x12)(20x12)(13x14)(7x10)(1x12)A` decompresses into a string of `A` repeated `241920` times.
+* `(25x3)(3x3)ABC(2x3)XY(5x2)PQRSTX(18x9)(3x2)TWO(5x7)SEVEN` becomes `445` characters long.
+
+Unfortunately, the computer you brought probably doesn't have enough memory to actually decompress the file; you'll have to come up with another way to get its decompressed length.
