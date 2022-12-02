@@ -6,10 +6,11 @@ outcome_map = {"X": {"A": "Z", "B": "X", "C": "Y"}, "Y": {"A": "X", "B": "Y", "C
 
 
 def calc_hand_score(them, me):
+	hand = them + me
 	score = 3 if me == 'Z' else (2 if me == 'Y' else 1)
-	if (them == 'A' and me == 'Y') or (them == 'B' and me == 'Z') or (them == 'C' and me == 'X'):
+	if hand == 'AY' or hand == 'BZ' or hand == 'CX':
 		score += 6
-	elif (them == 'A' and me == 'X') or (them == 'B' and me == 'Y') or (them == 'C' and me == 'Z'):
+	elif hand == 'AX' or hand == 'BY' or hand == 'CZ':
 		score += 3
 	return score
 
