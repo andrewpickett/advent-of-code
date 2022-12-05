@@ -1,16 +1,52 @@
 from aoc_utils import run_with_timer
 
-data = [int(x.strip()) for x in open("input.txt").readlines()]
+data = [x.strip().split(" ") for x in open("input.txt").readlines()]
+
+
+def run_instructions(outputs, low_comp, high_comp):
+	process_instructions = []
+	bots = {}
+	comparing_bot = ""
+	while len(process_instructions) < len(data):
+		for x in data:
+			if x not in process_instructions:
+				if x[0] == "value":
+					if x[5] not in bots:
+						bots[x[5]] = set()
+					bots[x[5]].add(int(x[1]))
+					process_instructions.append(x)
+				elif x[0] == "bot":
+					if x[1] not in bots:
+						bots[x[1]] = set()
+					if len(bots[x[1]]) == 2:
+						low_target = bots if x[5] == "bot" else outputs
+						high_target = bots if x[10] == "bot" else outputs
+						if x[6] not in low_target:
+							low_target[x[6]] = set()
+						if x[11] not in high_target:
+							high_target[x[11]] = set()
+						low_val = min(bots[x[1]])
+						high_val = max(bots[x[1]])
+						low_target[x[6]].add(low_val)
+						bots[x[1]].remove(low_val)
+						high_target[x[11]].add(high_val)
+						bots[x[1]].remove(high_val)
+						if low_val == low_comp and high_val == high_comp and comparing_bot == "":
+							comparing_bot = x[1]
+						process_instructions.append(x)
+	return comparing_bot
 
 
 def part_one():
-	return
+	return run_instructions({}, 17, 61)
 
 
 def part_two():
-	return
+	outputs = {}
+	run_instructions(outputs, 17, 61)
+	return list(outputs["0"])[0] * list(outputs["1"])[0] * list(outputs["2"])[0]
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  #
-	run_with_timer(part_two)  #
+	run_with_timer(part_one)  # 98 -- took 23 ms
+	run_with_timer(part_two)  # 4042 -- took 0 ms
