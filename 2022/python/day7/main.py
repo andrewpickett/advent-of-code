@@ -3,83 +3,100 @@ from aoc_utils import run_with_timer
 data = [x.strip().split() for x in open("input.txt").readlines()]
 
 
+class FileSystem:
+	def __init__(self, root=None):
+		self.root = root
+		self.current_directory = self.root
+
+	def change_directory(self, path):
+		if path == "/":
+			self.current_directory = self.root
+		elif path == "..":
+			self.current_directory = self.current_directory.parent
+		else:
+			for file in self.current_directory.files:
+				if file.is_dir and file.name == path:
+					self.current_directory = file
+					return
+
+	def list_files(self):
+		return
+
+	def handle_listed_file(self, file_type, file_name):
+		if file_type == "dir":
+			new_file = File(file_name, self.current_directory.level + 1, parent=self.current_directory)
+			self.current_directory.add_file(new_file)
+		elif file_type.isnumeric():
+			new_file = File(file_name, self.current_directory.level + 1, int(file_type), False, self.current_directory)
+			self.current_directory.add_file(new_file)
+
+	def get_all_directories(self):
+		return self.root.get_all_directories()
+
+
 class File:
-	def __init__(self, name, level, size, is_dir, parent):
+	def __init__(self, name, level, size=0, is_dir=True, parent=None):
 		self.name = name
 		self.level = level
 		self.is_dir = is_dir
 		self.size = size
-		self.files = set()
+		self.files = []
 		self.parent = parent
+		self.needs_update = False
 
 	def update_size(self):
-		self.size = 0
-		for file in self.files:
-			if file.is_dir:
-				file.update_size()
-			self.size += file.size
+		if self.needs_update:
+			self.size = 0
+			for file in self.files:
+				if file.is_dir:
+					file.update_size()
+				self.size += file.size
+			self.needs_update = False
 
 	def add_file(self, file):
-		self.files.add(file)
+		if file not in self.files:
+			self.needs_update = True
+			self.files.append(file)
+
+	def get_all_directories(self):
+		all_dirs = []
+		if self.is_dir:
+			all_dirs.append(self)
+			for file in self.files:
+				if file.is_dir:
+					all_dirs.extend(file.get_all_directories())
+		return all_dirs
 
 	def __eq__(self, other):
 		return self.name == other.name and self.level == other.level
-
-	def __str__(self):
-		return "".ljust(self.level * 2, " ") + (self.name + "(" + str(self.size) + ")")
-
-	def __repr__(self):
-		return "".ljust(self.level * 2, " ") + (self.name + "[" + str(self.level) + "] -- (" + str(self.size) + ")")
 
 	def __hash__(self):
 		return hash(self.name) * 3 + hash(str(self.level)) * 7
 
 
 def build_filesystem():
-	root = File("/", 0, 0, True, None)
-	curr_file = root
-	all_files = [curr_file]
+	fs = FileSystem(File("/", 0))
 	for x in data:
 		if x[0] == "$":
 			if x[1] == "cd":
-				if x[2] == "..":
-					curr_file = curr_file.parent
-				elif x[2] == "/":
-					curr_file = root
-				else:
-					f = File(x[2], curr_file.level+1, 0, True, curr_file)
-					for file in all_files:
-						if file == f:
-							f = file
-					curr_file = f
-		elif x[0].isnumeric():
-			new_file = File(x[1], curr_file.level+1, int(x[0]), False, curr_file)
-			curr_file.add_file(new_file)
-			all_files.append(new_file)
-		elif x[0] == "dir":
-			new_file = File(x[1], curr_file.level+1, 0, True, curr_file)
-			all_files.append(new_file)
-			curr_file.add_file(new_file)
-	root.update_size()
-	return all_files, root
+				fs.change_directory(x[2])
+			if x[1] == "ls":
+				fs.list_files()
+		else:
+			fs.handle_listed_file(x[0], x[1])
+	fs.root.update_size()
+	return fs
 
 
 def part_one():
-	all_files, root = build_filesystem()
-	return sum(x.size for x in all_files if x.is_dir and x.size <= 100000)
+	return sum(x.size for x in build_filesystem().get_all_directories() if x.size <= 100000)
 
 
 def part_two():
-	all_files, root = build_filesystem()
-	space_needed = root.size - 40000000
-	min_file = None
-	for x in all_files:
-		if x.is_dir and x.size >= space_needed:
-			if min_file is None or min_file.size > x.size:
-				min_file = x
-	return min_file.size
+	fs = build_filesystem()
+	return min([x.size for x in fs.get_all_directories() if x.size >= fs.root.size - 40000000])
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  #
-	run_with_timer(part_two)  #
+	run_with_timer(part_one)  # 1644735 -- took 1 ms
+	run_with_timer(part_two)  # 1300850 -- took 1 ms
