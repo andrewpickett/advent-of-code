@@ -10,11 +10,11 @@ row and move down. So for the example input we were given, I would end up with s
 
 _**Looking from the left**_
 ```
---> 30373					10010
---> 25512					11000
---> 65332		gives		10000
---> 33549					10101
---> 35390					11010
+--> 30373                    10010
+--> 25512                    11000
+--> 65332        gives       10000
+--> 33549                    10101
+--> 35390                    11010
 ```
 
 I was then going to look from the top, and I only care about entries that are 0, because if there are any that are already 1,
@@ -24,11 +24,11 @@ _**Looking from the top**_
 ```
 |||||
 vvvvv
-30373					11111
-25512					11100
-65332		gives		10000
-33549					10101
-35390					11010
+30373                    11111
+25512                    11100
+65332        gives       10000
+33549                    10101
+35390                    11010
 ```
 
 So do that approach on all 4 sides, then you can just count the number of 1s in your resulting array.
