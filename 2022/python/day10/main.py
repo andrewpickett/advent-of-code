@@ -11,7 +11,7 @@ def draw_pixel(pixels, cycle, register):
 	if (cycle - 1) % 40 in [register - 1, register, register + 1]:
 		pixels[(cycle-1)//40] += "#"
 	else:
-		pixels[(cycle-1)//40] += "."
+		pixels[(cycle-1)//40] += " "
 
 
 def output_pixels(pixels):
