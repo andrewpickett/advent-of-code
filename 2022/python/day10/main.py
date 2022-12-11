@@ -39,7 +39,7 @@ def part_two():
 			cycle += 1
 			draw_pixel(pixels, cycle, register)
 			register += int(x[1])
-	return convert_ascii_to_text(4, 6, 1, pixels)
+	return convert_ascii_to_text(4, 6, pixels, 1)
 
 
 if __name__ == '__main__':

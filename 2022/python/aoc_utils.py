@@ -127,12 +127,14 @@ class Grid:
 
 letter_library = {
 	(4, 6): {
+		"A": [".##.", "#..#", "#..#", "####", "#..#", "#..#"],
 		"B": ["### ", "#  #", "### ", "#  #", "#  #", "### "],
 		"E": ["####", "#   ", "### ", "#   ", "#   ", "####"],
 		"F": ["####", "#   ", "### ", "#   ", "#   ", "#   "],
 		"G": [" ## ", "#  #", "#   ", "# ##", "#  #", " ###"],
 		"H": ["#  #", "#  #", "####", "#  #", "#  #", "#  #"],
 		"J": ["  ##", "   #", "   #", "   #", "#  #", " ## "],
+		"K": ["#..#", "#.#.", "##..", "#.#.", "#.#.", "#..#"],
 		"L": ["#   ", "#   ", "#   ", "#   ", "#   ", "####"],
 		"P": ["### ", "#  #", "#  #", "### ", "#   ", "#   "],
 		"Z": ["####", "   #", "  # ", " #  ", "#   ", "####"]
@@ -140,7 +142,7 @@ letter_library = {
 }
 
 
-def convert_ascii_to_text(letter_width, letter_height, grid, spacing=1, filler=" "):
+def convert_ascii_to_text(letter_width, letter_height, grid, spacing=1):
 	letters = []
 	for row in range(len(grid)):
 		for col in range(0, len(grid[row]), letter_width + spacing):
