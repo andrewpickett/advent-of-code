@@ -1,4 +1,4 @@
-from aoc_utils import run_with_timer
+from aoc_utils import run_with_timer, convert_ascii_to_text
 
 data = [x.strip().split(" ") for x in open("input.txt").readlines()]
 
@@ -12,11 +12,6 @@ def draw_pixel(pixels, cycle, register):
 		pixels[(cycle-1)//40] += "#"
 	else:
 		pixels[(cycle-1)//40] += " "
-
-
-def output_pixels(pixels):
-	for x in pixels:
-		print(x)
 
 
 def part_one():
@@ -44,8 +39,7 @@ def part_two():
 			cycle += 1
 			draw_pixel(pixels, cycle, register)
 			register += int(x[1])
-	output_pixels(pixels)
-	return
+	return convert_ascii_to_text(4, 6, 1, pixels)
 
 
 if __name__ == '__main__':

@@ -1,4 +1,5 @@
-import os, psutil
+import os
+import psutil
 import time
 
 
@@ -122,3 +123,36 @@ class Grid:
 				out_val += "\n"
 		out_val += "]"
 		return out_val
+
+
+letter_library = {
+	(4, 6): {
+		"B": ["### ", "#  #", "### ", "#  #", "#  #", "### "],
+		"E": ["####", "#   ", "### ", "#   ", "#   ", "####"],
+		"F": ["####", "#   ", "### ", "#   ", "#   ", "#   "],
+		"G": [" ## ", "#  #", "#   ", "# ##", "#  #", " ###"],
+		"H": ["#  #", "#  #", "####", "#  #", "#  #", "#  #"],
+		"J": ["  ##", "   #", "   #", "   #", "#  #", " ## "],
+		"L": ["#   ", "#   ", "#   ", "#   ", "#   ", "####"],
+		"P": ["### ", "#  #", "#  #", "### ", "#   ", "#   "],
+		"Z": ["####", "   #", "  # ", " #  ", "#   ", "####"]
+	}
+}
+
+
+def convert_ascii_to_text(letter_width, letter_height, grid, spacing=1, filler=" "):
+	letters = []
+	for row in range(len(grid)):
+		for col in range(0, len(grid[row]), letter_width + spacing):
+			if len(letters) < len(grid[row])//(letter_width + spacing):
+				letters.append([])
+			letters[col//(letter_width + spacing)].append(grid[row][col:col+letter_width])
+		# Still need to handle multiple rows of text...but don't care for now.
+	ret_str = ""
+	for letter in letters:
+		lib = letter_library.get((letter_width, letter_height))
+		for k, v in lib.items():
+			if v == letter:
+				ret_str += k
+				break
+	return ret_str
