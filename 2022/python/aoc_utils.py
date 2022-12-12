@@ -29,6 +29,7 @@ class Point:
 		self.row = row
 		self.value = value
 		self.neighbors = []
+		self.visited = False
 
 	def __str__(self):
 		return "({},{}):{}".format(self.row, self.col, self.value)
@@ -63,6 +64,11 @@ class Point:
 	def set_neighbors(self, neighbors):
 		self.neighbors = neighbors
 
+	def is_visited(self):
+		return self.visited
+
+	def set_visited(self, visited):
+		self.visited = visited
 	def get_neighbors(self):
 		return self.neighbors
 
