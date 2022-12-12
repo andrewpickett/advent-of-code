@@ -55,5 +55,5 @@ def part_two():
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  #
-	run_with_timer(part_two)  #
+	run_with_timer(part_one)  # 352 -- took 140 ms
+	run_with_timer(part_two)  # 345 -- took 2588 ms
