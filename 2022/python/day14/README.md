@@ -2,10 +2,23 @@
 ### Part 1
 > _How many units of sand come to rest before sand starts flowing into the abyss below?_
 
+Alright, this puzzle was fun. I went ahead and just used my `Grid` that I had already written and just initialized it all
+with "air" (`.`). I then didn't really do anything "fancy" or "tricky"; I just updated the walls (`#`) based on the input,
+set the start position for the sand, and literally just stepped through every single iteration over and over and over
+until I got to a point where the sand falls "off the bottom". Once the first grain of sand goes through the bottom of the
+grid, all other would follow. So at that point, just return how many grains fell.
+
+I did truncate my Grid to be skinnier, just to help optimize it, but it wasn't necessary.
 
 ### Part 2
 > _Using your scan, simulate the falling sand until the source of the sand becomes blocked. How many units of sand come to rest?_
 
+There wasn't anything tough on this one either. I basically just made my grid wider to account for the piling up along the
+bottom. I then do a first run through of the input to find the largest `y` value to create the floor.
+
+I did mess up the first time, because I apparently only put the floor 1 level below the bottom, instead of 2. Once
+I fixed that, my code just worked. Part 2 does take a little bit of time to run, and the code isn't super pretty, but
+it works and I'll take it.
 
 # Results
 
