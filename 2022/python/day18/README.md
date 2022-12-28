@@ -22,8 +22,8 @@ repeating that process until eventually either:
    1. This means that all of the space is enclosed (doesn't flood out to the open).
    2. We can then effectively ignore those exposed sides as they are inside and will not get cooled by water.
 2. The list just keeps growing and doesn't slow down.
-   3. This means the water is flowing out into space, and therefore part of the "exterior".
-   4. We can count that as 1 exposed side, as the water will eventually hit it and cool it.
+   1. This means the water is flowing out into space, and therefore part of the "exterior".
+   2. We can count that as 1 exposed side, as the water will eventually hit it and cool it.
 
 Once we have done the flood-fill on all of the point's neighbors, we will have a total sum. The tricky part here is to figure out
 at what point we consider the queue as "growing and not getting smaller" to identify when it floods out.
