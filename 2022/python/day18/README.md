@@ -32,6 +32,9 @@ I started at an arbitrarily large number (around 100000), and then slowly starte
 change -- at which point, it obviously was restricting more than it should. I ended up at 5000 as my limit. I'd like to have
 a better way to identify it, but this works just fine for this purpose.
 
+I could have probably gone back and redid part 1 in a similar way, which would have sped it up, but I kind of liked my
+solution -- even though it's slower. So, in the end, this is one puzzle where part 2 will just run faster than part 1!
+
 # Results
 
 |              | Answer | Attempts | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
