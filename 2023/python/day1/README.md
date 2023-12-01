@@ -36,6 +36,13 @@ lot of people had the same issue as me, and it was just a very ambiguously writt
 
 I really hope the rest go smoother this year.
 
+# Results
+
+|              | Attempts | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
+|--------------|---------:|----------------:|----------------------:|-----:|
+| **Part One** |        1 |               3 |              00:03:08 |  775 |
+| **Part Two** |        5 |              42 |              00:38:52 | 4438 |
+
 # Original puzzle
 ### --- Day 1: Trebuchet?! ---
 Something is wrong with global snow production, and you've been selected to take a look. The Elves have even given you a map; on it, they've used stars to mark the top fifty locations that are likely to be having problems.
