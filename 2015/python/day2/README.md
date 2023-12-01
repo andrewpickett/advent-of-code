@@ -1,22 +1,22 @@
 # Approach
 ### Part 1
-> _To what floor do the instructions take Santa?_
+> _All numbers in the elves' list are in feet. How many total square feet of wrapping paper should they order?_
 
-Since `(` is `+1` floor and `)` is `-1` floor, just subtract the number of `)` from the number of `(` in the input
-and it will give you the resulting floor.
+Another very simple puzzle. The hardest part of this is just parsing the input into a format that's easily usable. I decided
+to just split on each line's `x` character and map them into integers so I can do arithmetic easily. Once that is done,
+it's just follow the directions exactly to add together all the combinations of the 3 numbers plus the minimum of those.
 
 ### Part 2
-> _What is the position of the character that causes Santa to first enter the basement?_
+> _How many total feet of ribbon should they order?_
 
-Just iterate through the input and add/subtract based on each character. Once you have a value of `-1`, return the
-index you're on plus one (because of 0-based indexing).
+Again, since we have the numbers already usable, it's just follow the math that is outlined. Nothing tricky here.
 
 # Results
 
 |              | Exec. Time (ms) |
 |--------------|----------------:|
-| **Part One** |                 |
-| **Part Two** |                 |
+| **Part One** |              <1 |
+| **Part Two** |              <1 |
 
 # Original puzzle
 ### --- Day 2: I Was Told There Would Be No Math ---
