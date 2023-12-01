@@ -13,10 +13,10 @@ index you're on plus one (because of 0-based indexing).
 
 # Results
 
-|    | Answer     | Exec. Time (ms) |
-| ------ |-----------:| -------------------:|
-| **Part One**  |      | <1  |
-| **Part Two**  |      | 94  |
+|              | Answer | Exec. Time (ms) |
+|--------------|-------:|----------------:|
+| **Part One** |    131 |              <1 |
+| **Part Two** |   1771 |              94 |
 
 # Original puzzle
 ### --- Day 1: Not Quite Lisp ---
