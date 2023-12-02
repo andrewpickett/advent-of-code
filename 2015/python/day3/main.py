@@ -1,7 +1,5 @@
 from aoc_utils import run_with_timer
 
-data = [x for x in open('input.txt').readline().strip()]
-
 DIRS = {
 	'^': {'x': 0, 'y': 1},
 	'>': {'x': 1, 'y': 0},
@@ -10,23 +8,27 @@ DIRS = {
 }
 
 
-def part_one():
+def get_data(filename):
+	return [x for x in open(filename).readline().strip()]
+
+
+def part_one(d):
 	curr_pos = (0, 0,)
 	visited_pos = {curr_pos}
-	for direction in data:
+	for direction in d:
 		curr_pos = move(direction, curr_pos)
 		visited_pos.add(curr_pos)
 	return len(visited_pos)
 
 
-def part_two():
+def part_two(d):
 	curr_pos = [(0, 0,), (0, 0,)]
 	mover = 0
 	visited_pos = {curr_pos[mover]}
-	for direction in data:
+	for direction in d:
 		curr_pos[mover] = move(direction, curr_pos[mover])
-		mover = (mover + 1) % 2
 		visited_pos.add(curr_pos[mover])
+		mover = (mover + 1) % 2
 	return len(visited_pos)
 
 
@@ -35,5 +37,6 @@ def move(direction, pos):
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  # 2565
-	run_with_timer(part_two)  # 2639
+	data = get_data("input.txt")
+	run_with_timer(part_one, data)  # 2565
+	run_with_timer(part_two, data)  # 2639
