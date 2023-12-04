@@ -11,5 +11,4 @@ class TestMain(unittest.TestCase):
 		self.assertEqual(1048970, part_one(get_data("sample.txt")))
 
 	def test_part_two(self):
-		pass
-		# self.assertEqual(3, part_two("^v"))
+		self.assertEqual(5714438, part_two("pqrstuv"))
