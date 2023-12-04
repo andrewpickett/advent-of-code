@@ -1,16 +1,19 @@
-from aoc_utils import run_with_timer
-
-data = [x.strip() for x in open('input.txt').readlines()]
+from utils.timers import run_with_timer
 
 
-def part_one():
-	return sum(y.count('\\"') + y.count('\\\\') + ((y.count('\\x') - y.count('\\\\x') + y.count('\\\\\\x'))*3) + 2 for y in (x[1:-1] for x in data))
+def get_data(filename):
+	return [x.strip() for x in open(filename).readlines()]
 
 
-def part_two():
-	return sum(x.count('"') + x.count('\\') + 2 for x in data)
+def part_one(d):
+	return sum(y.count('\\"') + y.count('\\\\') + ((y.count('\\x') - y.count('\\\\x') + y.count('\\\\\\x'))*3) + 2 for y in (x[1:-1] for x in d))
+
+
+def part_two(d):
+	return sum(x.count('"') + x.count('\\') + 2 for x in d)
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  # 1350 -- took 0 ms
-	run_with_timer(part_two)  # 2085 -- took 0 ms
+	data = get_data("input.txt")
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
