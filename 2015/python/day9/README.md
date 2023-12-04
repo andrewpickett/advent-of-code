@@ -6,14 +6,14 @@ Alright, so creating the data structure is the important piece here, again. Sinc
 dictionary that has each city and their destinations like this:
 ```json
 {
-	city_a: {
-		city_b: <distance>,
-		city_c: <distance>,
-		city_d: <distance>
+	"city_a": {
+		"city_b": 1234,
+		"city_c": 4321,
+		"city_d": 111
 	},
-	city_b: {
-		city_a: <distance>,
-		city_d: <distance>
+	"city_b": {
+		"city_a": 1234,
+		"city_d": 88
 	}
 }
 ```
