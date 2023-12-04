@@ -1,6 +1,8 @@
-from aoc_utils import run_with_timer
+from utils.timers import run_with_timer
 
-data = [x.strip() for x in open('input.txt').readlines()]
+
+def get_data(filename):
+	return [x.strip() for x in open(filename).readlines()]
 
 
 def operand(op, signals):
@@ -14,10 +16,10 @@ def validate_operands(lhs, signals):
 	return True
 
 
-def run_instruction_book(signals):
+def run_instruction_book(d, signals):
 	completed_ins = []
-	while len(completed_ins) < len(data):
-		for x in data:
+	while len(completed_ins) < len(d):
+		for x in d:
 			if x not in completed_ins:
 				lhs = x.split(' -> ')[0].split(' ')
 				rhs = x.split(' -> ')[1]
@@ -40,18 +42,19 @@ def run_instruction_book(signals):
 					completed_ins.append(x)
 
 
-def part_one():
+def part_one(d):
 	signals = {}
-	run_instruction_book(signals)
+	run_instruction_book(d, signals)
 	return signals['a']
 
 
-def part_two():
-	signals = {'b': part_one()}
-	run_instruction_book(signals)
+def part_two(d):
+	signals = {'b': part_one(d)}
+	run_instruction_book(d, signals)
 	return signals['a']
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  # 16076 -- took 161 ms
-	run_with_timer(part_two)  # 2797 -- took 3196 ms
+	data = get_data("input.txt")
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
