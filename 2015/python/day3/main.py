@@ -1,4 +1,4 @@
-from aoc_utils import run_with_timer
+from utils.timers import run_with_timer
 
 DIRS = {
 	'^': {'x': 0, 'y': 1},
