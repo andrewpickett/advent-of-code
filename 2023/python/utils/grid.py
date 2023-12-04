@@ -51,15 +51,34 @@ class Point:
 	def get_north_neighbors(self):
 		return [n for n in self.neighbors if n.row == self.row - 1]
 
+	def get_north_neighbor(self):
+		ns = [n for n in self.neighbors if n.row == self.row - 1 and n.col == self.col]
+		if len(ns) > 0:
+			return ns[0]
+
 	def get_south_neighbors(self):
 		return [n for n in self.neighbors if n.row == self.row + 1]
+
+	def get_south_neighbor(self):
+		ns = [n for n in self.neighbors if n.row == self.row + 1 and n.col == self.col]
+		if len(ns) > 0:
+			return ns[0]
 
 	def get_east_neighbors(self):
 		return [n for n in self.neighbors if n.col == self.col + 1]
 
+	def get_east_neighbor(self):
+		ns = [n for n in self.neighbors if n.col == self.col + 1 and n.row == self.row]
+		if len(ns) > 0:
+			return ns[0]
+
 	def get_west_neighbors(self):
 		return [n for n in self.neighbors if n.col == self.col - 1]
 
+	def get_west_neighbor(self):
+		ns = [n for n in self.neighbors if n.col == self.col - 1 and n.row == self.row]
+		if len(ns) > 0:
+			return ns[0]
 
 class Grid:
 	def __init__(self, height=0, width=0, values=None, default_value=""):
