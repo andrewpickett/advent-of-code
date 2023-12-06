@@ -1,6 +1,8 @@
-from aoc_utils import run_with_timer
+from utils.timers import run_with_timer
 
-data = [x for x in open('input.txt').readline().strip()]
+
+def get_data(filename):
+	return [x for x in open(filename).readline().strip()]
 
 
 def look_and_say(input_val):
@@ -18,20 +20,21 @@ def look_and_say(input_val):
 	return new_str
 
 
-def part_one():
-	new_val = data
+def part_one(d):
+	new_val = d
 	for x in range(40):
 		new_val = look_and_say(new_val)
 	return len(new_val)
 
 
-def part_two():
-	new_val = data
+def part_two(d):
+	new_val = d
 	for x in range(50):
 		new_val = look_and_say(new_val)
 	return len(new_val)
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  # 492982 -- took 1248 ms
-	run_with_timer(part_two)  # 6989950 -- took 22484 ms
+	data = get_data("input.txt")
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
