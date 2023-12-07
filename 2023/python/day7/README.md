@@ -22,6 +22,11 @@ This gives me a map of characters to counts, so then to get the array representa
 and sort them. Now I have every hand represented as that array, and I can do my first level of comparison by just checking the
 types against each other.
 
+After that, as I mentioned, just iterate over all the types and do a card-by-card comparison and sort in each bucket.
+
+This leaves me with ordered buckets with ordered hands within each bucket. Just combine them all together into one
+giant array and we now have ordered hands in one list!
+
 ### Part 2
 > _Using the new joker rule, find the rank of every hand in your set. What are the new total winnings?_
 
