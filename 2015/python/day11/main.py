@@ -1,7 +1,10 @@
-from aoc_utils import run_with_timer
+from utils.timers import run_with_timer
 
-data = [x for x in open('input.txt').readline().strip()]
 alpha = [x for x in 'abcdefghijklmnopqrstuvwxyz']
+
+
+def get_data(filename):
+	return open(filename).readline().strip()
 
 
 def short_cut(pw, fc):
@@ -55,15 +58,15 @@ def get_next_pass(initial):
 	return pw
 
 
-def part_one():
-	return get_next_pass(data)
+def part_one(d):
+	return get_next_pass(d)
 
 
-def part_two():
-	initial = get_next_pass(data)
-	return get_next_pass(initial)
+def part_two(d):
+	return get_next_pass(d)
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  # hepxxyzz -- took 2388 ms
-	run_with_timer(part_two)  # heqaabcc -- took 8270 ms
+	data = get_data("input.txt")
+	p1 = run_with_timer(part_one, data)
+	run_with_timer(part_two, p1)
