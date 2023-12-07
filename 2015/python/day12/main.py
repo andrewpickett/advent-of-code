@@ -1,15 +1,17 @@
+from utils.timers import run_with_timer
 import json
 import re
 
-from aoc_utils import run_with_timer
 
-data = open('input.txt').readline().strip()
+def get_data(filename):
+	return open(filename).readline().strip()
+
 
 matcher = re.compile('[ a-zA-Z:,}{"\]\[]')
 
 
-def part_one():
-	return sum([int(x) for x in matcher.split(data) if x != ''])
+def part_one(d):
+	return sum([int(x) for x in matcher.split(d) if x != ''])
 
 
 def contains_red(root_obj):
@@ -28,13 +30,14 @@ def contains_red(root_obj):
 		return False
 
 
-def part_two():
-	json_data = json.loads(data)
+def part_two(d):
+	json_data = json.loads(d)
 	if contains_red(json_data):
 		json_data.clear()
 	return sum([int(x) for x in matcher.split(json.dumps(json_data)) if x != ''])
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  # 119433 -- took 6 ms
-	run_with_timer(part_two)  # 68466 -- took 6 ms
+	data = get_data("input.txt")
+	run_with_timer(part_one, data)  # 119433 -- took 6 ms
+	run_with_timer(part_two, data)  # 68466 -- took 6 ms
