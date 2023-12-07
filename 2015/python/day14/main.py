@@ -1,6 +1,8 @@
-from aoc_utils import run_with_timer
+from utils.timers import run_with_timer
 
-data = [x.strip() for x in open('input.txt').readlines()]
+
+def get_data(filename):
+	return [x.strip() for x in open(filename).readlines()]
 
 
 def calc_distance(r, time):
@@ -9,13 +11,13 @@ def calc_distance(r, time):
 	return (x * r['s'] * r['t']) + (r['s']*r['t'] if y >= r['t'] else r['s']*y)
 
 
-def part_one():
-	r = dict([(x[0], {"s":int(x[3]),"t":int(x[6]),"r":int(x[13])}) for x in [y.split() for y in data]])
+def part_one(d):
+	r = dict([(x[0], {"s":int(x[3]),"t":int(x[6]),"r":int(x[13])}) for x in [y.split() for y in d]])
 	return max(calc_distance(r[x], 2503) for x in r)
 
 
-def part_two():
-	r = dict([(x[0], {"s":int(x[3]),"t":int(x[6]),"r":int(x[13]),"p":0}) for x in [y.split() for y in data]])
+def part_two(d):
+	r = dict([(x[0], {"s":int(x[3]),"t":int(x[6]),"r":int(x[13]),"p":0}) for x in [y.split() for y in d]])
 	for i in range(1, 2504):
 		max_dist = 0
 		r_in_lead = None
@@ -29,5 +31,6 @@ def part_two():
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  #
-	run_with_timer(part_two)  #
+	data = get_data("input.txt")
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
