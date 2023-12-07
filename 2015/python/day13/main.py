@@ -1,12 +1,14 @@
+from utils.timers import run_with_timer
 import itertools
-from aoc_utils import run_with_timer
-
-data = [x.strip() for x in open('input.txt').readlines()]
 
 
-def build_guest_graph():
+def get_data(filename):
+	return [x.strip() for x in open(filename).readlines()]
+
+
+def build_guest_graph(d):
 	guest_graph = {}
-	for x in data:
+	for x in d:
 		parts = x.split(' ')
 		if not parts[0] in guest_graph.keys():
 			guest_graph[parts[0]] = {}
@@ -18,13 +20,13 @@ def calculate_happiness(guest_graph, s):
 	return sum(guest_graph[s[i]][s[(i+1)%len(s)]] + guest_graph[s[i]][s[(i-1)%len(s)]] for i in range(len(s)))
 
 
-def part_one():
-	guest_graph = build_guest_graph()
+def part_one(d):
+	guest_graph = build_guest_graph(d)
 	return max(calculate_happiness(guest_graph, x) for x in list(itertools.permutations(guest_graph.keys())))
 
 
-def part_two():
-	guest_graph = build_guest_graph()
+def part_two(d):
+	guest_graph = build_guest_graph(d)
 	guest_graph['Me'] = {}
 	for x in guest_graph.keys():
 		guest_graph['Me'][x] = 0
@@ -34,5 +36,6 @@ def part_two():
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  #
-	run_with_timer(part_two)  #
+	data = get_data("input.txt")
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
