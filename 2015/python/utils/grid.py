@@ -1,3 +1,5 @@
+from copy import copy
+
 class Point:
 	def __init__(self, row, col, value=None):
 		self.col = col
@@ -17,6 +19,11 @@ class Point:
 
 	def __hash__(self):
 		return hash(str(self.row) + "_" + str(self.col))
+
+	def __copy__(self):
+		p = Point(self.row, self.col, self.value)
+		p.visited = self.visited
+		return p
 
 	def get_row(self):
 		return self.row
@@ -80,6 +87,7 @@ class Point:
 		if len(ns) > 0:
 			return ns[0]
 
+
 class Grid:
 	def __init__(self, height=0, width=0, values=None, default_value=""):
 		if height > 0 and width > 0 and values:
@@ -90,8 +98,13 @@ class Grid:
 		for r in range(self.height):
 			row = []
 			for c in range(self.width):
-				row.append(Point(r, c, default_value if not values else values[r][c]))
+				if isinstance(values[r][c], Point):
+					row.append(copy(values[r][c]))
+				else:
+					row.append(Point(r, c, default_value if not values else values[r][c]))
 			self.data.append(row)
+		self.neighbors_set = False
+		self.include_diagonals = False
 
 	def set_neighbors_for_point(self, p=None, row=-1, col=-1, include_diagonals=False):
 		if not p and row >= 0 and col >= 0:
@@ -104,6 +117,8 @@ class Grid:
 				if 0 <= p.get_row()+y < len(self.data) and 0 <= p.get_col() + x < len(self.data[p.get_row()]):
 					neighbors.append(self.get_point(p.get_row()+y, p.get_col()+x))
 		p.set_neighbors(neighbors)
+		self.neighbors_set = True
+		self.include_diagonals = include_diagonals
 
 	def set_neighbors_for_all(self, include_diagonals=False):
 		for row in self.data:
@@ -143,3 +158,9 @@ class Grid:
 			if row < len(self.data) - 1:
 				out_val += "\n"
 		return out_val
+
+	def __copy__(self):
+		g = Grid(values=self.data)
+		if self.neighbors_set:
+			g.set_neighbors_for_all(self.include_diagonals)
+		return g

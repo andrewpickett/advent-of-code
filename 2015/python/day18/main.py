@@ -1,62 +1,41 @@
-from aoc_utils import run_with_timer
-
-data = [[y for y in x.strip()] for x in open('input.txt').readlines()]
-
-
-def get_neighbor(lights, row, col):
-	if 0 <= row < len(lights) and 0 <= col < len(lights[0]):
-		return lights[row][col]
+from utils.timers import run_with_timer
+from utils.grid import Grid
+from copy import copy
 
 
-def get_immediate_neighbors(lights, row, col):
-	return [
-		get_neighbor(lights, row - 1, col - 1),
-		get_neighbor(lights, row - 1, col),
-		get_neighbor(lights, row - 1, col + 1),
-
-		get_neighbor(lights, row, col + 1),
-		get_neighbor(lights, row, col - 1),
-
-		get_neighbor(lights, row + 1, col + 1),
-		get_neighbor(lights, row + 1, col),
-		get_neighbor(lights, row + 1, col - 1)
-	]
+def get_data(filename):
+	g = Grid(values=[[y for y in x.strip()] for x in open(filename).readlines()])
+	g.set_neighbors_for_all(True)
+	return {"steps": 100, "grid": g}
 
 
-def run_x_steps(lights, all_light_pos, step_count):
-	for i in range(step_count):
+def run_steps(grid, steps, broken_lights):
+	for i in range(steps):
 		lights_to_switch = []
-		for point in all_light_pos:
-			neighbors = get_immediate_neighbors(lights, point[0], point[1])
-			if lights[point[0]][point[1]] == '#' and neighbors.count('#') not in (2, 3):
-				lights_to_switch.append(point)
-			elif lights[point[0]][point[1]] == '.' and neighbors.count('#') == 3:
-				lights_to_switch.append(point)
+		for light in [x for x in grid.get_points() if x not in broken_lights]:
+			neighbor_lights = [x for x in light.get_neighbors() if x.value == "#"]
+			if light.value == "#" and len(neighbor_lights) not in (2, 3):
+				lights_to_switch.append(light)
+			elif light.value == "." and len(neighbor_lights) == 3:
+				lights_to_switch.append(light)
 		for light in lights_to_switch:
-			lights[light[0]][light[1]] = '.' if lights[light[0]][light[1]] == '#' else '#'
-	return sum(x.count('#') for x in lights)
+			light.value = "#" if light.value == "." else "."
+	return sum(1 for x in grid.get_points() if x.value == "#")
 
 
-def part_one():
-	lights = [list(x) for x in data]
-	all_light_pos = [(row, col) for row in range(len(lights)) for col in range(len(lights[row]))]
-	return run_x_steps(lights, all_light_pos, 100)
+def part_one(d):
+	return run_steps(copy(d["grid"]), d["steps"], [])
 
 
-def part_two():
-	lights = [list(x) for x in data]
-	lights[0][0] = '#'
-	lights[0][-1] = '#'
-	lights[-1][0] = '#'
-	lights[-1][-1] = '#'
-	all_light_pos = [(row, col) for row in range(len(lights)) for col in range(len(lights[row]))]
-	all_light_pos.remove((0, 0))
-	all_light_pos.remove((0, len(lights[0])-1))
-	all_light_pos.remove((len(lights)-1, 0))
-	all_light_pos.remove((len(lights)-1, len(lights[0])-1))
-	return run_x_steps(lights, all_light_pos, 100)
+def part_two(d):
+	grid = copy(d["grid"])
+	broken_lights = [grid.get_point(0, 0), grid.get_point(0, -1), grid.get_point(-1, 0), grid.get_point(-1, -1)]
+	for light in broken_lights:
+		light.value = "#"
+	return run_steps(grid, d["steps"], broken_lights)
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  #
-	run_with_timer(part_two)  #
+	data = get_data("input.txt")
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
