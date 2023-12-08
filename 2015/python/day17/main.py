@@ -1,6 +1,10 @@
-from aoc_utils import run_with_timer
+from utils.timers import run_with_timer
 
-data = [int(x.strip()) for x in open('input.txt').readlines()]
+
+def get_data(filename):
+	d = [int(x.strip()) for x in open(filename).readlines()]
+	d.sort(reverse=True)
+	return {"target": 150, "containers": d}
 
 
 def f(available, target, curr_combo, valid_combos):
@@ -12,20 +16,17 @@ def f(available, target, curr_combo, valid_combos):
 	return sum(f(available[i+1:], target, curr_combo + [x], valid_combos) for i, x in enumerate(available))
 
 
-def part_one():
-	containers = data.copy()
-	containers.sort(reverse=True)
-	return f(containers, 150, [], [])
+def part_one(d):
+	return f(d["containers"], d["target"], [], [])
 
 
-def part_two():
-	containers = data.copy()
-	containers.sort(reverse=True)
+def part_two(d):
 	valid_combos = []
-	f(containers, 150, [], valid_combos)
+	f(d["containers"], d["target"], [], valid_combos)
 	return sum(1 for x in valid_combos if len(x) == min([len(x) for x in valid_combos]))
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  # 654 -- took 34 ms
-	run_with_timer(part_two)  # 57 -- took 68 ms
+	data = get_data("input.txt")
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
