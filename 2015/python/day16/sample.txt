@@ -1,0 +1,2 @@
+Sue 1: vizslas: 0, cats: 7, akitas: 0
+Sue 2: cars: 2, pomeranians: 1, samoyeds: 2
