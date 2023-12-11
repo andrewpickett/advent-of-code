@@ -1,3 +1,5 @@
+from copy import copy
+
 class Point:
 	def __init__(self, row, col, value=None):
 		self.col = col
@@ -17,6 +19,11 @@ class Point:
 
 	def __hash__(self):
 		return hash(str(self.row) + "_" + str(self.col))
+
+	def __copy__(self):
+		p = Point(self.row, self.col, self.value)
+		p.visited = self.visited
+		return p
 
 	def get_row(self):
 		return self.row
@@ -90,8 +97,13 @@ class Grid:
 		for r in range(self.height):
 			row = []
 			for c in range(self.width):
-				row.append(Point(r, c, default_value if not values else values[r][c]))
+				if isinstance(values[r][c], Point):
+					row.append(copy(values[r][c]))
+				else:
+					row.append(Point(r, c, default_value if not values else values[r][c]))
 			self.data.append(row)
+		self.neighbors_set = False
+		self.include_diagonals = False
 
 	def set_neighbors_for_point(self, p=None, row=-1, col=-1, include_diagonals=False):
 		if not p and row >= 0 and col >= 0:
@@ -104,6 +116,8 @@ class Grid:
 				if 0 <= p.get_row()+y < len(self.data) and 0 <= p.get_col() + x < len(self.data[p.get_row()]):
 					neighbors.append(self.get_point(p.get_row()+y, p.get_col()+x))
 		p.set_neighbors(neighbors)
+		self.neighbors_set = True
+		self.include_diagonals = include_diagonals
 
 	def set_neighbors_for_all(self, include_diagonals=False):
 		for row in self.data:
@@ -112,6 +126,28 @@ class Grid:
 
 	def get_row(self, row):
 		return self.data[row]
+
+	def get_col(self, col):
+		c_data = []
+		for row in self.data:
+			c_data.append(row[col])
+		return c_data
+
+	def insert_column_after(self, val, n):
+		s = len(self.data)
+		for i in range(s):
+			row = self.data[i]
+			row.insert(n, col[i])
+
+	def insert_column_before(self, col, n):
+		for i, row in enumerate(self.data):
+			row.insert(n-1, col[i])
+
+	def insert_row_before(self, row, n):
+		self.data.insert(n-1, row)
+
+	def insert_row_after(self, row, n):
+		self.data.insert(n, row)
 
 	def get_point(self, row, col):
 		return self.data[row][col]
@@ -143,3 +179,9 @@ class Grid:
 			if row < len(self.data) - 1:
 				out_val += "\n"
 		return out_val
+
+	def __copy__(self):
+		g = Grid(values=self.data)
+		if self.neighbors_set:
+			g.set_neighbors_for_all(self.include_diagonals)
+		return g
