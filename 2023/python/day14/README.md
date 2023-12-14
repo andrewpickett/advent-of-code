@@ -23,6 +23,10 @@ I was going to run a bunch of loops, calculate the number of times it took for a
 and then take the LCM of all of them -- but then realized I need to know at EXACTLY 1000000000 iterations what the state
 was -- so I instead figured I just needed to find the cycle for the whole board.
 
+The other thing that needed done was to tip the board each direction in each cycle. The way I did this was to just rotate the
+array 90 clockwise and run it through my same "north" tilt algorithm. Do that for each direction, and then it's back to the
+original orientation having tipped each direction. So now, 1 cycle was a set of all 4 rotations/tips.
+
 So I just saved the state of the board in a cache, looping until I found the same state again. I then do it again until I find it again
 to ensure I know the size of the loop cycle (the very beginning values could throw off the initial repeat value).
 
