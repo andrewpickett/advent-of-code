@@ -5,17 +5,11 @@ def get_data(filename):
 	return [x.strip() for x in open(filename).readline().strip().split(",")]
 
 
-def hash_alg(s):
+def h_alg(s):
 	curr_val = 0
 	for x in s:
-		curr_val += ord(x)
-		curr_val *= 17
-		curr_val %= 256
+		curr_val = ((curr_val + ord(x)) * 17) % 256
 	return curr_val
-
-
-def part_one(d):
-	return sum(hash_alg(x) for x in d)
 
 
 def map_contains(bucket, label):
@@ -25,15 +19,17 @@ def map_contains(bucket, label):
 	return -1
 
 
+def part_one(d):
+	return sum(h_alg(x) for x in d)
+
+
 def part_two(d):
-	hashmap = {}
+	hashmap = {i: [] for i in range(256)}
 	label_objs = {}
-	for i in range(256):
-		hashmap[i] = []
 	for x in d:
 		if "=" in x:
 			parts = x.split("=")
-			h = hash_alg(parts[0])
+			h = h_alg(parts[0])
 			o = {parts[0]: int(parts[1])}
 			c = map_contains(hashmap[h], parts[0])
 			if c < 0:
@@ -44,15 +40,11 @@ def part_two(d):
 			label_objs[parts[0]] = o
 		elif "-" in x:
 			label = x[:-1]
-			if label in label_objs and label_objs[label] in hashmap[hash_alg(label)]:
-				hashmap[hash_alg(label)].remove(label_objs[label])
+			h = h_alg(label)
+			if label in label_objs and label_objs[label] in hashmap[h]:
+				hashmap[h].remove(label_objs[label])
 
-	s = 0
-	for k, v in hashmap.items():
-		for i, x in enumerate(v):
-			s += (k+1) * (i+1) * list(x.values())[0]
-
-	return s
+	return sum((k+1) * (i+1) * list(x.values())[0] for k, v in hashmap.items() for i, x in enumerate(v))
 
 
 if __name__ == "__main__":
