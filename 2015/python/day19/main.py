@@ -1,17 +1,18 @@
-from aoc_utils import run_with_timer
-
-data = [x.strip() for x in open('sample.txt').readlines() if not x.isspace()]
+from utils.timers import run_with_timer
 
 
-def get_data_as_molecule_map():
-	molecule = get_elems(data[-1])
-	replacements = data[:-1]
+def get_data(filename):
+	return [x.strip() for x in open(filename).readlines() if not x.isspace()]
+
+
+def get_data_as_molecule_map(d):
+	molecule = get_elems(d[-1])
 	molmap = {}
-	for x in replacements:
+	for x in d[:-1]:
 		parts = x.split(' => ')
 		if parts[0] not in molmap.keys():
 			molmap[parts[0]] = []
-		molmap[parts[0]].append(get_elems(parts[1]))
+		molmap[parts[0]].append(parts[1])
 	return molecule, molmap
 
 
@@ -28,52 +29,73 @@ def get_elems(molecule):
 	return elems
 
 
-def replace_all_individually(molecule, replacee, replacements):
-	all_replaced = []
-	for replacement in replacements:
-		curr_index = 0
-		for _ in range(molecule.count(replacee)):
-			# idx = molecule.index(replacee)
-			curr_index = molecule[curr_index:].index(replacee) + curr_index
-			mcop = molecule.copy()
-			mcop[curr_index] = ''.join(replacement)
-			all_replaced.append(''.join(mcop))
-			curr_index += 1
-	return all_replaced
-
-
 def replacement_step(molecule, molmap):
-	unique_molecules = set(x for x in [replace_all_individually(molecule, replacee, replacements) for replacee, replacements in molmap.items()])
-	for replacee, replacement in molmap.items():
-		unique_molecules.update(replace_all_individually(molecule, replacee, replacement))
-	return len(unique_molecules)
+	unique_molecules = set()
+	for i, x in enumerate(molecule):
+		if x in molmap:
+			for y in molmap[x]:
+				new_molecule = molecule.copy()
+				new_molecule[i] = ''.join(y)
+				unique_molecules.add(''.join(new_molecule))
+	return unique_molecules
 
 
-def part_one():
-	molecule, molmap = get_data_as_molecule_map()
-	return replacement_step(molecule, molmap)
+def part_one(d):
+	molecule, molmap = get_data_as_molecule_map(d)
+	return len(replacement_step(molecule, molmap))
 
 
-def f(start, target, molmap, depth):
-	if len(start) > len(target):
-		return None
-	elif start == target:
-		return depth
-
-	curr_min = 999999999
-	for i in range(len(start)):
-		for j in molmap[start[i]]:
-			next_val = f(start[:i] + j + start[i+1:], target, molmap, depth+1)
-			if next_val:
-				curr_min = min(curr_min, next_val)
-	return curr_min
+def invert_replacements(d):
+	reverse = {}
+	for k, v in d.items():
+		for i in v:
+			if i not in reverse:
+				reverse[i] = []
+			reverse[i].append(k)
+	return reverse
 
 
-def part_two():
-	molecule = get_elems(data[-1])
-	molmap = get_data_as_molecule_map()
+def get_previous_molecules(target, replacements):
+	molecules = set()
+
+	for k, v in replacements.items():
+		idx = target.find(k)
+		while idx >= 0:
+			for i in v:
+				if i != "e":
+					molecules.add(target[:idx] + i + target[idx + len(k):])
+			idx = target.find(k, idx+1)
+	if len(molecules) == 0:
+		molecules = {"e"}
+	return molecules
+
+
+def build_molecule(target, replacements):
+	replacements = invert_replacements(replacements)
+	mset = {}
+	last_generation = get_previous_molecules(target, replacements)
+	n_steps = 1
+	while last_generation != {"e"}:
+		current_generation = set()
+		m = min(last_generation, key=len)
+
+		if m in mset:
+			new_molecules = mset[m]
+		else:
+			new_molecules = get_previous_molecules(m, replacements)
+			mset[m] = new_molecules
+		current_generation |= new_molecules
+		last_generation = current_generation
+		n_steps += 1
+	return n_steps
+
+
+def part_two(d):
+	molecule, molmap = get_data_as_molecule_map(d)
+	return build_molecule(''.join(molecule), molmap)
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  # 509 -- took 0 ms
-	run_with_timer(part_two)  #
+	data = get_data("input.txt")
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
