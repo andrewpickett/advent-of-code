@@ -121,12 +121,13 @@ Here's another example:
 999999999991
 ```
 Sadly, an ultra crucible would need to take an unfortunate path like this one:
-
+```
 1>>>>>>>1111
 9999999v9991
 9999999v9991
 9999999v9991
 9999999v>>>>
+```
 This route causes the ultra crucible to incur the minimum possible heat loss of **`71`**.
 
 Directing the **ultra crucible** from the lava pool to the machine parts factory, **what is the least heat loss it can incur?**
