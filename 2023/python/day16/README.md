@@ -1,19 +1,144 @@
 # Approach
 ### Part 1
-> 
+> _With the beam starting in the top-left heading right, how many tiles end up being energized?_
 
+This one seemed pretty clear when I started it (in the morning, because I again just needed sleep).
+
+I started coding the different rules based on the direction I was currently
+traveling, the value at any given space, and it seemed to make sense and work. I just keep a list of lights that are currently
+shining and for each one of them move one space at a time. If at any time they go off the edge of the board, I remove it from
+the list. Seemed pretty easy!
+
+Well...I ran the code on the sample, and it just ran forever! I started debugging, and it seemed like everything was working
+just fine.
+
+Took me much longer than it should have to realize that there are cases where the light will just go in an infinite loop
+by bouncing around mirrors. The example in the sample input was here:
+```
+..../.\\..
+.-.-/..|..
+.|....-|.\
+```
+You can see the infinite loop here:
+```
+....>>v\..
+.>>>^.v|..
+.^<<<<v|.\
+```
+So, I had to basically check to see if I ever land on a space going in the same direction as I have before, then I can just
+kill that light, because that means it's on some sort of loop.
+
+So really, I just updated my "visited" set to include a direction on it and kill the light if that set contains the same square/direction
+I was on.
+
+Now at the end, I have to filter down my set to remove the directions and only include the points. At that point I have a set
+of all visited squares, so just return the length.
 
 ### Part 2
-> 
+> _Find the initial beam configuration that energizes the largest number of tiles; how many tiles are energized in that configuration?_
 
+Yeah...I decided to just run my algorithm for every single edge. I didn't optimize anything...and it just took a little bit of
+time to actually account for all edges, but it ran in 5-10 seconds, which is good enough for me.
 
 # Results
 
-|              | Attempts | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
-|--------------|---------:|----------------:|----------------------:|-----:|
-| **Part One** |          |                 |              00:00:00 |      |
-| **Part Two** |          |                 |              00:00:00 |      |
+|              | Attempts | Exec. Time (ms) | Solve Time (HH:mm:ss) |  Rank |
+|--------------|---------:|----------------:|----------------------:|------:|
+| **Part One** |        1 |              28 |              08:30:53 | 15028 |
+| **Part Two** |        1 |            6842 |              09:14:20 | 14684 |
 
 
 # Original puzzle
-### 
+### --- Day 16: The Floor Will Be Lava ---
+With the beam of light completely focused **somewhere**, the reindeer leads you deeper still into the Lava Production Facility. At some point, you realize that the steel facility walls have been replaced with cave, and the doorways are just cave, and the floor is cave, and you're pretty sure this is actually just a giant cave.
+
+Finally, as you approach what must be the heart of the mountain, you see a bright light in a cavern up ahead. There, you discover that the beam of light you so carefully focused is emerging from the cavern wall closest to the facility and pouring all of its energy into a contraption on the opposite side.
+
+Upon closer inspection, the contraption appears to be a flat, two-dimensional square grid containing empty **space** (`.`), **mirrors** (`/` and `\`), and **splitters** (`|` and `-`).
+
+The contraption is aligned so that most of the beam bounces around the grid, but each tile on the grid converts some of the beam's light into **heat** to melt the rock in the cavern.
+
+You note the layout of the contraption (your puzzle input). For example:
+```
+.|...\....
+|.-.\.....
+.....|-...
+........|.
+..........
+.........\
+..../.\\..
+.-.-/..|..
+.|....-|.\
+..//.|....
+```
+The beam enters in the top-left corner from the left and heading to the **right**. Then, its behavior depends on what it encounters as it moves:
+
+* If the beam encounters **empty space** (`.`), it continues in the same direction.
+* If the beam encounters a **mirror** (`/` or `\`), the beam is **reflected** 90 degrees depending on the angle of the mirror. For instance, a rightward-moving beam that encounters a `/` mirror would continue **upward** in the mirror's column, while a rightward-moving beam that encounters a `\` mirror would continue **downward** from the mirror's column.
+* If the beam encounters the **pointy end of a splitter** (`|` or `-`), the beam passes through the splitter as if the splitter were **empty space**. For instance, a rightward-moving beam that encounters a `-` splitter would continue in the same direction.
+* If the beam encounters the **flat side of a splitter** (`|` or `-`), the beam is **split into two beams** going in each of the two directions the splitter's pointy ends are pointing. For instance, a rightward-moving beam that encounters a `|` splitter would split into two beams: one that continues **upward** from the splitter's column and one that continues **downward** from the splitter's column.
+
+Beams do not interact with other beams; a tile can have many beams passing through it at the same time. A tile is **energized** if that tile has at least one beam pass through it, reflect in it, or split in it.
+
+In the above example, here is how the beam of light bounces around the contraption:
+```
+>|<<<\....
+|v-.\^....
+.v...|->>>
+.v...v^.|.
+.v...v^...
+.v...v^..\
+.v../2\\..
+<->-/vv|..
+.|<<<2-|.\
+.v//.|.v..
+```
+Beams are only shown on empty tiles; arrows indicate the direction of the beams. If a tile contains beams moving in multiple directions, the number of distinct directions is shown instead. Here is the same diagram but instead only showing whether a tile is **energized** (`#`) or not (`.`):
+```
+######....
+.#...#....
+.#...#####
+.#...##...
+.#...##...
+.#...##...
+.#..####..
+########..
+.#######..
+.#...#.#..
+```
+Ultimately, in this example, **`46`** tiles become **energized**.
+
+The light isn't energizing enough tiles to produce lava; to debug the contraption, you need to start by analyzing the current situation. With the beam starting in the top-left heading right, **how many tiles end up being energized?**
+
+### --- Part Two ---
+As you try to work out what might be wrong, the reindeer tugs on your shirt and leads you to a nearby control panel. There, a collection of buttons lets you align the contraption so that the beam enters from **any edge tile** and heading away from that edge. (You can choose either of two directions for the beam if it starts on a corner; for instance, if the beam starts in the bottom-right corner, it can start heading either left or upward.)
+
+So, the beam could start on any tile in the top row (heading downward), any tile in the bottom row (heading upward), any tile in the leftmost column (heading right), or any tile in the rightmost column (heading left). To produce lava, you need to find the configuration that **energizes as many tiles as possible**.
+
+In the above example, this can be achieved by starting the beam in the fourth tile from the left in the top row:
+```
+.|<2<\....
+|v-v\^....
+.v.v.|->>>
+.v.v.v^.|.
+.v.v.v^...
+.v.v.v^..\
+.v.v/2\\..
+<-2-/vv|..
+.|<<<2-|.\
+.v//.|.v..
+```
+Using this configuration, **`51`** tiles are energized:
+```
+.#####....
+.#.#.#....
+.#.#.#####
+.#.#.##...
+.#.#.##...
+.#.#.##...
+.#.#####..
+########..
+.#######..
+.#...#.#..
+```
+Find the initial beam configuration that energizes the largest number of tiles; **how many tiles are energized in that configuration?**
