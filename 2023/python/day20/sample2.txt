@@ -1,0 +1,5 @@
+broadcaster -> a
+%a -> inv, dt
+&inv -> b
+%b -> dt
+&dt -> rx
