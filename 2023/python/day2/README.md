@@ -22,8 +22,8 @@ input into a list of hands containing a list of pulled cubes. So it ends up bein
 the actual code much easier. The first two games of the sample input are shown below after my data parse:
 ```
 [
-  [																		// A single game containing a list of drawn cubes
-    [ ["3", "blue"], ["4", "red"] ],							// Each draw showing the individual cubes
+  [		// A single game containing a list of drawn cubes
+    [ ["3", "blue"], ["4", "red"] ],		// Each draw showing the individual cubes
     [ ["1", "red"], ["2", "green"], ["6", "blue"] ],
     [ ["2", "green"] ]
   ],
