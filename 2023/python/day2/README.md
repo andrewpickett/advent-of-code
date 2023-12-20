@@ -20,7 +20,7 @@ Again, most of the time I spent was just parsing and breaking out loops -- so no
 I decided to go back and do a little better job at the parsing of the input. Basically I do a 1-liner to parse each "game" from the
 input into a list of hands containing a list of pulled cubes. So it ends up being a list of lists of lists of lists...but it makes
 the actual code much easier. The first two games of the sample input are shown below after my data parse:
-```
+```json
 [
   [		// A single game containing a list of drawn cubes
     [ ["3", "blue"], ["4", "red"] ],		// Each draw showing the individual cubes
