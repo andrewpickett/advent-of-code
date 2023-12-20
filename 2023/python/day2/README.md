@@ -17,6 +17,23 @@ to a running sum.
 
 Again, most of the time I spent was just parsing and breaking out loops -- so not super fast, or pretty, but it works.
 
+I decided to go back and do a little better job at the parsing of the input. Basically I do a 1-liner to parse each "game" from the
+input into a list of hands containing a list of pulled cubes. So it ends up being a list of lists of lists of lists...but it makes
+the actual code much easier. The first two games of the sample input are shown below after my data parse:
+```
+[
+  [																		// A single game containing a list of drawn cubes
+    [ ["3", "blue"], ["4", "red"] ],							// Each draw showing the individual cubes
+    [ ["1", "red"], ["2", "green"], ["6", "blue"] ],
+    [ ["2", "green"] ]
+  ],
+  [
+    [ ["1", "blue"], ["2", "green"] ],
+    [ ["3", "green"], ["4", "blue"], ["1", "red"] ],
+    [ ["1", "green"], ["1", "blue"] ]
+  ],
+```
+
 ### Part 2
 > What is the sum of the power of these sets?
 

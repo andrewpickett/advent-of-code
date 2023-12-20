@@ -10,7 +10,10 @@ blanks, leaving a string of just the numbers. Then it's just return 10 times the
 
 Sum every line together and you have your answer.
 
-I tried to make it more concise and pythonic...but after a few minutes of trying, I figured it's good enough and I left it.
+I then went back and made it more concise by just making the realization that since you're taking 10 times the first digit and adding
+the last digit, you're really just make a 2-digit number out of the first and last. By using that, you can just write the code
+to say "concatenate the first and last numbers and convert to an int...then add all of those up". With that statement, it can
+be done in one line! Yay!
 
 ### Part 2
 > What is the sum of all of the calibration values?

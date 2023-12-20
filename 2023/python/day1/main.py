@@ -7,11 +7,7 @@ def get_data(filename):
 
 
 def part_one(d):
-	s = 0
-	for x in d:
-		nums = re.sub('[a-z]', '', x)
-		s += int(nums[0])*10 + int(nums[-1])
-	return s
+	return sum(int(''.join([re.findall("[0-9]", x)[i] for i in (0, -1)])) for x in d)
 
 
 def part_two(d):
@@ -33,5 +29,5 @@ def part_two(d):
 
 if __name__ == "__main__":
 	data = get_data("input.txt")
-	run_with_timer(part_one, data.copy())
-	run_with_timer(part_two, data.copy())
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)

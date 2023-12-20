@@ -1,47 +1,29 @@
 from utils.timers import run_with_timer
+import math
 
 
 def get_data(filename):
-	return [x[x.find(":")+1:].strip() for x in open(filename).readlines()]
+	return [[[z.split() for z in y.strip().split(", ")] for y in x[x.find(":")+1:].strip().split(";")] for x in open(filename).readlines()]
 
 
 def part_one(d):
-	max_amounts = {
-		"red": 12,
-		"green": 13,
-		"blue": 14
-	}
-	s = 0
+	max_amounts = {"red": 12, "green": 13, "blue": 14}
+	valid = [True] * len(d)
 	for i, x in enumerate(d):
-		hands = x.split(";")
-		possible = True
-		for hand in hands:
-			parts = hand.replace(",", "").split()
-			for j in range(0, len(parts), 2):
-				if int(parts[j]) > max_amounts[parts[j+1]]:
-					possible = False
-					break
-			if not possible:
-				break
-		if possible:
-			s += i+1
-	return s
+		for y in x:
+			for z in y:
+				valid[i] = valid[i] and max_amounts[z[1]] >= int(z[0])
+	return sum(i+1 for i, x in enumerate(valid) if x)
 
 
 def part_two(d):
 	s = 0
-	for i, x in enumerate(d):
-		hands = x.split(";")
-		mins = {
-			"red": 0,
-			"blue": 0,
-			"green": 0
-		}
-		for hand in hands:
-			parts = hand.replace(",", "").split()
-			for j in range(0, len(parts), 2):
-				mins[parts[j+1]] = max(mins[parts[j+1]], int(parts[j]))
-		s += mins["red"] * mins["blue"] * mins["green"]
+	for x in d:
+		mins = {"red": 0, "blue": 0, "green": 0}
+		for y in x:
+			for z in y:
+				mins[z[1]] = max(mins[z[1]], int(z[0]))
+		s += math.prod(mins.values())
 	return s
 
 
