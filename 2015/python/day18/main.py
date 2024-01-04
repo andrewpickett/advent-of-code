@@ -1,10 +1,10 @@
-from utils.timers import run_with_timer
+from utils.timers import run_with_timer, get_data_with_timer
 from utils.grid import Grid
 from copy import copy
 
 
 def get_data(filename):
-	g = Grid(values=[[y for y in x.strip()] for x in open(filename).readlines()])
+	g = Grid(file=filename)
 	g.set_neighbors_for_all(True)
 	return {"steps": 100, "grid": g}
 
@@ -36,6 +36,6 @@ def part_two(d):
 
 
 if __name__ == '__main__':
-	data = get_data("input.txt")
+	data = get_data_with_timer(get_data, "input.txt")
 	run_with_timer(part_one, data)
 	run_with_timer(part_two, data)

@@ -1,4 +1,4 @@
-from utils.timers import run_with_timer
+from utils.timers import run_with_timer, get_data_with_timer
 from itertools import combinations
 from operator import itemgetter
 from functools import reduce
@@ -10,7 +10,7 @@ def get_data(filename):
 
 def find_answer(d, compartments=3):
 	weight = sum(d) // compartments
-	for n in range(1, 8):
+	for n in range(1, len(d)-compartments):
 		ans = []
 		for comb in combinations(d, n):
 			if sum(comb) == weight:
@@ -30,7 +30,7 @@ def find_answer(d, compartments=3):
 
 
 def find_other_two_groups(rest, weight):
-	for n in range(1,len(rest)):
+	for n in range(1, len(rest)):
 		for comb in combinations(rest, n):
 			if sum(comb) == weight:
 				return comb
@@ -57,6 +57,6 @@ def part_two(d):
 
 
 if __name__ == '__main__':
-	data = get_data("input.txt")
+	data = get_data_with_timer(get_data, "input.txt")
 	run_with_timer(part_one, data)
 	run_with_timer(part_two, data)

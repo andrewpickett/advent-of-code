@@ -1,8 +1,8 @@
-from utils.timers import run_with_timer
+from utils.timers import run_with_timer, get_data_with_timer
 
 
 def get_data(filename):
-	return [x.strip() for x in open(filename).readlines()]
+	return [{parts[i*2+2][:-1]: int(parts[i*2+3].replace(',', '')) for i in range(len(parts)//2 - 1)} for parts in [x.split() for x in [y.strip() for y in open(filename).readlines()]]]
 
 
 ticker = {
@@ -19,18 +19,12 @@ ticker = {
 }
 
 
-def get_sues_list(d):
-	return [{parts[i*2+2][:-1]: int(parts[i*2+3].replace(',', '')) for i in range(len(parts)//2 - 1)} for parts in [x.split() for x in d]]
-
-
 def part_one(d):
-	sues = get_sues_list(d)
-	return [sues.index(sue)+1 for sue in sues if sum(1 if sue[x] == ticker[x] else 0 for x in sue.keys() & ticker.keys()) == len(sue)][0]
+	return [d.index(sue)+1 for sue in d if sum(1 if sue[x] == ticker[x] else 0 for x in sue.keys() & ticker.keys()) == len(sue)][0]
 
 
 def part_two(d):
-	sues = get_sues_list(d)
-	for sue in sues:
+	for sue in d:
 		match_found = True
 		for prop in ticker.keys():
 			if prop in sue.keys():
@@ -43,11 +37,11 @@ def part_two(d):
 				elif ticker[prop] != sue[prop]:
 					match_found = False
 		if match_found:
-			return sues.index(sue) + 1
+			return d.index(sue) + 1
 	return
 
 
 if __name__ == '__main__':
-	data = get_data("input.txt")
-	run_with_timer(part_one, data)  # 40 -- took 2 ms
-	run_with_timer(part_two, data)  # 241 -- took 1 ms
+	data = get_data_with_timer(get_data, "input.txt")
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)

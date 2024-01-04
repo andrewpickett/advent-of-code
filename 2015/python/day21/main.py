@@ -1,4 +1,5 @@
-from utils.timers import run_with_timer
+from utils.timers import run_with_timer, get_data_with_timer
+from copy import copy
 
 
 weapons = {
@@ -28,7 +29,8 @@ rings = {
 
 
 def get_data(filename):
-	return [x.strip() for x in open(filename).readlines()]
+	d = [x.strip() for x in open(filename).readlines()]
+	return {"hp": int(d[0].split(" ")[2]), "damage": int(d[1].split(" ")[1]), "armor": int(d[2].split(" ")[1])}
 
 
 def fight(player_stats, boss_stats):
@@ -49,14 +51,14 @@ def get_fight_costs(d, want_to_win):
 				for r2 in rings:
 					if r1 != r2:
 						player_stats = {"hp": 100, "damage": sum([weapons[w]["damage"], rings[r1]["damage"], rings[r2]["damage"]]), "armor": sum([armor[a]["armor"], rings[r1]["armor"], rings[r2]["armor"]])}
-						boss_stats = {"hp": int(d[0].split(" ")[2]), "damage": int(d[1].split(" ")[1]), "armor": int(d[2].split(" ")[1])}
-						player_wins = fight(player_stats, boss_stats)
+						player_wins = fight(player_stats, copy(d))
 						if (player_wins and want_to_win) or (not player_wins and not want_to_win):
 							costs.append(sum([weapons[w]["cost"], armor[a]["cost"], rings[r1]["cost"], rings[r2]["cost"]]))
 	return costs
 
 
 def part_one(d):
+	print(d)
 	return min(get_fight_costs(d, True))
 
 
@@ -65,6 +67,6 @@ def part_two(d):
 
 
 if __name__ == '__main__':
-	data = get_data("input.txt")
+	data = get_data_with_timer(get_data, "input.txt")
 	run_with_timer(part_one, data)
 	run_with_timer(part_two, data)

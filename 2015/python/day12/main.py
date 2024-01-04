@@ -1,4 +1,4 @@
-from utils.timers import run_with_timer
+from utils.timers import run_with_timer, get_data_with_timer
 import json
 import re
 
@@ -7,10 +7,8 @@ def get_data(filename):
 	return open(filename).readline().strip()
 
 
-matcher = re.compile('[ a-zA-Z:,}{"\]\[]')
-
-
 def part_one(d):
+	matcher = re.compile('[^-0-9]')
 	return sum([int(x) for x in matcher.split(d) if x != ''])
 
 
@@ -34,10 +32,11 @@ def part_two(d):
 	json_data = json.loads(d)
 	if contains_red(json_data):
 		json_data.clear()
+	matcher = re.compile('[^-0-9]')
 	return sum([int(x) for x in matcher.split(json.dumps(json_data)) if x != ''])
 
 
 if __name__ == '__main__':
-	data = get_data("input.txt")
-	run_with_timer(part_one, data)  # 119433 -- took 6 ms
-	run_with_timer(part_two, data)  # 68466 -- took 6 ms
+	data = get_data_with_timer(get_data, "input.txt")
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)

@@ -1,13 +1,9 @@
-from utils.timers import run_with_timer
+from utils.timers import run_with_timer, get_data_with_timer
 
 
 def get_data(filename):
-	return [x.strip() for x in open(filename).readlines()]
-
-
-def build_city_graph(d):
 	city_map = {}
-	for x in d:
+	for x in [y.strip() for y in open(filename).readlines()]:
 		city_data = x.split(' = ')
 
 		cities = city_data[0].split(' to ')
@@ -37,16 +33,14 @@ def traverse_map(city_map, start_city, visited_cities, is_min):
 
 
 def part_one(d):
-	city_map = build_city_graph(d)
-	return min(traverse_map(city_map, start_city, [], True) for start_city in city_map)
+	return min(traverse_map(d, start_city, [], True) for start_city in d)
 
 
 def part_two(d):
-	city_map = build_city_graph(d)
-	return max(traverse_map(city_map, start_city, [], False) for start_city in city_map)
+	return max(traverse_map(d, start_city, [], False) for start_city in d)
 
 
 if __name__ == '__main__':
-	data = get_data("input.txt")
+	data = get_data_with_timer(get_data, "input.txt")
 	run_with_timer(part_one, data)
 	run_with_timer(part_two, data)

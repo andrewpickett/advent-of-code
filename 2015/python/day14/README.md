@@ -1,17 +1,53 @@
 # Approach
+### Data format
+
+I read each line of the input file and build a map of each reindeer which maps to a list of attributes.
+Parsing the data works because every line is formatted the exact same way:
+```
+{name} can fly {speed} km/s for {time}, but then must rest for {rest} seconds
+```
+
+The end result is something like this:
+```
+{
+  "Vixen": {
+    "s": 8,
+    "t": 8,
+    "r": 53,
+    "p": 0
+  },
+  "Blitzen": {
+    "s": 13,
+    "t": 4,
+    "r": 49,
+    "p": 0
+  }
+}
+```
+The `p` key was added for part to account for the points they have accumulated. I just initialize them to `0`.
+
 ### Part 1
 > _Given the descriptions of each reindeer (in your puzzle input), after exactly 2503 seconds, what distance has the winning reindeer traveled?_
 
-...Not going to lie. I wrote this a while ago...I'm just now going back to do my writeups. Right now, looking at my code,
-I have no idea what it's doing. I know I took a purely mathematical approach to this, but I don't remember the work I did
-to come up with the formula I used...
+You can think of each "cycle" of a reindeer's flight to be time flying at full speed plus the time resting. That really gives
+their "true speed" after a given amount of time.
 
-Maybe I'll come back to this write up after I digest my code again...but probably not
+For example, if a reindeer has a speed of 10 km/s for 20 seconds and must rest for 5 seconds after flying, then they have a 25 second
+"cycle" where they will fly 200 km in the first 20 seconds, and then rest in the next 5. This will repeat over and over
+until we're at the time limit.
+
+So for each reindeer we first divide the end time by this total cycle time. There will likely be SOME remainder of time left.
+Since they are doing all their flying at the beginning of their cycle, we can check if the remainder is more than the time
+they're able to fly. If it is, then they have flown their full distance for that last cycle...otherwise, we just return the
+remainder because that's all they were able to fly.
+
+So do that for all of the reindeer and then return the maximum to find the winner.
 
 ### Part 2
 > _Again given the descriptions of each reindeer (in your puzzle input), after exactly 2503 seconds, how many points does the winning reindeer have?_
 
-See above.
+For this part, I just calculate the distance for each reindeer after every second and whichever one is in the lead, I add one
+point to their "points" counter. At the end of 2503 seconds, I return the highest point score.
 
 # Results
 
@@ -19,31 +55,3 @@ See above.
 |--------------|----------------:|
 | **Part One** |               0 |
 | **Part Two** |              17 |
-
-# Original puzzle
-### --- Day 14: Reindeer Olympics ---
-This year is the Reindeer Olympics! Reindeer can fly at high speeds, but must rest occasionally to recover their energy. Santa would like to know which of his reindeer is fastest, and so he has them race.
-
-Reindeer can only either be **flying** (always at their top speed) or **resting** (not moving at all), and always spend whole seconds in either state.
-
-For example, suppose you have the following Reindeer:
-
-* Comet can fly **14 km/s for 10 seconds**, but then must rest for **127 seconds**.
-* Dancer can fly **16 km/s for 11 seconds**, but then must rest for **162 seconds**.
-
-After one second, Comet has gone 14 km, while Dancer has gone 16 km. After ten seconds, Comet has gone 140 km, while Dancer has gone 160 km. On the eleventh second, Comet begins resting (staying at 140 km), and Dancer continues on for a total distance of 176 km. On the 12th second, both reindeer are resting. They continue to rest until the 138th second, when Comet flies for another ten seconds. On the 174th second, Dancer flies for another 11 seconds.
-
-In this example, after the 1000th second, both reindeer are resting, and Comet is in the lead at **`1120`** km (poor Dancer has only gotten `1056` km by that point). So, in this situation, Comet would win (if the race ended at 1000 seconds).
-
-Given the descriptions of each reindeer (in your puzzle input), after exactly `2503` seconds, **what distance has the winning reindeer traveled**?
-
-### --- Part Two ---
-Seeing how reindeer move in bursts, Santa decides he's not pleased with the old scoring system.
-
-Instead, at the end of each second, he awards one point to the reindeer currently in the lead. (If there are multiple reindeer tied for the lead, they each get one point.) He keeps the traditional 2503 second time limit, of course, as doing otherwise would be entirely ridiculous.
-
-Given the example reindeer from above, after the first second, Dancer is in the lead and gets one point. He stays in the lead until several seconds into Comet's second burst: after the 140th second, Comet pulls into the lead and gets his first point. Of course, since Dancer had been in the lead for the 139 seconds before that, he has accumulated 139 points by the 140th second.
-
-After the 1000th second, Dancer has accumulated **`689`** points, while poor Comet, our old champion, only has `312`. So, with the new scoring system, Dancer would win (if the race ended at 1000 seconds).
-
-Again given the descriptions of each reindeer (in your puzzle input), after exactly `2503` seconds, **how many points does the winning reindeer have**?

@@ -1,4 +1,4 @@
-from utils.timers import run_with_timer
+from utils.timers import run_with_timer, get_data_with_timer
 
 
 def get_data(filename):
@@ -6,9 +6,7 @@ def get_data(filename):
 
 
 def get_coords(instruction):
-	idx = 2
-	if 'toggle' in instruction:
-		idx = 1
+	idx = 1 if 'toggle' in instruction else 2
 	return tuple(map(int, instruction.split(' ')[idx].split(','))), tuple(map(int, instruction.split(' ')[idx+2].split(',')))
 
 
@@ -44,6 +42,6 @@ def part_two(d):
 
 
 if __name__ == '__main__':
-	data = get_data("input.txt")
+	data = get_data_with_timer(get_data, "input.txt")
 	run_with_timer(part_one, data)
 	run_with_timer(part_two, data)

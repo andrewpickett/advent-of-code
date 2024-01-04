@@ -1,4 +1,4 @@
-from utils.timers import run_with_timer
+from utils.timers import run_with_timer, get_data_with_timer
 from copy import deepcopy
 
 spells = {
@@ -64,18 +64,18 @@ def play_game(p_hp, p_mp, b_hp, b_atk, p_turn, active_spells, mana_used, least_m
 
 
 def part_one(d):
-	least_mana = [1e100]
+	least_mana = [float("inf")]
 	play_game(50, 500, d["hp"], d["atk"], True, [], 0, least_mana)
 	return least_mana[0]
 
 
 def part_two(d):
-	least_mana = [1e100]
+	least_mana = [float("inf")]
 	play_game(50, 500, d["hp"], d["atk"], True, [], 0, least_mana, True)
 	return least_mana[0]
 
 
 if __name__ == '__main__':
-	data = get_data("input.txt")
+	data = get_data_with_timer(get_data, "input.txt")
 	run_with_timer(part_one, data)
 	run_with_timer(part_two, data)

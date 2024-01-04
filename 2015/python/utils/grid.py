@@ -1,5 +1,6 @@
 from copy import copy
 
+
 class Point:
 	def __init__(self, row, col, value=None):
 		self.col = col
@@ -21,9 +22,12 @@ class Point:
 		return hash(str(self.row) + "_" + str(self.col))
 
 	def __copy__(self):
-		p = Point(self.row, self.col, self.value)
+		p = Point(self.row, self.col, copy(self.value))
 		p.visited = self.visited
 		return p
+
+	def get_coord(self):
+		return self.row, self.col
 
 	def get_row(self):
 		return self.row
@@ -59,37 +63,37 @@ class Point:
 		return [n for n in self.neighbors if n.row == self.row - 1]
 
 	def get_north_neighbor(self):
-		ns = [n for n in self.neighbors if n.row == self.row - 1 and n.col == self.col]
-		if len(ns) > 0:
-			return ns[0]
+		return self.get_neighbor((-1, 0))
 
 	def get_south_neighbors(self):
 		return [n for n in self.neighbors if n.row == self.row + 1]
 
 	def get_south_neighbor(self):
-		ns = [n for n in self.neighbors if n.row == self.row + 1 and n.col == self.col]
-		if len(ns) > 0:
-			return ns[0]
+		return self.get_neighbor((1, 0))
 
 	def get_east_neighbors(self):
 		return [n for n in self.neighbors if n.col == self.col + 1]
 
 	def get_east_neighbor(self):
-		ns = [n for n in self.neighbors if n.col == self.col + 1 and n.row == self.row]
-		if len(ns) > 0:
-			return ns[0]
+		return self.get_neighbor((0, 1))
 
 	def get_west_neighbors(self):
 		return [n for n in self.neighbors if n.col == self.col - 1]
 
 	def get_west_neighbor(self):
-		ns = [n for n in self.neighbors if n.col == self.col - 1 and n.row == self.row]
+		return self.get_neighbor((0, -1))
+
+	def get_neighbor(self, pos):
+		ns = [n for n in self.neighbors if n.col == self.col + pos[1] and n.row == self.row + pos[0]]
 		if len(ns) > 0:
 			return ns[0]
 
 
 class Grid:
-	def __init__(self, height=0, width=0, values=None, default_value=""):
+	def __init__(self, height=0, width=0, values=None, default_value="", file=None):
+		if file:
+			with open(file) as f:
+				values = [[y for y in x.strip()] for x in f.readlines()]
 		if height > 0 and width > 0 and values:
 			raise RuntimeError("Cannot define both the dimensions and default values. One or the other are required.")
 		self.data = []

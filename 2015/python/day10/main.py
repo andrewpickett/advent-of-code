@@ -1,8 +1,8 @@
-from utils.timers import run_with_timer
+from utils.timers import run_with_timer, get_data_with_timer
 
 
 def get_data(filename):
-	return [x for x in open(filename).readline().strip()]
+	return open(filename).readline().strip()
 
 
 def look_and_say(input_val):
@@ -35,6 +35,6 @@ def part_two(d):
 
 
 if __name__ == '__main__':
-	data = get_data("input.txt")
+	data = get_data_with_timer(get_data, "input.txt")
 	run_with_timer(part_one, data)
 	run_with_timer(part_two, data)

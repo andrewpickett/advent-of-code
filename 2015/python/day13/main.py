@@ -1,14 +1,10 @@
-from utils.timers import run_with_timer
+from utils.timers import run_with_timer, get_data_with_timer
 import itertools
 
 
 def get_data(filename):
-	return [x.strip() for x in open(filename).readlines()]
-
-
-def build_guest_graph(d):
 	guest_graph = {}
-	for x in d:
+	for x in [y.strip() for y in open(filename).readlines()]:
 		parts = x.split(' ')
 		if not parts[0] in guest_graph.keys():
 			guest_graph[parts[0]] = {}
@@ -21,21 +17,18 @@ def calculate_happiness(guest_graph, s):
 
 
 def part_one(d):
-	guest_graph = build_guest_graph(d)
-	return max(calculate_happiness(guest_graph, x) for x in list(itertools.permutations(guest_graph.keys())))
+	return max(calculate_happiness(d, x) for x in list(itertools.permutations(d.keys())))
 
 
 def part_two(d):
-	guest_graph = build_guest_graph(d)
-	guest_graph['Me'] = {}
-	for x in guest_graph.keys():
-		guest_graph['Me'][x] = 0
-		guest_graph[x]['Me'] = 0
-	del guest_graph['Me']['Me']
-	return max(calculate_happiness(guest_graph, x) for x in list(itertools.permutations(guest_graph.keys())))
+	d['Me'] = {}
+	for x in [y for y in d.keys() if y != 'Me']:
+		d['Me'][x] = 0
+		d[x]['Me'] = 0
+	return max(calculate_happiness(d, x) for x in list(itertools.permutations(d.keys())))
 
 
 if __name__ == '__main__':
-	data = get_data("input.txt")
+	data = get_data_with_timer(get_data, "input.txt")
 	run_with_timer(part_one, data)
 	run_with_timer(part_two, data)
