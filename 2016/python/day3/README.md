@@ -1,4 +1,15 @@
 # Approach
+### Data format
+
+Read each line of input as a tuple of side lengths into an array. Something like:
+```
+[
+	(3, 4, 5),
+	(5, 12, 13),
+	...
+]
+```
+
 ### Part 1
 > _In your puzzle input, how many of the listed triangles are possible?_
 
@@ -20,36 +31,7 @@ Really no additional "trickery" here.
 
 # Results
 
-|              | Answer | Attempts | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
-|--------------|-------:|---------:|----------------:|----------------------:|-----:|
-| **Part One** |    982 |        1 |               1 |                   N/A |  N/A |
-| **Part Two** |   1826 |        1 |               1 |                   N/A |  N/A |
-
-
-# Original puzzle
-### --- Day 3: Squares With Three Sides ---
-
-Now that you can think clearly, you move deeper into the labyrinth of hallways and office furniture that makes up this part of Easter Bunny HQ. This must be a graphic design department; the walls are covered in specifications for triangles.
-
-Or are they?
-
-The design document gives the side lengths of each triangle it describes, but... `5 10 25`? Some of these aren't triangles. You can't help but mark the impossible ones.
-
-In a valid triangle, the sum of any two sides must be larger than the remaining side. For example, the "triangle" given above is impossible, because `5 + 10` is not larger than `25`.
-
-In your puzzle input, how many of the listed triangles are possible?
-
-### --- Part Two ---
-
-Now that you've helpfully marked up their design documents, it occurs to you that triangles are specified in groups of three vertically. Each set of three numbers in a column specifies a triangle. Rows are unrelated.
-
-For example, given the following specification, numbers with the same hundreds digit would be part of the same triangle:
-
-```
-101 301 501
-102 302 502
-103 303 503
-201 401 601
-202 402 602
-203 403 603
-```
+|              | Exec. Time (ms) |
+|--------------|----------------:|
+| **Part One** |               1 |
+| **Part Two** |               1 |
