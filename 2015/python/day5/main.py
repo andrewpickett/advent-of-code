@@ -13,8 +13,11 @@ def part_two(d):
 	return sum(1 for x in d if sum(x.count(x[i:i+2]) for i in range(len(x)-1)) > len(x)-1 and sum(x[i] == x[i+2] for i in range(len(x)-2)) > 0)
 
 
-if __name__ == '__main__':
-	data = get_data_with_timer(get_data, "input.txt")
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
 	run_with_timer(part_one, data)
 	run_with_timer(part_two, data)
 
+
+if __name__ == '__main__':
+	main()

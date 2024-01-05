@@ -66,7 +66,11 @@ def part_two(d):
 	return get_next_pass(d)
 
 
-if __name__ == '__main__':
-	data = get_data_with_timer(get_data, "input.txt")
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
 	p1 = run_with_timer(part_one, data)
 	run_with_timer(part_two, p1)
+
+
+if __name__ == '__main__':
+	main()

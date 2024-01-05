@@ -58,7 +58,6 @@ def get_fight_costs(d, want_to_win):
 
 
 def part_one(d):
-	print(d)
 	return min(get_fight_costs(d, True))
 
 
@@ -66,7 +65,11 @@ def part_two(d):
 	return max(get_fight_costs(d, False))
 
 
-if __name__ == '__main__':
-	data = get_data_with_timer(get_data, "input.txt")
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
 	run_with_timer(part_one, data)
 	run_with_timer(part_two, data)
+
+
+if __name__ == '__main__':
+	main()

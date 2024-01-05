@@ -56,7 +56,11 @@ def part_two(d):
 	return find_answer(d, 4)
 
 
-if __name__ == '__main__':
-	data = get_data_with_timer(get_data, "input.txt")
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
 	run_with_timer(part_one, data)
 	run_with_timer(part_two, data)
+
+
+if __name__ == '__main__':
+	main()

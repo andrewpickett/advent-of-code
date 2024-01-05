@@ -26,7 +26,11 @@ def part_two(d):
 	return sum(1 for x in valid_combos if len(x) == min([len(x) for x in valid_combos]))
 
 
-if __name__ == '__main__':
-	data = get_data_with_timer(get_data, "input.txt")
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
 	run_with_timer(part_one, data)
 	run_with_timer(part_two, data)
+
+
+if __name__ == '__main__':
+	main()
