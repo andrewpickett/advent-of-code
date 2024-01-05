@@ -40,4 +40,4 @@ I rated each day in 4 categories:
 3. **Difficulty** - How difficult I thought the puzzle was. This encompasses both parts.
 4. **Overall** - My overall ranking of the puzzle. This takes into account all of the above and just my general feelings on it.
 
-[2015 Daily Rankings](images/daily_rankings.png)
+![2015 Daily Rankings](images/daily_rankings.png)
