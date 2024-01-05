@@ -80,10 +80,10 @@ def run_part_with_no_data(runs, part2):
 
 def main():
 	runs = 10
-	# run_all_get_data(runs)
-	# run_all_part_one_no_data(runs)
-	# run_all_part_two_no_data(runs)
-	run_all(1)
+	run_all_get_data(runs)
+	run_all_part_one_no_data(runs)
+	run_all_part_two_no_data(runs)
+	run_all(runs)
 
 
 if __name__ == "__main__":
