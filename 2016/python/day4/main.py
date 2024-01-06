@@ -1,12 +1,15 @@
-from aoc_utils import run_with_timer
+from utils.timers import run_with_timer, get_data_with_timer
+import re
 
-data = [x.strip() for x in open("input.txt").readlines()]
+
+def get_data(filename):
+	return [re.split('[\[\]\-]', x.strip())[:-1] for x in open(filename).readlines()]
 
 
 def get_character_counts(d):
 	counts = {}
 	for x in d:
-		if x != '-':
+		if x != "-":
 			if x not in counts.keys():
 				counts[x] = 0
 			counts[x] = counts[x] + 1
@@ -25,40 +28,27 @@ def calculate_checksum(counts):
 	return fstr[0:5]
 
 
-def part_one():
-	total = 0
-	for x in data:
-		name = x[0:x.index("[")]
-		sector = int(name[name.rindex("-")+1:])
-		name = name[0:name.rindex("-")]
-		checksum = x[x.index("[")+1:-1]
-
-		if checksum == calculate_checksum(get_character_counts(name)):
-			total += sector
-	return total
+def part_one(d):
+	return sum(int(x[-2]) for x in d if x[-1] == calculate_checksum(get_character_counts(''.join(x[:-2]))))
 
 
-def part_two():
+def part_two(d):
 	alpha = 'abcdefghijklmnopqrstuvwxyz'
-	total = 0
-	for x in data:
-		name = x[0:x.index("[")]
-		sector = int(name[name.rindex("-")+1:])
-		shift = sector % 26
-		name = name[0:name.rindex("-")]
-		checksum = x[x.index("[")+1:-1]
+	target = "northpole"
+	for x in d:
+		for y in x[:-2]:
+			if len(y) == len(target):
+				sector = int(x[-2])
+				name = ''.join(list(map(lambda z: alpha[(alpha.index(z) + sector) % 26], y)))
+				if name == target:
+					return sector
 
-		if checksum == calculate_checksum(get_character_counts(name)):
-			real_name = ""
-			for i, y in enumerate(name):
-				if y != '-':
-					real_name += alpha[(alpha.index(y) + shift) % 26]
-				else:
-					real_name += " "
-			if "northpole" in real_name:
-				return sector
+
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  #
-	run_with_timer(part_two)  #
+	main()
