@@ -17,20 +17,20 @@ def get_letter_counts(d):
 	return col_counts
 
 
-def part_one(d):
+def calc_message(d, f):
 	ret_val = ""
 	col_counts = get_letter_counts(d)
 	for i in col_counts:
-		ret_val += max(i, key=i.get)
+		ret_val += f(i, key=i.get)
 	return ret_val
+
+
+def part_one(d):
+	return calc_message(d, max)
 
 
 def part_two(d):
-	ret_val = ""
-	col_counts = get_letter_counts(d)
-	for i in col_counts:
-		ret_val += min(i, key=i.get)
-	return ret_val
+	return calc_message(d, min)
 
 
 def main(f="input.txt"):
