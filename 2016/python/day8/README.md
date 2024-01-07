@@ -1,7 +1,7 @@
 # Approach
 ### Data format
 
-For this one, I kn
+Just read the lines into an array and split it on each word so we can handle the different use cases.
 
 ### Part 1
 > _after you swipe your card, if the screen did work, how many pixels should be lit?_

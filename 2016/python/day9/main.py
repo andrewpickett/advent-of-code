@@ -1,6 +1,8 @@
-from aoc_utils import run_with_timer
+from utils.timers import run_with_timer, get_data_with_timer
 
-data = open("input.txt").readline().strip()
+
+def get_data(filename):
+	return open(filename).readline().strip()
 
 
 def decompress(s, recurse, depth):
@@ -16,14 +18,19 @@ def decompress(s, recurse, depth):
 	return len(prefix) + int(parts[1]) * decompress(next, recurse, depth+1) + decompress(suffix, recurse, depth)
 
 
-def part_one():
-	return decompress(data, False, 0)
+def part_one(d):
+	return decompress(d, False, 0)
 
 
-def part_two():
-	return decompress(data, True, 0)
+def part_two(d):
+	return decompress(d, True, 0)
+
+
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  #
-	run_with_timer(part_two)  #
+	main()

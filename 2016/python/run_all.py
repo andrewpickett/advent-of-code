@@ -6,9 +6,9 @@ import day3.main as d3
 import day4.main as d4
 import day5.main as d5
 import day6.main as d6
-# import day7.main as d7
-# import day8.main as d8
-# import day9.main as d9
+import day7.main as d7
+import day8.main as d8
+import day9.main as d9
 # import day10.main as d10
 # import day11.main as d11
 # import day12.main as d12
@@ -26,7 +26,7 @@ import day6.main as d6
 # import day24.main as d24
 # import day25.main as d25
 
-days = [d1, d2, d3, d4, d5, d6] #d6, d7, d8, d9, d10, d11, d12, d13, d14, d15, d16, d17, d18, d19, d20, d21, d22, d23, d24, d25]
+days = [d1, d2, d3, d4, d5, d6, d7, d8, d9] # d10, d11, d12, d13, d14, d15, d16, d17, d18, d19, d20, d21, d22, d23, d24, d25]
 
 
 def run_all(runs):
