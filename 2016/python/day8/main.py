@@ -1,6 +1,8 @@
-from aoc_utils import run_with_timer
+from utils.timers import run_with_timer, get_data_with_timer
 
-data = [x.strip().split(" ") for x in open("input.txt").readlines()]
+
+def get_data(filename):
+	return [x.strip().split(" ") for x in open(filename).readlines()]
 
 
 def init_screen(height, width):
@@ -36,9 +38,9 @@ def rotate_column(col, amount, screen):
 		screen[i][col] = new_col[i]
 
 
-def build_screen(height, width):
+def build_screen(d, height, width):
 	screen = init_screen(height, width)
-	for x in data:
+	for x in d:
 		if x[0] == "rect":
 			parts = x[1].split("x")
 			make_rect(int(parts[1]), int(parts[0]), screen)
@@ -51,15 +53,20 @@ def build_screen(height, width):
 	return screen
 
 
-def part_one():
-	return sum(1 for y in build_screen(6, 50) for x in y if x == "#")
+def part_one(d):
+	return sum(1 for y in build_screen(d, 6, 50) for x in y if x == "#")
 
 
-def part_two():
-	print_screen(build_screen(6, 50))
+def part_two(d):
+	print_screen(build_screen(d, 6, 50))
 	return 0
 
 
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
+
+
 if __name__ == '__main__':
-	run_with_timer(part_one)  #
-	run_with_timer(part_two)  #
+	main()
