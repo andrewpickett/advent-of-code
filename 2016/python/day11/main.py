@@ -1,11 +1,13 @@
-from aoc_utils import run_with_timer
-
-data = [x.strip() for x in open("input.txt").readlines()]
+from utils.timers import run_with_timer, get_data_with_timer
 
 
-def parse_input():
+def get_data(filename):
+	return [x.strip() for x in open(filename).readlines()]
+
+
+def parse_input(d):
 	floors = [[], [], [], []]
-	for i, x in enumerate(data):
+	for i, x in enumerate(d):
 		if "nothing relevant" not in x:
 			parts = x.split(" ")
 			for j, y in enumerate(parts):
@@ -17,8 +19,8 @@ def parse_input():
 	return floors
 
 
-def part_one():
-	floors = parse_input()
+def part_one(d):
+	floors = parse_input(d)
 	print(floors)
 	curr_floor = 0
 	move_count = 0
@@ -27,10 +29,15 @@ def part_one():
 	return move_count
 
 
-def part_two():
+def part_two(d):
 	return
 
 
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
+
+
 if __name__ == '__main__':
-	run_with_timer(part_one)  #
-	run_with_timer(part_two)  #
+	main()
