@@ -1,14 +1,16 @@
-from aoc_utils import run_with_timer
-
-data = [x.strip().split(" ") for x in open("input.txt").readlines()]
+from utils.timers import run_with_timer, get_data_with_timer
 
 
-def run_instructions(outputs, low_comp, high_comp):
+def get_data(filename):
+	return [x.strip().split(" ") for x in open(filename).readlines()]
+
+
+def run_instructions(d, outputs, low_comp, high_comp):
 	process_instructions = []
 	bots = {}
 	comparing_bot = ""
-	while len(process_instructions) < len(data):
-		for x in data:
+	while len(process_instructions) < len(d):
+		for x in d:
 			if x not in process_instructions:
 				if x[0] == "value":
 					if x[5] not in bots:
@@ -37,16 +39,21 @@ def run_instructions(outputs, low_comp, high_comp):
 	return comparing_bot
 
 
-def part_one():
-	return run_instructions({}, 17, 61)
+def part_one(d):
+	return run_instructions(d, {}, 17, 61)
 
 
-def part_two():
+def part_two(d):
 	outputs = {}
-	run_instructions(outputs, 17, 61)
+	run_instructions(d, outputs, 17, 61)
 	return list(outputs["0"])[0] * list(outputs["1"])[0] * list(outputs["2"])[0]
 
 
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
+
+
 if __name__ == '__main__':
-	run_with_timer(part_one)  # 98 -- took 23 ms
-	run_with_timer(part_two)  # 4042 -- took 0 ms
+	main()
