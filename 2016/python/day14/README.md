@@ -1,4 +1,8 @@
 # Approach
+### Data format
+
+Just read the input as a string.
+
 ### Part 1
 > _Given the actual salt in your puzzle input, what index produces your 64th one-time pad key?_
 
