@@ -1,9 +1,12 @@
 # Approach
 ### Data format
 
+Since the format of each line is the exact same:
 ```
 Disc #{NUM} has {NUM_POS} positions; at time=0, it is at position {POS}.
 ```
+I just parse each line and extract the pieces that I need into a map and store those all in an array so that I can
+iterate over each of them to get the pieces.
 
 ### Part 1
 > _What is the first time you can press the button to get a capsule?_

@@ -1,12 +1,14 @@
-from aoc_utils import run_with_timer
+from utils.timers import run_with_timer, get_data_with_timer
 
-data = open("input.txt").readline().strip()
+
+def get_data(filename):
+	return open(filename).readline().strip()
 
 
 def generate_data(a, disc_size):
 	d = a
 	while len(d) < disc_size:
-		d = d + "0" + d[::-1].replace("0", "2").replace("1", "0").replace("2", "1")
+		d = d + "0" + "{0:b}".format(int(d[::-1], 2) ^ int("1" * len(d), 2)).rjust(len(d), "0")
 	return d[:disc_size]
 
 
@@ -20,14 +22,19 @@ def generate_checksum(s):
 	return checksum
 
 
-def part_one():
-	return generate_checksum(generate_data(data, 272))
+def part_one(d):
+	return generate_checksum(generate_data(d, 272))
 
 
-def part_two():
-	return generate_checksum(generate_data(data, 35651584))
+def part_two(d):
+	return generate_checksum(generate_data(d, 35651584))
+
+
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  #
-	run_with_timer(part_two)  #
+	main()
