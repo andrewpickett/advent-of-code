@@ -1,7 +1,14 @@
 # Approach
-### Part 1
-> __
+### Data format
 
+Just read the input as a string.
+
+### Part 1
+> _Given your vault's passcode, what is the shortest path (the actual path, not just the length) to reach the vault?_
+
+This certainly screams BFS, doesn't it?
+
+Well, that's exactly what it turns out it is.
 
 ### Part 2
 > __
@@ -9,14 +16,7 @@
 
 # Results
 
-|              | Answer | Attempts | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
-|--------------|-------:|---------:|----------------:|----------------------:|-----:|
-| **Part One** |        |          |                 |                       |      |
-| **Part Two** |        |          |                 |                       |      |
-
-
-# Original puzzle
-### ---  ---
-
-
-### --- Part Two ---
+|              | Exec. Time (ms) |
+|--------------|----------------:|
+| **Part One** |                 |
+| **Part Two** |                 |
