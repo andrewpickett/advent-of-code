@@ -1,52 +1,39 @@
-from aoc_utils import run_with_timer, Grid
+from utils.timers import run_with_timer, get_data_with_timer
+from utils.grid import Grid
+from utils.algorithms import bfs
 
-data = int(open("input.txt").readline())
 
-
-def build_office(cols, rows):
-	g = Grid(rows, cols, default_value=".")
+def get_data(filename):
+	i = int(open(filename).readline())
+	g = Grid(60, 60, default_value=".")
 	for x in g.get_points():
-		x.value = "." if bin(x.col*x.col + 3*x.col + 2*x.col*x.row + x.row + x.row*x.row + data).count("1") % 2 == 0 else "#"
+		x.value = "." if bin(x.col*x.col + 3*x.col + 2*x.col*x.row + x.row + x.row*x.row + i).count("1") % 2 == 0 else "#"
 	g.set_neighbors_for_all()
-	return g
+	return {"g": g, "t": (39, 31)}
 
 
-def find_shortest_path_bfs(src, dest):
-	src.set_visited(True)
+def part_one(d):
+	return bfs(d["g"].get_point(1, 1), d["g"].get_point(d["t"][0], d["t"][1]), lambda x: [y for y in x[0].get_neighbors() if y.value == "."])[1]
+
+
+def part_two(d):
+	src = d["g"].get_point(1, 1)
+	visited = {src}
 	dist_queue = [(src, 0)]
 	while len(dist_queue) > 0:
 		p = dist_queue.pop(0)
-		if p[0] == dest:
-			return p[1]
-		else:
-			for x in p[0].get_neighbors():
-				if not x.is_visited() and x.get_value() == ".":
-					x.set_visited(True)
-					dist_queue.append((x, p[1] + 1))
-	return False
-
-
-def part_one():
-	g = build_office(50, 50)
-	return find_shortest_path_bfs(g.get_point(1, 1), g.get_point(39, 31))
-
-
-def part_two():
-	g = build_office(60, 60)
-	src = g.get_point(1, 1)
-	src.set_visited(True)
-	dist_queue = [(src, 0)]
-	visited_count = 0
-	while len(dist_queue) > 0:
-		p = dist_queue.pop(0)
-		visited_count += 1
+		visited.add(p[0])
 		for x in p[0].get_neighbors():
-			if not x.is_visited() and x.get_value() == "." and p[1] < 50:
-				x.set_visited(True)
+			if x not in visited and x.get_value() == "." and p[1] < 50:
 				dist_queue.append((x, p[1] + 1))
-	return visited_count
+	return len(visited)
+
+
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  # 82 -- took 29 ms
-	run_with_timer(part_two)  # 138 -- took 39 ms
+	main()
