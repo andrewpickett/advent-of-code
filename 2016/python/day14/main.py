@@ -1,8 +1,10 @@
-from aoc_utils import run_with_timer
+from utils.timers import run_with_timer, get_data_with_timer
 import hashlib
 import re
 
-data = open("input.txt").readline().strip()
+
+def get_data(filename):
+	return open(filename).readline().strip()
 
 
 def get_matches(salt, stretch, start, end, trips, pents):
@@ -45,14 +47,19 @@ def hash_stretch(key, stretch):
 	return h
 
 
-def part_one():
-	return get_key_index(data, 0)
+def part_one(d):
+	return get_key_index(d, 0)
 
 
-def part_two():
-	return get_key_index(data, 2016)
+def part_two(d):
+	return get_key_index(d, 2016)
+
+
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  #
-	run_with_timer(part_two)  #
+	main()
