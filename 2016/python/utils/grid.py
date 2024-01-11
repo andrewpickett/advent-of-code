@@ -102,7 +102,7 @@ class Grid:
 		for r in range(self.height):
 			row = []
 			for c in range(self.width):
-				if isinstance(values[r][c], Point):
+				if values and isinstance(values[r][c], Point):
 					row.append(copy(values[r][c]))
 				else:
 					row.append(Point(r, c, default_value if not values else values[r][c]))
