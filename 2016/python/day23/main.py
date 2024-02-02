@@ -1,16 +1,30 @@
-from aoc_utils import run_with_timer
-
-data = [int(x.strip()) for x in open("input.txt").readlines()]
-
-
-def part_one():
-	return
+from utils.timers import run_with_timer, get_data_with_timer
+from utils.assembunny import AssembunnyProgram
 
 
-def part_two():
-	return
+def get_data(filename):
+	return [x.strip() for x in open(filename).readlines()]
+
+
+def run_input(d, registers, out_val):
+	p = AssembunnyProgram(code=d, registers=registers)
+	p.run()
+	return p.registers[out_val]
+
+
+def part_one(d):
+	return run_input(d, {"a": 7, "b": 0, "c": 1, "d": 0}, "a")
+
+
+def part_two(d):
+	return run_input(d, {"a": 12, "b": 0, "c": 1, "d": 0}, "a")
+
+
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data) # not 6, 8455 too low
 
 
 if __name__ == '__main__':
-	run_with_timer(part_one)  #
-	run_with_timer(part_two)  #
+	main()

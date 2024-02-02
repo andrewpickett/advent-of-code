@@ -1,6 +1,10 @@
 # Approach
+### Data format
+
+
+
 ### Part 1
-> __
+> _How many viable pairs of nodes are there?_
 
 
 ### Part 2
@@ -9,14 +13,7 @@
 
 # Results
 
-|              | Answer | Attempts | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
-|--------------|-------:|---------:|----------------:|----------------------:|-----:|
-| **Part One** |        |          |                 |                       |      |
-| **Part Two** |        |          |                 |                       |      |
-
-
-# Original puzzle
-### ---  ---
-
-
-### --- Part Two ---
+|              | Exec. Time (ms) |
+|--------------|----------------:|
+| **Part One** |             410 |
+| **Part Two** |                 |

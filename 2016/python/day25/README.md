@@ -1,6 +1,10 @@
 # Approach
+### Data format
+
+Read the input as an integer. That is all.
+
 ### Part 1
-> __
+> _Given the list of blocked IPs you retrieved from the firewall (your puzzle input), what is the lowest-valued IP that is not blocked?_
 
 
 ### Part 2
@@ -9,14 +13,7 @@
 
 # Results
 
-|              | Answer | Attempts | Exec. Time (ms) | Solve Time (HH:mm:ss) | Rank |
-|--------------|-------:|---------:|----------------:|----------------------:|-----:|
-| **Part One** |        |          |                 |                       |      |
-| **Part Two** |        |          |                 |                       |      |
-
-
-# Original puzzle
-### ---  ---
-
-
-### --- Part Two ---
+|              | Exec. Time (ms) |
+|--------------|----------------:|
+| **Part One** |                 |
+| **Part Two** |                 |

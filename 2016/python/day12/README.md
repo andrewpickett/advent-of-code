@@ -12,6 +12,11 @@ from the register stated.
 
 Other than that, it wasn't anything tricky.
 
+After reaching day 23, where I needed to expand on the Assembunny code, I decided to extract it out to a separate
+utility and use a more OO design. So using that, it's the same logic, but wrapped in classes.
+
+Runs at about the same speed.
+
 ### Part 2
 > _If you instead initialize register c to be 1, what value is now left in register a?_
 
