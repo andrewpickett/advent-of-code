@@ -23,7 +23,7 @@ def part_two(d):
 def main(f="input.txt"):
 	data = get_data_with_timer(get_data, f)
 	run_with_timer(part_one, data)
-	run_with_timer(part_two, data) # not 6, 8455 too low
+	run_with_timer(part_two, data)
 
 
 if __name__ == '__main__':
