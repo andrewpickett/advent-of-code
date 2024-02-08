@@ -1,7 +1,11 @@
 # Overall Results
 
-I still need to go back and actually CODE Day 11! Right now I just solved it by hand...and I don't like that...
+I have so much optimizing I should do on this year's programs. Overall, there were only a couple of really tricky problems.
+I still need to go back and actually CODE Day 11! Right now I just solved it by hand...and I don't like that...It was
+definitely one of the hardest I've done so far on this.
 
+Some of my programs take multiple minutes to run, which obviously isn't ideal. Right now, they're all done, so I'm happy
+with that, but this is a year I DEFINITELY need to go back and figure out better solutions.
 
 ## Timings
 
