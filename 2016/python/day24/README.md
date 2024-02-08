@@ -32,6 +32,9 @@ Something like this:
 }
 ```
 
+I used a simple BFS on my `Grid` class, since I already had one written. It could probably be much more optimized, but since
+I only need to do this part once, it's fine.
+
 ### Part 1
 > _Given your actual map, and starting from location 0, what is the fewest number of steps required to visit every non-0 number marked on the map at least once?_
 
