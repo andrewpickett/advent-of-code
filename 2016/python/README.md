@@ -1,5 +1,6 @@
 # Overall Results
 
+I still need to go back and actually CODE Day 11! Right now I just solved it by hand...and I don't like that...
 
 
 ## Timings
@@ -12,7 +13,7 @@ For the below, I ran each part individually and then everything together. I did 
 
 |              | Total Exec. Time (ms) |
 |--------------|----------------------:|
-| **Get Data** |                       |
+| **Get Data** |                 59207 |
 | **Part One** |                       |
 | **Part Two** |                       |
 | **TOTAL**    |                       |
@@ -34,4 +35,4 @@ I rated each day in 4 categories:
 3. **Difficulty** - How difficult I thought the puzzle was. This encompasses both parts.
 4. **Overall** - My overall ranking of the puzzle. This takes into account all of the above and just my general feelings on it.
 
-COMING SOON.
+![2016 Daily Rankings](images/daily_rankings.png)
