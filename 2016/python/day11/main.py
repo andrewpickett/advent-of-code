@@ -29,7 +29,7 @@ def part_one(d):
 	floors = [{"g": [], "m": ["h", "l"]}, {"g": ["h"], "m": []}, {"g": [], "m": ["l"]}, {"g": [], "m": []}]
 	curr_floor = 0
 	move_count = 0
-	while len(floors[0]) != 0 or len(floors[1]) != 0 or len(floors[2]) != 0:
+	# while len(floors[0]) != 0 or len(floors[1]) != 0 or len(floors[2]) != 0:
 		# Elevator can only move with 1 or 2 items (either type)
 		# can't move mixed M and Gs of different types together
 		# M and G on the same floor without matching the M and G is not allowed
@@ -43,7 +43,7 @@ def part_one(d):
 
 		# What is a "move" -- it is a target floor, and 1 or 2 elements
 
-		move_count += 1
+		# move_count += 1
 	return move_count
 
 
