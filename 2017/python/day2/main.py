@@ -1,4 +1,3 @@
-import copy
 from utils.timers import run_with_timer
 
 
@@ -16,5 +15,5 @@ def part_two(d):
 
 if __name__ == "__main__":
 	data = get_data("input.txt")
-	run_with_timer(part_one, copy.deepcopy(data))
-	run_with_timer(part_two, copy.deepcopy(data))
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
