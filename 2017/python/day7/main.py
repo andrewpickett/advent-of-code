@@ -1,6 +1,4 @@
-import copy
-import json
-from utils.timers import run_with_timer
+from utils.timers import run_with_timer, get_data_with_timer
 
 
 class Node:
@@ -17,9 +15,6 @@ class Node:
 	def __str__(self):
 		return self.name
 
-	def __repr__(self):
-		return json.dumps(self.__dict__, default=lambda t: f'{t}')
-
 
 def get_data(filename):
 	tmp = [x.strip().split("->") for x in open(filename).readlines()]
@@ -28,12 +23,9 @@ def get_data(filename):
 		left = x[0].strip().split()
 		right = x[1].strip().split(",") if len(x) > 1 else []
 		ret_val.append((left[0], int(left[1][1:-1]), right))
-	return ret_val
 
-
-def build_tree(d):
 	tree = {}
-	for x in d:
+	for x in ret_val:
 		# It was added to the tree already, as a child of something else. Update weight.
 		if x[0] in tree:
 			disc = tree[x[0]]
@@ -47,11 +39,11 @@ def build_tree(d):
 				tree[child] = Node(child)
 			tree[child].parent = disc
 			disc.add_child(tree[child])
-	return tree, list({k: v for (k, v) in tree.items() if not v.parent}.keys())[0]
+	return tree
 
 
 def part_one(d):
-	return build_tree(d)[1]
+	return list({k: v for (k, v) in d.items() if not v.parent}.keys())[0]
 
 
 def calc_tower_weights(root):
@@ -77,18 +69,21 @@ def balance_tower(root):
 			curr_node = curr_node.children[idx]
 		else:
 			# We've reached the bottom of the imbalance!
-			# curr_node.parent.children
 			diff = target_weight - curr_node.tower_weight
 			return curr_node.weight + diff
 
 
 def part_two(d):
-	tree, root = build_tree(d)
-	calc_tower_weights(tree[root])
-	return balance_tower(tree[root])
+	root = list({k: v for (k, v) in d.items() if not v.parent}.keys())[0]
+	calc_tower_weights(d[root])
+	return balance_tower(d[root])
 
 
-if __name__ == "__main__":
-	data = get_data("input.txt")
-	run_with_timer(part_one, copy.deepcopy(data))
-	run_with_timer(part_two, copy.deepcopy(data))
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
+
+
+if __name__ == '__main__':
+	main()
