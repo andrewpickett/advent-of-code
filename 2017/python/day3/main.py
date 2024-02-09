@@ -1,15 +1,5 @@
-from utils.timers import run_with_timer
-
-
-class Point:
-	def __init__(self, x, y):
-		self.x = x
-		self.y = y
-		self.val = 0
-		self.neighbors = []
-
-	def set_val(self, val):
-		self.val = val
+from utils.timers import run_with_timer, get_data_with_timer
+from utils.grid import Point
 
 
 def get_data(filename):
@@ -33,25 +23,27 @@ def part_two(d):
 	neighbor_mapping = [(1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1), (0, -1), (1, -1)]
 	dir_mapping = [(0, -1), (1, 0), (0, 1), (-1, 0)]
 	curr_dir = 0
-	points = {}
-	p = Point(0, 0)
-	p.set_val(1)
-	points[(0, 0)] = p
+	p = Point(0, 0, 1)
+	points = {(0, 0): p}
 	while True:
 		next_dir = dir_mapping[(curr_dir + 1) % len(dir_mapping)]
-		if (p.x + next_dir[0], p.y + next_dir[1]) in points:
+		if (p.row + next_dir[0], p.col + next_dir[1]) in points:
 			next_dir = dir_mapping[curr_dir]
 		else:
 			curr_dir = (curr_dir + 1) % len(dir_mapping)
 
-		p = Point(p.x + next_dir[0], p.y + next_dir[1])
-		p.set_val(sum(points[(p.x + neighbor[0], p.y + neighbor[1])].val for neighbor in neighbor_mapping if (p.x + neighbor[0], p.y + neighbor[1]) in points))
-		points[(p.x, p.y)] = p
-		if p.val > d:
-			return p.val
+		p = Point(p.row + next_dir[0], p.col + next_dir[1])
+		p.set_value(sum(points[(p.row + neighbor[0], p.col + neighbor[1])].value for neighbor in neighbor_mapping if (p.row + neighbor[0], p.col + neighbor[1]) in points))
+		points[(p.row, p.col)] = p
+		if p.value > d:
+			return p.value
 
 
-if __name__ == "__main__":
-	data = get_data("input.txt")
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
 	run_with_timer(part_one, data)
 	run_with_timer(part_two, data)
+
+
+if __name__ == '__main__':
+	main()
