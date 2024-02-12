@@ -1,8 +1,4 @@
-from utils.timers import run_with_timer
-
-
-def get_data(filename):
-	return [x.strip() for x in open(filename).readlines()]
+from utils.timers import run_with_timer, get_data_with_timer
 
 
 class Instruction:
@@ -12,34 +8,14 @@ class Instruction:
 		self.amount = amount
 
 
+def get_data(filename):
+	return [x.strip() for x in open(filename).readlines()]
+
+
 def get_operands(registers, lh, rh):
 	a = int(lh) if str(lh).lstrip("-").isnumeric() else registers[lh]
 	b = int(rh) if str(rh).lstrip("-").isnumeric() else registers[rh]
 	return a, b
-
-
-def comp_eq(operands):
-	return operands[0] == operands[1]
-
-
-def comp_ne(operands):
-	return operands[0] != operands[1]
-
-
-def comp_lt(operands):
-	return operands[0] < operands[1]
-
-
-def comp_gt(operands):
-	return operands[0] > operands[1]
-
-
-def comp_le(operands):
-	return operands[0] <= operands[1]
-
-
-def comp_ge(operands):
-	return operands[0] >= operands[1]
 
 
 def init_registers(registers, inst):
@@ -61,17 +37,17 @@ def get_maximums(d):
 		operation = None
 		match parts[5]:
 			case "==":
-				operation = comp_eq
+				operation = lambda x: x[0] == x[1]
 			case "!=":
-				operation = comp_ne
+				operation = lambda x: x[0] != x[1]
 			case ">":
-				operation = comp_gt
+				operation = lambda x: x[0] > x[1]
 			case "<":
-				operation = comp_lt
+				operation = lambda x: x[0] < x[1]
 			case ">=":
-				operation = comp_ge
+				operation = lambda x: x[0] >= x[1]
 			case "<=":
-				operation = comp_le
+				operation = lambda x: x[0] <= x[1]
 		if operation(operands):
 			registers[instruction.target] += instruction.amount if instruction.operation == "inc" else -instruction.amount
 			old_max = max(old_max, registers[instruction.target])
@@ -88,7 +64,11 @@ def part_two(d):
 	return old_max
 
 
-if __name__ == "__main__":
-	data = get_data("input.txt")
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
 	run_with_timer(part_one, data)
 	run_with_timer(part_two, data)
+
+
+if __name__ == '__main__':
+	main()
