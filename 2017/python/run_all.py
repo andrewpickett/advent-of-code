@@ -26,7 +26,7 @@ import day23.main as d23
 import day24.main as d24
 import day25.main as d25
 
-days = [d1, d2, d3, d4] #, d5, d6, d7, d8, d9, d10, d11, d12, d13, d14, d15, d16, d17, d18, d19, d20, d21, d22, d23, d24, d25]
+days = [d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12, d13, d14] #, d15, d16, d17, d18, d19, d20, d21, d22, d23, d24, d25]
 
 
 def run_all(runs):
@@ -39,7 +39,7 @@ def run_all(runs):
 			total_time += time.time_ns() - stime
 		runtimes.append(total_time)
 	total_avg = (sum(runtimes) // len(runtimes)) / 1000000
-	print("2016 -- took {} ms (average {} ms per day over {} runs)".format(total_avg, int(total_avg // len(days)), len(runtimes)))
+	print("2017 -- took {} ms (average {} ms per day over {} runs)".format(total_avg, int(total_avg // len(days)), len(runtimes)))
 
 
 def run_all_get_data(runs):
@@ -52,7 +52,7 @@ def run_all_get_data(runs):
 			total_time += time.time_ns() - stime
 		runtimes.append(total_time)
 	total_avg = (sum(runtimes) // len(runtimes)) / 1000000
-	print("2016 get_data -- took {} ms (average {} ms per day over {} runs)".format(total_avg, int(total_avg // len(days)), len(runtimes)))
+	print("2017 get_data -- took {} ms (average {} ms per day over {} runs)".format(total_avg, int(total_avg // len(days)), len(runtimes)))
 
 
 def run_all_part_one_no_data(runs):
@@ -75,11 +75,11 @@ def run_part_with_no_data(runs, part2):
 			total_time += time.time_ns() - stime
 		runtimes.append(total_time)
 	total_avg = (sum(runtimes) // len(runtimes)) // 1000000
-	print("2016 {} -- took {} ms (average {} ms per day over {} runs)".format("part_two" if part2 else "part_one", total_avg, int(total_avg // len(days)), len(runtimes)))
+	print("2017 {} -- took {} ms (average {} ms per day over {} runs)".format("part_two" if part2 else "part_one", total_avg, int(total_avg // len(days)), len(runtimes)))
 
 
 def main():
-	runs = 10
+	runs = 1
 	run_all_get_data(runs)
 	run_all_part_one_no_data(runs)
 	run_all_part_two_no_data(runs)
