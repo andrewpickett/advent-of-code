@@ -11,11 +11,16 @@ class DuetProgram:
 			self.registers["snd"] = []
 		if "rcv" not in self.registers:
 			self.registers["rcv"] = []
+		self.debug_calls = {}
 		self.waiting = False
 		self.sound = sound
 
 	def run(self):
 		while self.pointer < len(self.code):
+			if self.code[self.pointer]:
+				if self.code[self.pointer].op not in self.debug_calls:
+					self.debug_calls[self.code[self.pointer].op] = 0
+				self.debug_calls[self.code[self.pointer].op] += 1
 			# For part 1, if I get to a receive and it's not 0, then return the last sound value.
 			if self.code[self.pointer].op == DuetReceive.OP_NAME and self.sound:
 				if self.code[self.pointer].eval(self.code, self.pointer, self.registers):
@@ -30,12 +35,14 @@ class DuetProgram:
 					self.pointer += self.code[self.pointer].eval(self.code, self.pointer, self.registers)
 			else:
 				self.pointer += self.code[self.pointer].eval(self.code, self.pointer, self.registers)
+
 		return
 
 	def send(self, other):
 		other.registers["rcv"].extend(self.registers["snd"])
 		other.waiting = len(self.registers["snd"]) == 0
 		self.registers["snd"].clear()
+
 
 class DuetInstruction:
 	def __init__(self, op, args):
@@ -52,6 +59,8 @@ class DuetInstruction:
 				return DuetSet(parts[1:])
 			case DuetAdd.OP_NAME:
 				return DuetAdd(parts[1:])
+			case DuetSub.OP_NAME:
+				return DuetSub(parts[1:])
 			case DuetMultiply.OP_NAME:
 				return DuetMultiply(parts[1:])
 			case DuetModulo.OP_NAME:
@@ -60,6 +69,8 @@ class DuetInstruction:
 				return DuetReceive(parts[1:], sound)
 			case DuetJump.OP_NAME:
 				return DuetJump(parts[1:])
+			case DuetJumpNotZero.OP_NAME:
+				return DuetJumpNotZero(parts[1:])
 
 	def eval(self, code, pointer, registers):
 		print("Unknown operation", self.op, self.args)
@@ -101,6 +112,17 @@ class DuetAdd(DuetInstruction):
 
 	def eval(self, code, pointer, registers):
 		registers[self.args[0]] += int(self.args[1]) if self.args[1].lstrip("+-").isnumeric() else registers[self.args[1]]
+		return 1
+
+
+class DuetSub(DuetInstruction):
+	OP_NAME = "sub"
+
+	def __init__(self, args):
+		super().__init__(self.OP_NAME, args)
+
+	def eval(self, code, pointer, registers):
+		registers[self.args[0]] -= int(self.args[1]) if self.args[1].lstrip("+-").isnumeric() else registers[self.args[1]]
 		return 1
 
 
@@ -152,3 +174,15 @@ class DuetJump(DuetInstruction):
 		arg1 = (int(self.args[0]) if self.args[0].lstrip("+-").isnumeric() else registers[self.args[0]])
 		arg2 = (int(self.args[1]) if self.args[1].lstrip("+-").isnumeric() else registers[self.args[1]])
 		return arg2 if arg1 > 0 else 1
+
+
+class DuetJumpNotZero(DuetInstruction):
+	OP_NAME = "jnz"
+
+	def __init__(self, args):
+		super().__init__(self.OP_NAME, args)
+
+	def eval(self, code, pointer, registers):
+		arg1 = (int(self.args[0]) if self.args[0].lstrip("+-").isnumeric() else registers[self.args[0]])
+		arg2 = (int(self.args[1]) if self.args[1].lstrip("+-").isnumeric() else registers[self.args[1]])
+		return arg2 if arg1 != 0 else 1
