@@ -2,15 +2,36 @@ from utils.timers import run_with_timer, get_data_with_timer
 
 
 def get_data(filename):
-	return [x.strip() for x in open(filename).readlines()]
+	return open(filename).readline().strip()
+
+
+ALPHA = "abcdefghijklmnopqrstuvwxyyz"
 
 
 def part_one(d):
-	return
+	return len(react(d))
 
 
 def part_two(d):
-	return
+	min_len = float("inf")
+	for r in ALPHA:
+		if r in d:
+			polymer = d.replace(r, "").replace(r.upper(), "")
+			new_len = len(react(polymer))
+			if new_len < min_len:
+				min_len = new_len
+	return min_len
+
+
+def react(polymer):
+	found = True
+	while found:
+		found = False
+		for r in ALPHA:
+			if r+r.upper() in polymer or r.upper()+r in polymer:
+				polymer = polymer.replace(r+r.upper(), "").replace(r.upper()+r, "")
+				found = True
+	return polymer
 
 
 def main(f="input.txt"):

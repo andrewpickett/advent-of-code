@@ -1,17 +1,29 @@
 # Approach
 ### Data format
 
+I store a list of all of the steps, and which steps can follow them once completed. Likewise, I keep a list of the steps
+that are required BEFORE a step can be completed. This way I can do a lookup both directions, to get the next
+possible steps as well as being able to check if all prerequisites have been met or not.
+
+Finally, I decided to keep a list of available next steps in the same map, since I needed to find the "original" starting
+point anyways.
 
 ### Part 1
-> __
+> _In what order should the steps in your instructions be completed?_
+
+The code is really ugly, but the idea is pretty simple: just iterate through the "available" next steps. Use the lookup
+map to find which ones can be done after it is complete, but only add them if every item in the "prerequisite" map
+is also already complete. Just keep the "available" list sorted alphabetical.
+
+Once you are out of items in the available list, then we're done.
 
 ### Part 2
-> __
+> _With 5 workers and the 60+ second step durations described above, how long will it take to complete all of the steps?_
 
 
 # Results
 
 |              | Exec. Time (ms) |
 |--------------|----------------:|
-| **Part One** |                 |
+| **Part One** |               0 |
 | **Part Two** |                 |
