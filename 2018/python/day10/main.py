@@ -1,4 +1,3 @@
-import itertools
 from utils.timers import run_with_timer, get_data_with_timer
 
 
@@ -7,17 +6,11 @@ def get_data(filename):
 
 
 def part_one(d):
-	return sum(map(int, d))
+	return
 
 
 def part_two(d):
-	used_frequencies = {0}
-	frequency = 0
-	for num in itertools.cycle(map(int, d)):
-		frequency += num
-		if frequency in used_frequencies:
-			return frequency
-		used_frequencies.add(frequency)
+	return
 
 
 def main(f="input.txt"):

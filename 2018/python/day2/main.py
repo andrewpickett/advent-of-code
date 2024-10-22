@@ -1,10 +1,14 @@
-data = [x.strip() for x in open("input.txt").readlines()]
+from utils.timers import run_with_timer, get_data_with_timer
 
 
-def part_one():
+def get_data(filename):
+	return [x.strip() for x in open(filename).readlines()]
+
+
+def part_one(d):
 	total_twos = 0
 	total_threes = 0
-	for line in data:
+	for line in d:
 		twos = 0
 		threes = 0
 		for letter in line:
@@ -17,8 +21,8 @@ def part_one():
 	return total_twos * total_threes
 
 
-def part_two():
-	sorted_data = sorted(data)
+def part_two(d):
+	sorted_data = sorted(d)
 	for i in range(len(sorted_data) - 1):
 		for j in range(i + 1, len(sorted_data)):
 			diff_count = 0
@@ -33,6 +37,11 @@ def part_two():
 				return sorted_data[i][0:diff_idx] + sorted_data[i][diff_idx + 1:]
 
 
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
+
+
 if __name__ == '__main__':
-	print(part_one())
-	print(part_two())
+	main()
