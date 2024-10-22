@@ -1,11 +1,11 @@
 # Overall Results
 
-I have so much optimizing I should do on this year's programs. Overall, there were only a couple of really tricky problems.
-I still need to go back and actually CODE Day 11! Right now I just solved it by hand...and I don't like that...It was
-definitely one of the hardest I've done so far on this.
+As per usual, it's not exactly the most optimized code ever. This year definitely runs a little faster than previous
+years, but I know of a few things to cut the time down quite a bit.
 
-Some of my programs take multiple minutes to run, which obviously isn't ideal. Right now, they're all done, so I'm happy
-with that, but this is a year I DEFINITELY need to go back and figure out better solutions.
+I would say overall, this year was much simpler than 2015 or 2016. There weren't really many problems that took very much
+time or did anything overly complicated. There also weren't as many problems that I found "fun", and the story was a
+little lackluster this year. So, overall, while it wasn't too hard to complete, it wasn't my favorite year to work through.
 
 ## Timings
 
@@ -13,14 +13,14 @@ I created a utility to run all of the days a given number of times and average t
 I made it so I can run just the parsing of the input data, part 1, part 2, or all of them combined so I can see a true
 breakdown of how long each part of my total Advent of Code takes.
 
-For the below, I ran each part individually and then everything together. Due to the sheer slowness of my part 2 solutions,
-I only ran this 1 time...as it takes over an hour to complete all of the days. Again: I need to work on optimizing.
+For the below, I ran each part individually and then everything together. It averages almost 3 seconds per day for part
+1 and over 16 seconds for each day on part 2...so...definitely needs some improvements...
 
 |              | Total Exec. Time (ms) |
 |--------------|----------------------:|
-| **Get Data** |                 59207 |
-| **Part One** |                 20438 |
-| **Part Two** |               3941774 |
+| **Get Data** |                  3126 |
+| **Part One** |                 74147 |
+| **Part Two** |                165423 |
 | **TOTAL**    |               4076251 |
 
 ## System Details
@@ -40,4 +40,4 @@ I rated each day in 4 categories:
 3. **Difficulty** - How difficult I thought the puzzle was. This encompasses both parts.
 4. **Overall** - My overall ranking of the puzzle. This takes into account all of the above and just my general feelings on it.
 
-![2016 Daily Rankings](images/daily_rankings.png)
+![2017 Daily Rankings](images/daily_rankings.png)
