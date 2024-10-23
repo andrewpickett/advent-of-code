@@ -20,10 +20,19 @@ Once you are out of items in the available list, then we're done.
 ### Part 2
 > _With 5 workers and the 60+ second step durations described above, how long will it take to complete all of the steps?_
 
+Since we now have multiple workers, each processing at their own "speeds", I figured it was time to rewrite my part
+1 solution so that it was class-based. I created a `Worker` class that basically stored which value it is currently
+working on and how much time that value will take to complete.
+
+Then, I pretty much just do the same loop as I originally did on part one, but I loop over every worker and let each one
+pull any available letters from the queue if it is ready to work.
+
+I ran into quite a bit of trouble keeping track of which ones are ready to work and which ones have been completed and
+everything -- but once I finally kept proper track of it all, it made a lot of sense.
 
 # Results
 
 |              | Exec. Time (ms) |
 |--------------|----------------:|
-| **Part One** |               0 |
-| **Part Two** |                 |
+| **Part One** |              40 |
+| **Part Two** |              28 |

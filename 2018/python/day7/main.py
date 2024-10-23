@@ -1,8 +1,36 @@
 from utils.timers import run_with_timer, get_data_with_timer
 
 
+ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+
+class Worker:
+
+	def __init__(self, timer=60, weighted=True):
+		self.orig_timer = timer
+		self.timer = 0
+		self.item = None
+		self.weighted = weighted
+
+	def set_item(self, item):
+		self.item = item
+		self.timer = (ALPHA.find(item) if self.weighted else 0) + self.orig_timer + 1
+
+	def work(self):
+		ret_val = None
+		if self.item:
+			self.timer -= 1
+		if self.timer == 0:
+			ret_val = self.item
+			self.item = None
+		return ret_val
+
+	def can_work(self):
+		return self.item is None
+
+
 def get_data(filename):
-	ret_val = {"avail": [], "steps": {}, "reqs": {}, "workers": 5}
+	ret_val = {"avail": [], "steps": {}, "reqs": {}, "workers": 5, "timer": 60}
 	avail = set()
 	for line in [x.strip() for x in open(filename).readlines()]:
 		parts = line.split()
@@ -21,39 +49,49 @@ def get_data(filename):
 	return ret_val
 
 
-def part_one(d):
+def run_workers(d, workers):
 	avail = d["avail"].copy()
-	path = ""
-	while len(avail) > 0:
-		next_step = avail.pop(0)
-		path += next_step
-		if next_step in d["steps"]:
-			next_steps = d["steps"][next_step]
-			ready_steps = []
-			for x in next_steps:
-				reqs = d["reqs"][x]
-				ready = True
-				for y in reqs:
-					if y not in path:
-						ready = False
-						break
-				if ready:
-					ready_steps.append(x)
-			avail.extend(ready_steps)
-			avail.sort()
-	return path
+	path = []
+	t = 0
+	while len(avail) > 0 or are_workers_working(workers):
+		added_steps = []
+		working_steps = []
+		for worker in workers:
+			if worker.can_work() and len(avail) > 0:
+				worker.set_item(avail.pop(0))
+			i = worker.work()
+			if worker.item:
+				working_steps.append(worker.item)
+			if i:
+				added_steps.append(i)
+		added_steps.sort()
+		path.extend(added_steps)
+		next_available = get_next_available_steps(path, working_steps, avail, d)
+		avail.extend(next_available)
+		avail.sort()
+		t += 1
+	return path, t
+
+
+def are_workers_working(workers):
+	return sum(1 for worker in workers if not worker.can_work()) > 0
+
+
+def get_next_available_steps(completed, working_steps, avail, d):
+	return [step for step in [x for x in d["reqs"] if x not in completed and x not in working_steps and x not in avail] if sum(1 for req in d["reqs"][step] if req not in completed) == 0]
+
+
+def part_one(d):
+	path, t = run_workers(d, [Worker(d["timer"], False)])
+	return ''.join(path)
 
 
 def part_two(d):
-	ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	workers = [None] * d["workers"]
-	avail = d["avail"].copy()
-	t = 0
-	while len(avail) > 0:
-		avail.pop(0)
-		t += 1
-	print(workers)
-	return
+	workers = []
+	for _ in range(d["workers"]):
+		workers.append(Worker(d["timer"], True))
+	path, t = run_workers(d, workers)
+	return t
 
 
 def main(f="input.txt"):
