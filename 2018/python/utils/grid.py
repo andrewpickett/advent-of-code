@@ -132,8 +132,8 @@ class Grid:
 	def get_row(self, row):
 		return self.data[row]
 
-	def get_point(self, row, col):
-		return self.data[row][col]
+	def get_point(self, row=0, col=0, coords=None):
+		return self.data[coords[0]][coords[1]] if coords else self.data[row][col]
 
 	def get_height(self):
 		return self.height
@@ -145,15 +145,16 @@ class Grid:
 		return [pt for row in range(len(self.data)) for pt in self.data[row]]
 
 	def __str__(self):
-		out_val = "["
-		for row in range(len(self.data)):
-			if row > 0:
-				out_val += " "
-			out_val += "[" + ",".join([str(x.get_value()) for x in self.data[row]]) + "]"
-			if row < len(self.data) - 1:
-				out_val += "\n"
-		out_val += "]"
-		return out_val
+		# out_val = "["
+		# for row in range(len(self.data)):
+		# 	if row > 0:
+		# 		out_val += " "
+		# 	out_val += "[" + ",".join([str(x.get_value()) for x in self.data[row]]) + "]"
+		# 	if row < len(self.data) - 1:
+		# 		out_val += "\n"
+		# out_val += "]"
+		# return out_val
+		return self.output()
 
 	def output(self):
 		out_val = ""
