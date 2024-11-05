@@ -145,16 +145,15 @@ class Grid:
 		return [pt for row in range(len(self.data)) for pt in self.data[row]]
 
 	def __str__(self):
-		# out_val = "["
-		# for row in range(len(self.data)):
-		# 	if row > 0:
-		# 		out_val += " "
-		# 	out_val += "[" + ",".join([str(x.get_value()) for x in self.data[row]]) + "]"
-		# 	if row < len(self.data) - 1:
-		# 		out_val += "\n"
-		# out_val += "]"
-		# return out_val
-		return self.output()
+		out_val = "["
+		for row in range(len(self.data)):
+			if row > 0:
+				out_val += " "
+			out_val += "[" + ",".join([str(x.get_value()) for x in self.data[row]]) + "]"
+			if row < len(self.data) - 1:
+				out_val += "\n"
+		out_val += "]"
+		return out_val
 
 	def output(self):
 		out_val = ""
