@@ -32,7 +32,29 @@ So I put a debugger in to figure out which lines were causing the slowdown. I fo
 of the program, and after a BUNCH of pseudocode chicken scratch, I was able to figure out that it was essentially
 adding a counter to register 0 for every factor of the number that gets stored in register 5.
 
-...That's it...that's all we need to do. Instead of actually running the code, we just need it to run far enough
+This was my really-hard to read reverse engineering of the part of the code that was going to loop trillions of times:
+```
+if r3 * r1 == r5:
+	r2 = 1
+	r4 += r2	// Skips ONE step (specifically the add 4 1 4...which means it will Run the addr 3 0 0 step next!)
+else:
+	r2 = 0
+
+// The "addi 4 1 4" step makes it skip step "addr 3 0 0"
+
+r1 += 1
+if r1 > r5:
+	r2 = 1
+	r4 += r2
+else:
+	r2 = 0
+
+r4 = 2 // Jump back to top.
+
+// r0 += 1 for each time r3 is a factor of r5!!
+```
+
+Somehow from that, I figured out what it was doing. ...That's it...that's all we need to do. Instead of actually running the code, we just need it to run far enough
 to set a value in register 5, and then find all factors of that number and add them up. Pretty simple...but man was
 it confusing to figure out...
 
