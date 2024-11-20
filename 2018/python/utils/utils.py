@@ -13,6 +13,8 @@ DIRS = {
 	">": (0, 1)
 }
 
+DIR_COORDS = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+
 
 def turn_right(curr_dir):
 	if curr_dir == DIRS["U"]:
