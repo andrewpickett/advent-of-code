@@ -2,15 +2,20 @@ from utils.timers import run_with_timer, get_data_with_timer
 
 
 def get_data(filename):
-	return [x.strip() for x in open(filename).readlines()]
+	lines = [list(map(int, x.strip().split())) for x in open(filename).readlines()]
+	l1 = [x[0] for x in lines]
+	l2 = [x[1] for x in lines]
+	l1.sort()
+	l2.sort()
+	return [l1, l2]
 
 
 def part_one(d):
-	return
+	return sum(abs(d[0][x] - d[1][x]) for x in range(len(d[0])))
 
 
 def part_two(d):
-	return
+	return sum(x * d[1].count(x) for x in d[0])
 
 
 def main(f="input.txt"):
