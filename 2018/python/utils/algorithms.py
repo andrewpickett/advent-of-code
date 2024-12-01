@@ -1,4 +1,8 @@
-def bfs(src, dest, neighbor_func, inc_func=lambda _: 1):
+from collections import deque
+import heapq
+
+
+def bfs(src, dest, neighbor_func=lambda p: p.get_neighbors(), inc_func=lambda _: 1):
 	"""
 	Simple BFS algorithm that takes a "source" object, a "destination" and finds the shortest path from src to dest.
 	:param src: Some object that is the source
@@ -8,30 +12,29 @@ def bfs(src, dest, neighbor_func, inc_func=lambda _: 1):
 	:return: a tuple containing the destination point, the distance to get to that point, and the parent (which can be used to trace all the way back to the source)
 	"""
 	a = (src, 0, None)
-	visited = [a[0]]
-	q = [a]
-	while len(q) > 0:
-		p = q.pop(0)
-		if p[0] == dest:
-			return p
-
-		for x in neighbor_func(p):
+	q = deque([a])
+	visited = set(a[0])
+	while q:
+		curr = q.popleft()
+		if curr[0] == dest:
+			return curr
+		for x in neighbor_func(curr[0]):
 			if x not in visited:
-				a = (x, p[1] + inc_func(x), p)
-				visited.append(a[0])
+				a = (x, curr[1] + inc_func(x), curr)
+				visited.add(a[0])
 				q.append(a)
 
 
 def dfs(src, dest, neighbor_func, inc_func=lambda _: 1):
 	s = [(src, 0, None)]
-	visited = []
+	visited = set()
 	while len(s) > 0:
 		p = s.pop(0)
 		if p[0] == dest:
 			return p
 
 		if p[0] not in visited:
-			visited.append(p[0])
+			visited.add(p[0])
 			for x in neighbor_func(p):
 				s.insert(0, (x, p[1] + inc_func(x), p))
 	return visited

@@ -26,6 +26,9 @@ class Point:
 		p.visited = self.visited
 		return p
 
+	def __iter__(self):
+		return iter((self.row, self.col))
+
 	def get_coord(self):
 		return self.row, self.col
 

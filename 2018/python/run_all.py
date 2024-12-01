@@ -39,7 +39,7 @@ def run_all(runs):
 			total_time += time.time_ns() - stime
 		runtimes.append(total_time)
 	total_avg = (sum(runtimes) // len(runtimes)) / 1000000
-	print("2017 -- took {} ms (average {} ms per day over {} runs)".format(total_avg, int(total_avg // len(days)), len(runtimes)))
+	print("2018 -- took {} ms (average {} ms per day over {} runs)".format(total_avg, int(total_avg // len(days)), len(runtimes)))
 
 
 def run_all_get_data(runs):

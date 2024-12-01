@@ -1,11 +1,14 @@
 # Overall Results
 
-As per usual, it's not exactly the most optimized code ever. This year definitely runs a little faster than previous
-years, but I know of a few things to cut the time down quite a bit.
+Ouch, this one had some HARD problems...and ones where my solution just is NOT good. I still have one (day 15) that I
+haven't finished -- I have spent hours working on my solution, and it's "off by one"...I only got the right answer because
+in my attempts to debug, I ran someone else's code. I am going to fix mine at some point...but I needed to walk away from
+it for a while, because seriously...nothing I do is fixing the off by one, and everything I have SEEMS right (and works
+for all input, including additional examples from the community...just not my own input!).
 
-I would say overall, this year was much simpler than 2015 or 2016. There weren't really many problems that took very much
-time or did anything overly complicated. There also weren't as many problems that I found "fun", and the story was a
-little lackluster this year. So, overall, while it wasn't too hard to complete, it wasn't my favorite year to work through.
+Other than that, I have one or two that just take forever to run, so clearly I need to work on them as well.
+
+So yeah, overall, this year was the hardest yet...
 
 ## Timings
 
@@ -18,10 +21,10 @@ For the below, I ran each part individually and then everything together. It ave
 
 |              | Total Exec. Time (ms) |
 |--------------|----------------------:|
-| **Get Data** |                  3126 |
-| **Part One** |                 74147 |
-| **Part Two** |                165423 |
-| **TOTAL**    |               4076251 |
+| **Get Data** |                  6185 |
+| **Part One** |               3518067 |
+| **Part Two** |               3575905 |
+| **TOTAL**    |               7100157 |
 
 ## System Details
 
@@ -40,4 +43,4 @@ I rated each day in 4 categories:
 3. **Difficulty** - How difficult I thought the puzzle was. This encompasses both parts.
 4. **Overall** - My overall ranking of the puzzle. This takes into account all of the above and just my general feelings on it.
 
-![2017 Daily Rankings](images/daily_rankings.png)
+![2018 Daily Rankings](images/daily_rankings.png)
