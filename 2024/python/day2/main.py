@@ -2,15 +2,32 @@ from utils.timers import run_with_timer, get_data_with_timer
 
 
 def get_data(filename):
-	return [x.strip() for x in open(filename).readlines()]
+	return [list(map(int, x.strip().split())) for x in open(filename).readlines()]
 
 
 def part_one(d):
-	return
+	return sum(1 for x in d if try_safety_check(x))
 
 
 def part_two(d):
-	return
+	c = 0
+	for x in d:
+		if try_safety_check(x):
+			c += 1
+		else:
+			for i in range(len(x)):
+				if try_safety_check(x[:i] + x[i+1:]):
+					c += 1
+					break
+	return c
+
+
+def try_safety_check(x):
+	for i in range(len(x) - 1):
+		sx = sorted(x)
+		if (list(sx) != x and list(reversed(sx)) != x) or abs(x[i] - x[i+1]) not in [1, 2, 3]:
+			return False
+	return True
 
 
 def main(f="input.txt"):
