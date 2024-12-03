@@ -16,17 +16,12 @@ def part_two(d):
 	do = True
 	for x in d:
 		s += mult_if_present(do, x)
-		if "do()" in x:
-			do = True
-		elif "don't()" in x:
-			do = False
+		do = (x.rfind("do()") - x.rfind("don't()")) > 0 if ("do()" in x or "don't()" in x) else do
 	return s
 
 
 def mult_if_present(do, x):
-	if do and re.match("\(\d+,\d+\)", x):
-		return math.prod(list(map(int, x[1:x.find(")")].split(","))))
-	return 0
+	return math.prod(list(map(int, x[1:x.find(")")].split(",")))) if do and re.match("\(\d+,\d+\)", x) else 0
 
 
 def main(f="input.txt"):

@@ -24,6 +24,12 @@ in the token. If so, set a flag to whether I should process and add this flag as
 
 Very straightforward, in the top 1000 again. I'm happy with that.
 
+EDIT: I realized the next morning that my solution didn't account for some specific edge cases. For example:
+`mul(1,2)do()don't()mul(3,4)`
+would have returned `14` because my code was just saying "if `do()` is in the next token, then count it!"...but if it was
+followed by a `don't()` in the same token, it would've ignored that. So I went back and tweaked it a bit to account for this
+as well.
+
 # Results
 
 |              | Exec. Time (ms) |
