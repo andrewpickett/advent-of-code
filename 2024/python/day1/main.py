@@ -15,7 +15,10 @@ def part_one(d):
 
 
 def part_two(d):
-	return sum(x * d[1].count(x) for x in d[0])
+	counts = {}
+	for x in d[1]:
+		counts[x] = counts[x] + 1 if x in counts else 1
+	return sum(x * (counts[x] if x in counts else 0) for x in d[0])
 
 
 def main(f="input.txt"):

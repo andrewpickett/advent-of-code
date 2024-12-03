@@ -22,6 +22,9 @@ it in the second list. Multiply and add and there's the answer.
 
 I got rank 788 on this one! NICE!!
 
+Went back and refactored it a little bit. It's a few more lines of code, but it runs in `O(n)` time instead of `O(n^2)`...
+which lowered the run time from `11 ms` to about `3 ms`, so I'm going to keep the change.
+
 # Results
 
 |              | Exec. Time (ms) |
