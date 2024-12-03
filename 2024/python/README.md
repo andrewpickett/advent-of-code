@@ -6,8 +6,7 @@ I created a utility to run all of the days a given number of times and average t
 I made it so I can run just the parsing of the input data, part 1, part 2, or all of them combined so I can see a true
 breakdown of how long each part of my total Advent of Code takes.
 
-For the below, I ran each part individually and then everything together. It averages almost 3 seconds per day for part
-1 and over 16 seconds for each day on part 2...so...definitely needs some improvements...
+For the below, I ran each part individually and then everything together.
 
 |              | Total Exec. Time (ms) |
 |--------------|----------------------:|
