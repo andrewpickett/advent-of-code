@@ -48,18 +48,17 @@ func PartTwo(d interface{}) string {
 }
 
 func TrySafetyCheck(x []int) bool {
-	for i := 0; i < len(x)-1; i++ {
-		sorted := make([]int, len(x))
-		reversed := make([]int, len(x))
-
-		copy(sorted, x)
-		slices.Sort(sorted)
-		copy(reversed, sorted)
-		slices.Reverse(reversed)
-
-		if (!slices.Equal(x, sorted) && !slices.Equal(x, reversed)) || (math.Abs(float64(x[i]-x[i+1])) <= 0 || math.Abs(float64(x[i]-x[i+1])) >= 4) {
-			return false
+	reversed := make([]int, len(x))
+	copy(reversed, x)
+	slices.Reverse(reversed)
+	if slices.IsSorted(x) || slices.IsSorted(reversed) {
+		for i := 0; i < len(x)-1; i++ {
+			if math.Abs(float64(x[i]-x[i+1])) <= 0 || math.Abs(float64(x[i]-x[i+1])) >= 4 {
+				return false
+			}
 		}
+	} else {
+		return false
 	}
 	return true
 }

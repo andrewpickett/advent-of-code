@@ -7,6 +7,8 @@ import (
 	"os"
 	"reflect"
 	"runtime"
+	"strconv"
+	"strings"
 	"time"
 )
 
@@ -35,28 +37,29 @@ func GetLines(f string) []string {
 	return lines
 }
 
+func GetIntsFromLine(line string, delim string) []int {
+	var nums []int
+	if delim == "" {
+		delim = " "
+	}
+	for _, strNum := range strings.Split(line, delim) {
+		num, err := strconv.Atoi(strNum)
+		if err != nil {
+			continue
+		}
+		nums = append(nums, num)
+	}
+	return nums
+}
+
 func RunWithTimer(track fn, d interface{}) {
 	start := time.Now()
 	result := track(d)
 	fmt.Println(fmt.Sprintf("%s -- %s -- took %d ms", runtime.FuncForPC(reflect.ValueOf(track).Pointer()).Name(), result, time.Since(start)/1000000))
 }
 
-func GetDataWithTimer() {
-
+func GetDataWithTimer(track fn, filename string) {
+	start := time.Now()
+	result := track(filename)
+	fmt.Println(fmt.Sprintf("%s -- %s -- took %d ms", runtime.FuncForPC(reflect.ValueOf(track).Pointer()).Name(), result, time.Since(start)/1000000))
 }
-
-//
-//def get_data_with_timer(f, filename):
-//stime = time.time_ns()
-//result = f(filename)
-//etime = time.time_ns()
-//print("{} -- took {} ms".format(f.__name__, (etime - stime) // 1000000))
-//return result
-//
-//
-//def run_with_timer(f, d):
-//stime = time.time_ns()
-//result = f(d)
-//etime = time.time_ns()
-//print("{} -- {} -- took {} ms".format(f.__name__, result, (etime - stime) // 1000000))
-//return result
