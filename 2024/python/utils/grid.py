@@ -91,6 +91,19 @@ class Point:
 		if len(ns) > 0:
 			return ns[0]
 
+	def get_line(self, pos, dist):
+		curr_point = self
+		line = [curr_point]
+		for i in range(1, dist):
+			ns = [n for n in curr_point.neighbors if n.col == curr_point.col + pos[1] and n.row == curr_point.row + pos[0]]
+			if len(ns) > 0:
+				curr_point = ns[0]
+				line.append(curr_point)
+			else:
+				break
+		return line
+
+
 
 class Grid:
 	def __init__(self, height=0, width=0, values=None, default_value="", file=None):

@@ -10,7 +10,7 @@ Well, long story short, I ended up just reading the input in as an array of stri
 easier to implement.
 
 ### Part 1
-> __
+> _How many times does XMAS appear?_
 
 So, as I mentioned above, I was trying to use my `Grid` class to do this, but after about 5-10 minutes of fumbling
 around with getting neighbors in all directions and still needing to check boundaries, my code wasn't looking as
@@ -27,7 +27,7 @@ that `X`. Now, I have to check all the boundaries, so sometimes it was less than
 I should have just finished this in about 5 minutes, if I had just hacked it together to begin with...oh well.
 
 ### Part 2
-> __
+> _How many times does an X-MAS appear?_
 
 This one went quite a bit quicker. The first step was find all of the `A` characters (instead of `X` as above). This is
 because all of the `X-MAS` instances will HAVE to have an `A` in the center:
