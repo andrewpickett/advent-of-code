@@ -29,23 +29,19 @@ def run(start):
 	cur_pos = start
 	curr_dir = DIRS["^"]
 	visited = {(cur_pos.get_row(), cur_pos.get_col(), curr_dir[0], curr_dir[1])}
-	running = True
-	loop = False
-	while running:
+	while True:
 		next_pos = cur_pos.get_neighbor(curr_dir)
 		if not next_pos:
-			running = False
+			return visited, False
 		else:
 			n = (next_pos.get_row(), next_pos.get_col(), curr_dir[0], curr_dir[1])
 			if n in visited:
-				running = False
-				loop = True
+				return None, True
 			elif next_pos.get_value() != ".":
 				curr_dir = turn_right(curr_dir)
 			else:
 				visited.add(n)
 				cur_pos = next_pos
-	return visited, loop
 
 
 def main(f="input.txt"):
