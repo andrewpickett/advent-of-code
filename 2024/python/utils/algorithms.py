@@ -1,5 +1,4 @@
 from collections import deque
-import heapq
 
 
 def bfs(src, dest, neighbor_func=lambda p: p.get_neighbors(), inc_func=lambda _: 1):
@@ -23,21 +22,6 @@ def bfs(src, dest, neighbor_func=lambda p: p.get_neighbors(), inc_func=lambda _:
 				a = (x, curr[1] + inc_func(x), curr)
 				visited.add(a[0])
 				q.append(a)
-
-
-def dfs(src, dest, neighbor_func, inc_func=lambda _: 1):
-	s = [(src, 0, None)]
-	visited = set()
-	while len(s) > 0:
-		p = s.pop(0)
-		if p[0] == dest:
-			return p
-
-		if p[0] not in visited:
-			visited.add(p[0])
-			for x in neighbor_func(p):
-				s.insert(0, (x, p[1] + inc_func(x), p))
-	return visited
 
 
 def reconstruct_path(came_from, current):

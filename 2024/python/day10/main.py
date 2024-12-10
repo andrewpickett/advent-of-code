@@ -1,5 +1,6 @@
 from utils.timers import run_with_timer, get_data_with_timer
-from utils.utils import tuple_add, DIR_COORDS, read_input_as_2d_int_array
+from utils.utils import tuple_add, DIR_COORDS, neighbors
+from utils.input import read_input_as_2d_int_array
 from collections import deque
 
 
@@ -24,7 +25,7 @@ def simple_bfs(d, y, x, p1):
 		if curr[2] == 9:
 			c += 1 if not p1 or p1 and curr not in visited else 0
 			visited.add(curr)
-		q.extend([(z[0], z[1], d[z[0]][z[1]]) for z in tuple_add(DIR_COORDS, (curr[0], curr[1])) if d[z[0]][z[1]] - curr[2] == 1])
+		q.extend(neighbors(d, curr, condition=lambda a, b, n: d[n[0]][n[1]] - b[2] == 1))
 	return c
 
 
@@ -35,4 +36,4 @@ def main(f="input.txt"):
 
 
 if __name__ == '__main__':
-	main("input.txt")
+	main()
