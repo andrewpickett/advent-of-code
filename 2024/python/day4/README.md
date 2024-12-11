@@ -50,5 +50,5 @@ So that's pretty much it -- just count the number where that's true.
 
 |              | Exec. Time (ms) |
 |--------------|----------------:|
-| **Part One** |              27 |
-| **Part Two** |              11 |
+| **Part One** |              14 |
+| **Part Two** |               6 |

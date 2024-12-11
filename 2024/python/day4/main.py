@@ -1,8 +1,9 @@
 from utils.timers import run_with_timer, get_data_with_timer
+from utils.input import read_input_as_2d_str_grid
 
 
 def get_data(filename):
-	return [x.strip() for x in open(filename).readlines()]
+	return read_input_as_2d_str_grid(filename, pad_size=3, pad_val=".")
 
 
 def part_one(d):
@@ -10,28 +11,20 @@ def part_one(d):
 
 
 def get_vals(d, i, j):
-	vals = []
-	if i > 2 and j > 2:
-		vals.append(d[i][j] + d[i-1][j-1] + d[i-2][j-2] + d[i-3][j-3])
-	if i > 2:
-		vals.append(d[i][j] + d[i-1][j] + d[i-2][j] + d[i-3][j])
-	if i > 2 and j < len(d[i]) - 3:
-		vals.append(d[i][j] + d[i-1][j+1] + d[i-2][j+2] + d[i-3][j+3])
-	if j > 2:
-		vals.append(d[i][j] + d[i][j-1] + d[i][j-2] + d[i][j-3])
-	if j < len(d[i]) - 3:
-		vals.append(d[i][j:j+4])
-	if i < len(d) - 3 and j > 2:
-		vals.append(d[i][j] + d[i+1][j-1] + d[i+2][j-2] + d[i+3][j-3])
-	if i < len(d) - 3:
-		vals.append(d[i][j] + d[i+1][j] + d[i+2][j] + d[i+3][j])
-	if i < len(d) - 3 and j < len(d[i]) - 3:
-		vals.append(d[i][j] + d[i+1][j+1] + d[i+2][j+2] + d[i+3][j+3])
-	return vals
+	return [
+		d[i][j] + d[i-1][j-1] + d[i-2][j-2] + d[i-3][j-3],
+		d[i][j] + d[i-1][j] + d[i-2][j] + d[i-3][j],
+		d[i][j] + d[i-1][j+1] + d[i-2][j+2] + d[i-3][j+3],
+		d[i][j] + d[i][j-1] + d[i][j-2] + d[i][j-3],
+		''.join(d[i][j:j+4]),
+		d[i][j] + d[i+1][j-1] + d[i+2][j-2] + d[i+3][j-3],
+		d[i][j] + d[i+1][j] + d[i+2][j] + d[i+3][j],
+		d[i][j] + d[i+1][j+1] + d[i+2][j+2] + d[i+3][j+3]
+	]
 
 
 def part_two(d):
-	return sum(1 for i in range(1, len(d)-1) for j in range(1, len(d[i])-1) if d[i][j] == "A" and get_square(d, i, j))
+	return sum(1 for i in range(4, len(d)-4) for j in range(4, len(d[i])-4) if d[i][j] == "A" and get_square(d, i, j))
 
 
 def get_square(d, i, j):

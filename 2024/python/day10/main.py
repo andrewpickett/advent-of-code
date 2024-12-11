@@ -1,11 +1,11 @@
 from utils.timers import run_with_timer, get_data_with_timer
-from utils.utils import tuple_add, DIR_COORDS, neighbors
-from utils.input import read_input_as_2d_int_array
+from utils.utils import neighbors
+from utils.input import read_input_as_2d_int_grid
 from collections import deque
 
 
 def get_data(filename):
-	return read_input_as_2d_int_array(filename, 1)
+	return read_input_as_2d_int_grid(filename, 1)
 
 
 def part_one(d):
