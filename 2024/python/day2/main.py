@@ -1,8 +1,9 @@
 from utils.timers import run_with_timer, get_data_with_timer
+from utils.input import read_input_as_int_arrays
 
 
 def get_data(filename):
-	return [list(map(int, x.strip().split())) for x in open(filename).readlines()]
+	return read_input_as_int_arrays(filename)
 
 
 def part_one(d):
