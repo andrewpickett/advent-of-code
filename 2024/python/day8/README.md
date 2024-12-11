@@ -14,7 +14,7 @@ overwriting the actual antenna values. So basically the original array from the 
 ends up being my "write" array.
 
 So now I just loop over all antenna values (I assumed all 62 possible characters are possible). If there are any that
-are present more than once in the grid, I check every combination of them and get the slop between any 2 pairs of them.
+are present more than once in the grid, I check every combination of them and get the slope between any 2 pairs of them.
 From there, I can just add and subtract a slope from the two points to find the two antinodes that are created from them.
 Obviously they need to be within the bounds of the grid, so I do that check as well.
 
