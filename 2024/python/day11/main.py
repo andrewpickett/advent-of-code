@@ -18,7 +18,7 @@ def part_two(d):
 def blink_a_bunch(d, num):
 	for _ in range(num):
 		d = blink(d)
-	return sum(x for x in d.values())
+	return sum(d.values())
 
 
 def blink(d):
