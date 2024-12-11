@@ -30,4 +30,4 @@ which lowered the run time from `11 ms` to about `3 ms`, so I'm going to keep th
 |              | Exec. Time (ms) |
 |--------------|----------------:|
 | **Part One** |              <1 |
-| **Part Two** |              11 |
+| **Part Two** |              <1 |

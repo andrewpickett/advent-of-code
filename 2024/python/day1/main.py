@@ -1,4 +1,5 @@
 from utils.timers import run_with_timer, get_data_with_timer
+from collections import defaultdict
 
 
 def get_data(filename):
@@ -15,9 +16,9 @@ def part_one(d):
 
 
 def part_two(d):
-	counts = {}
+	counts = defaultdict(lambda: 0)
 	for x in d[1]:
-		counts[x] = counts[x] + 1 if x in counts else 1
+		counts[x] += 1
 	return sum(x * (counts[x] if x in counts else 0) for x in d[0])
 
 
