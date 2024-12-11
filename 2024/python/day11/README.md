@@ -31,5 +31,5 @@ the answer! Fun little puzzle!
 
 |              | Exec. Time (ms) |
 |--------------|----------------:|
-| **Part One** |              10 |
-| **Part Two** |             270 |
+| **Part One** |               4 |
+| **Part Two** |             150 |

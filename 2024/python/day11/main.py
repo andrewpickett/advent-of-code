@@ -1,4 +1,5 @@
 from utils.timers import run_with_timer, get_data_with_timer
+from collections import defaultdict
 
 
 def get_data(filename):
@@ -19,20 +20,21 @@ def blink_a_bunch(d, num):
 		d = blink(d)
 	return sum(x for x in d.values())
 
+
 def blink(d):
-	new_counts = {}
-	for s, c in d.items():
-		if s == 0:
+	new_counts = defaultdict(lambda: 0)
+	for k, v in d.items():
+		s = str(k)
+		l = len(s)
+		if k == 0:
 			single_move = [1]
-		elif len(str(s)) % 2 == 0:
-			single_move = [int(str(s)[:len(str(s))//2]), int(str(s)[len(str(s))//2:])]
+		elif l % 2 == 0:
+			single_move = [int(s[:l//2]), int(s[l//2:])]
 		else:
-			single_move = [2024 * s]
+			single_move = [2024 * k]
 
 		for stone in single_move:
-			if stone not in new_counts:
-				new_counts[stone] = 0
-			new_counts[stone] += c
+			new_counts[stone] += v
 	return new_counts
 
 
@@ -43,4 +45,4 @@ def main(f="input.txt"):
 
 
 if __name__ == '__main__':
-	main("input.txt")
+	main()
