@@ -16,7 +16,7 @@ def part_one(d):
 
 
 def part_two(d):
-	counts = defaultdict(lambda: 0)
+	counts = defaultdict(int)
 	for x in d[1]:
 		counts[x] += 1
 	return sum(x * (counts[x] if x in counts else 0) for x in d[0])

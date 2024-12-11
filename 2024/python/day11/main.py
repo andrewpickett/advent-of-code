@@ -22,7 +22,7 @@ def blink_a_bunch(d, num):
 
 
 def blink(d):
-	new_counts = defaultdict(lambda: 0)
+	new_counts = defaultdict(int)
 	for k, v in d.items():
 		s = str(k)
 		l = len(s)
