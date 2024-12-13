@@ -34,7 +34,43 @@ As I said, I was trying to think about the maths behind what was going on in par
 I took a shot at writing up a quick and dirty solution based on what I was seeing, and sure enough it ended up being
 correct. So after submitting, I went back and REALLY cleaned up the code to what it is now.
 
-TODO -- write up mathematical reasoning...
+It turned out this was just solving a system of linear equations with 2-variables. You could get all fancy with linear algebra
+or just write the system and simply/solve as you need. The two equations you're solving for are:
+
+```
+ax*a + bx*b = tx
+ay*a + by*b = ty
+```
+
+Where `a` and `b` are the actual number of those button presses needed, and all the other variables are the known values
+from the input for a given machine (e.g. `ax` is the `x` increase after pressing button `a`).
+So that means that you can solve these by solving for one variable (let's say `a`) from the first equation to get:
+
+```
+a = (tx - bx*b) / ax
+```
+
+So now plug that back into the other equation to solve for `b`:
+```
+(ay * (tx-bx*b)/ax) + by*b = ty
+(ay*tx - ay*bx*b) + ax*by*b = ax*ty
+ax*by*b - ay*bx*b = ax*ty-ay*tx
+b(ax*by - ay*bx) = ax*ty-ay*tx
+
+b = (ax*ty - ay*tx) / (ax*by - ay*bx)
+```
+
+And doing the exact same thing for the other variable, you get your two equations:
+```
+a = (by*tx - bx*ty) / (ax*by - ay*bx)
+b = (ax*ty - ay*tx) / (ax*by - ay*bx)
+```
+
+Now that you have those two equations, you know there is only a solution when both of those values for `a` and `b`
+are whole numbers. So I just check if `a == int(a)` and `b == int(b)`. If so, then I have a valid solution. Otherwise, I don't.
+Then just add up the tokens needed for all valid solutions.
+
+YAY MATHS!!
 
 # Results
 
