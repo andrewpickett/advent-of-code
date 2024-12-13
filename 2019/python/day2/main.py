@@ -1,55 +1,32 @@
-from aoc_utils import run_with_timer
-from intcode_new import IntcodeOpMachine
-
-data = [int(x) for x in open("input.txt").readline().split(',')]
+from utils.timers import run_with_timer, get_data_with_timer
+from utils.intcode import IntcodeMachine
 
 
-def part_one():
-	return calculate_output(create_data_list(12, 2))
+def get_data(filename):
+	return {"input": [12,2], "instructions": [int(x) for x in open(filename).readline().split(',')], "target": 19690720}
 
 
-def part_two():
-	for noun in range(99):
-		for verb in range(99):
-			if calculate_output(create_data_list(noun, verb)) == 19690720:
-				return noun * 100 + verb
-
-
-def create_data_list(noun, verb):
-	op_data = list(data)
-	op_data[1] = noun
-	op_data[2] = verb
-	return op_data
-
-
-def calculate_output(d):
-	for i in range(0, len(d), 4):
-		op, in1, in2, out = d[i], d[i + 1], d[i + 2], d[i + 3]
-		if op == 99:
-			return d[0]
-		d[out] = d[in1] + d[in2] if op == 1 else d[in1] * d[in2]
-
-
-def part_one_with_finished_machine():
-	machine = IntcodeOpMachine(create_data_list(12, 2))
-	machine.run_until_halt()
+def part_one(d):
+	machine = IntcodeMachine([d["instructions"][0]] + d["input"] + d["instructions"][3:])
+	machine.run()
 	return machine.instructions[0]
 
 
-def part_two_with_finished_machine():
-	for noun in range(99):
-		for verb in range(99):
-			machine = IntcodeOpMachine(create_data_list(noun, verb))
-			machine.run_until_halt()
-			if machine.instructions[0] == 19690720:
-				return noun * 100 + verb
+def part_two(d):
+	for noun in range(100):
+		for verb in range(100):
+			machine = IntcodeMachine([d["instructions"][0]] + [noun, verb] + d["instructions"][3:])
+			machine.run()
+			if machine.instructions[0] == d["target"]:
+				return noun*100+verb
+	return None
+
+
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
+	run_with_timer(part_one, data.copy())
+	run_with_timer(part_two, data.copy())
 
 
 if __name__ == '__main__':
-	print("Solution without the final machine.")
-	run_with_timer(part_one)  # 3716293
-	run_with_timer(part_two)  # 6429
-	print()
-	print("Solution using the final machine.")
-	run_with_timer(part_one_with_finished_machine)  # 3716293
-	run_with_timer(part_two_with_finished_machine)  # 6429
+	main()

@@ -1,14 +1,16 @@
-from aoc_utils import run_with_timer
-
-data = [int(x.strip()) for x in open("input.txt").readlines()]
+from utils.timers import run_with_timer, get_data_with_timer
 
 
-def part_one():
-	return sum(calc_spec_fuel(i) for i in data)
+def get_data(filename):
+	return [int(x.strip()) for x in open(filename).readlines()]
 
 
-def part_two():
-	return sum(calc_total_fuel(i) for i in data)
+def part_one(d):
+	return sum(calc_spec_fuel(i) for i in d)
+
+
+def part_two(d):
+	return sum(calc_total_fuel(i) for i in d)
 
 
 def calc_spec_fuel(val):
@@ -20,6 +22,11 @@ def calc_total_fuel(start):
 	return 0 if n <= 0 else n + calc_total_fuel(n)
 
 
+def main(f="input.txt"):
+	data = get_data_with_timer(get_data, f)
+	run_with_timer(part_one, data)
+	run_with_timer(part_two, data)
+
+
 if __name__ == '__main__':
-	run_with_timer(part_one)  # 3382284
-	run_with_timer(part_two)  # 5070541
+	main()
