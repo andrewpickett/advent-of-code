@@ -9,10 +9,12 @@ class Point:
 		self.visited = False
 
 	def __str__(self):
-		return "({},{}):{}".format(self.row, self.col, self.value)
+		# return "({},{}):{}".format(self.row, self.col, self.value)
+		return self.value
 
 	def __repr__(self):
-		return "({},{}):{}".format(self.row, self.col, self.value)
+		# return "({},{}):{}".format(self.row, self.col, self.value)
+		return self.value
 
 	def __eq__(self, other):
 		return self.row == other.row and self.col == other.col

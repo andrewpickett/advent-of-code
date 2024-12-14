@@ -77,3 +77,13 @@ def tuple_multiply(array_of_tuples, scalar_tuple):
 	if len(array_of_tuples[0]) != len(scalar_tuple):
 		raise ValueError("Tuples must have same length")
 	return [tuple(a*b for a, b in zip(t, scalar_tuple)) for t in array_of_tuples]
+
+
+def get_2d_array(height, width, fill_char):
+	grid = []
+	for row in range(height):
+		new_row = []
+		for col in range(width):
+			new_row.append(fill_char)
+		grid.append(new_row)
+	return grid
