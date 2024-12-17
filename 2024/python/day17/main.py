@@ -20,4 +20,4 @@ def main(f="input.txt"):
 
 
 if __name__ == '__main__':
-	main()
+	main() # 202366627359274
