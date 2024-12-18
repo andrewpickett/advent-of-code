@@ -1,5 +1,7 @@
 from copy import copy
 
+from utils.utils import NEIGHBOR_COORDS
+
 
 class Point:
 	def __init__(self, row, col, value=None):
@@ -159,6 +161,13 @@ class Grid:
 
 	def get_points(self):
 		return [pt for row in range(len(self.data)) for pt in self.data[row]]
+
+	def get_neighbor(self, p, n):
+		np = (p.get_row() + n[0], p.get_col() + n[1])
+		return None if (np[0] < 0 or np[0] >= len(self.data) or np[1] < 0 or np[1] >= len(self.data[p.get_row()])) else self.get_point(coords=np)
+
+	def get_neighbors(self, p, include_diagonals=False):
+		return [self.get_neighbor(p, n) for n in (NEIGHBOR_COORDS["orthogonal"] if not include_diagonals else NEIGHBOR_COORDS["all"])]
 
 	def __str__(self):
 		out_val = "["
