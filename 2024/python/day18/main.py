@@ -1,16 +1,34 @@
 from utils.timers import run_with_timer, get_data_with_timer
+from utils.grid import Grid
+from utils.algorithms import bfs
 
 
 def get_data(filename):
-	return [x.strip() for x in open(filename).readlines()]
+	return {"c": [tuple(map(int, x.strip().split(",")[::-1])) for x in open(filename).readlines()], "s": 71, "b": 1024}
 
 
 def part_one(d):
-	return
+	grid = get_grid(d["s"], d["c"], d["b"])
+	return bfs(grid.get_point(0, 0), grid.get_point(d["s"]-1, d["s"]-1), lambda p: [y for y in p.get_neighbors() if y.get_value() == "."])[1]
 
 
 def part_two(d):
-	return
+	grid = get_grid(d["s"], d["c"], d["b"])
+	i = d["b"]
+	while True:
+		grid.get_point(coords=d["c"][i]).set_value("#")
+		path = bfs(grid.get_point(0, 0), grid.get_point(d["s"]-1, d["s"]-1), lambda p: [y for y in p.get_neighbors() if y.get_value() == "."])
+		if not path:
+			return ','.join(list(map(str, d["c"][i][::-1])))
+		i += 1
+
+
+def get_grid(size, coords, block):
+	grid = Grid(size, size, default_value=".")
+	grid.set_neighbors_for_all()
+	for x in range(block):
+		grid.get_point(coords=coords[x]).set_value("#")
+	return grid
 
 
 def main(f="input.txt"):
