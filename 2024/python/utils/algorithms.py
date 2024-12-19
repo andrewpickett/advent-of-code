@@ -1,9 +1,10 @@
 from collections import deque
 
 
-def bfs(src, dest, neighbor_func=lambda p: p.get_neighbors(), inc_func=lambda _: 1):
+def bfs(grid, src, dest, neighbor_func=lambda g, p: g.get_neighbors(p), inc_func=lambda _: 1):
 	"""
 	Simple BFS algorithm that takes a "source" object, a "destination" and finds the shortest path from src to dest.
+	:param grid: The grid we're traversing with a BFS
 	:param src: Some object that is the source
 	:param dest: Some object that is the destination
 	:param neighbor_func: The function that should be called to determine neighbors of a given "point"
@@ -17,7 +18,7 @@ def bfs(src, dest, neighbor_func=lambda p: p.get_neighbors(), inc_func=lambda _:
 		curr = q.popleft()
 		if curr[0] == dest:
 			return curr
-		for x in neighbor_func(curr[0]):
+		for x in neighbor_func(grid, curr[0]):
 			if x not in visited:
 				a = (x, curr[1] + inc_func(x), curr)
 				visited.add(a[0])

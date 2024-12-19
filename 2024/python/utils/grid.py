@@ -167,7 +167,12 @@ class Grid:
 		return None if (np[0] < 0 or np[0] >= len(self.data) or np[1] < 0 or np[1] >= len(self.data[p.get_row()])) else self.get_point(coords=np)
 
 	def get_neighbors(self, p, include_diagonals=False):
-		return [self.get_neighbor(p, n) for n in (NEIGHBOR_COORDS["orthogonal"] if not include_diagonals else NEIGHBOR_COORDS["all"])]
+		ns = []
+		for n in (NEIGHBOR_COORDS["orthogonal"] if not include_diagonals else NEIGHBOR_COORDS["all"]):
+			neighbor = self.get_neighbor(p, n)
+			if neighbor:
+				ns.append(neighbor)
+		return ns
 
 	def __str__(self):
 		out_val = "["
