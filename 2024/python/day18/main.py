@@ -9,7 +9,7 @@ def get_data(filename):
 
 def part_one(d):
 	grid = get_grid(d["s"], d["c"], d["b"])
-	return bfs(grid.get_point(0, 0), grid.get_point(d["s"]-1, d["s"]-1), lambda p: [y for y in p.get_neighbors() if y.get_value() == "."])[1]
+	return bfs(grid, grid.get_point(0, 0), grid.get_point(d["s"]-1, d["s"]-1), lambda g, p: [y for y in g.get_neighbors(p) if y.get_value() == "."])[1]
 
 
 def part_two(d):
@@ -17,7 +17,7 @@ def part_two(d):
 	i = d["b"]
 	while True:
 		grid.get_point(coords=d["c"][i]).set_value("#")
-		path = bfs(grid.get_point(0, 0), grid.get_point(d["s"]-1, d["s"]-1), lambda p: [y for y in p.get_neighbors() if y.get_value() == "."])
+		path = bfs(grid, grid.get_point(0, 0), grid.get_point(d["s"]-1, d["s"]-1), lambda g, p: [y for y in g.get_neighbors(p) if y.get_value() == "."])
 		if not path:
 			return ','.join(list(map(str, d["c"][i][::-1])))
 		i += 1
@@ -25,7 +25,6 @@ def part_two(d):
 
 def get_grid(size, coords, block):
 	grid = Grid(size, size, default_value=".")
-	grid.set_neighbors_for_all()
 	for x in range(block):
 		grid.get_point(coords=coords[x]).set_value("#")
 	return grid
