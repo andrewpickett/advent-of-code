@@ -30,5 +30,5 @@ Nothing complicated in the solution.
 
 |              | Exec. Time (ms) |
 |--------------|----------------:|
-| **Part One** |                 |
-| **Part Two** |                 |
+| **Part One** |            2469 |
+| **Part Two** |           10523 |
