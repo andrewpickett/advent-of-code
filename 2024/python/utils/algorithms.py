@@ -33,7 +33,7 @@ def reconstruct_path(came_from, current):
 	return total_path
 
 
-def astar(src, dest, h=lambda x: 0):
+def astar(grid, src, dest, early_exit=True, h=lambda x: 0):
 	open_set = [src]
 	came_from = {}
 
@@ -48,11 +48,12 @@ def astar(src, dest, h=lambda x: 0):
 				min_val = f_score[x]
 				min_x = x
 		current = min_x
-		if current == dest:
+
+		if early_exit and current == dest:
 			return reconstruct_path(came_from, current)
 
 		open_set.remove(current)
-		for neighbor in [x for x in current.get_neighbors() if x.get_value() != "#"]:
+		for neighbor in [x for x in grid.get_neighbors(current) if x.get_value() != "#"]:
 			tentative_g_score = g_score[current] + 1
 			if neighbor not in g_score:
 				g_score[neighbor] = float("inf")

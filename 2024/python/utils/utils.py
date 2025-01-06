@@ -87,3 +87,7 @@ def get_2d_array(height, width, fill_char):
 			new_row.append(fill_char)
 		grid.append(new_row)
 	return grid
+
+
+def rotate_matrix(matrix):
+	return [list(reversed(row)) for row in list(zip(*matrix))]
