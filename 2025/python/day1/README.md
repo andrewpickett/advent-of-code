@@ -20,7 +20,8 @@ input carefully, so I didn't notice that there were large jumps at first (like t
 between all of that, it took much longer than it should have...but overall it wasn't difficult.
 
 Basically, we do the same thing as in part one, but before actually changing the pointer, we check if we ever crossed the `0` line.
-If we did, and we didn't START on `0`, we increment the counter by `1`. Once we actually do the turn, we check HOW MUCH we turned it. If the turn was
+If we did, and we didn't START on `0` (since it would have already been counted from the last turn), we increment the
+counter by `1`. Once we actually do the turn, we check HOW MUCH we turned it. If the turn was
 more than a full turn of the dial (`100`), we check how many full turns it was and add that to the counter as well.
 
 # Results
