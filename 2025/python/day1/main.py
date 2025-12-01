@@ -6,25 +6,27 @@ def get_data(filename):
 
 
 def part_one(d):
-	cur_pointer = d["s"]
-	count = 0
-	for x in d["d"]:
-		cur_pointer = ((cur_pointer - x[1]) if x[0] == "L" else (cur_pointer + x[1])) % 100
-		count = count + 1 if cur_pointer == 0 else count
-	return count
+	return run_steps(d["s"], d["d"], True)
 
 
 def part_two(d):
-	cur_pointer = d["s"]
-	count = 0
-	for x in d["d"]:
-		tmp = cur_pointer - (x[1] % 100) if x[0] == "L" else cur_pointer + (x[1] % 100)
-		if (tmp <= 0 or tmp > 99) and cur_pointer != 0:
-			count += 1
-		cur_pointer = tmp % 100
-		if x[1] >= 100:
-			count += x[1] // 100
-	return count
+	return run_steps(d["s"], d["d"], False)
+
+
+def run_steps(start_pos, steps, p1):
+	pos_count = {"c": 0, "p": start_pos}
+	for x in steps:
+		next_pos = pos_count["p"] - (x[1] % 100) if x[0] == "L" else pos_count["p"] + (x[1] % 100)
+		if p1:
+			next_pos %= 100
+			pos_count["c"] += 1 if next_pos == 0 else 0
+		else:
+			pos_count["c"] += 1 if not next_pos in range(1, 100) and pos_count["p"] != 0 else 0
+			next_pos %= 100
+			if x[1] >= 100:
+				pos_count["c"] += x[1] // 100
+		pos_count["p"] = next_pos
+	return pos_count["c"]
 
 
 def main(f="input.txt"):

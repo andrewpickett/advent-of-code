@@ -10,6 +10,10 @@ Nice and easy, as I would expect for Day 1, part 1. Just keep a pointer to the c
 and run through the list of instructions. After every turn, just modulo 100 and then check if the pointer is sitting on
 `0`. Every time it is, increment a counter and return the final count at the end.
 
+UPDATE: I updated the code to be a bit cleaner by storing a dict of the current position and counter and just updating the values
+directly in there. This helped clean up the code by removing multi-return functions and just kept it so that both parts
+can just use the same function to run through the steps.
+
 ### Part 2
 > _Using password method 0x434C49434B, what is the password to open the door?_
 
@@ -29,4 +33,4 @@ more than a full turn of the dial (`100`), we check how many full turns it was a
 |              | Exec. Time (ms) |
 |--------------|----------------:|
 | **Part One** |               1 |
-| **Part Two** |               2 |
+| **Part Two** |               1 |
