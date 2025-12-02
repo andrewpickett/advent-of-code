@@ -22,16 +22,17 @@ def part_two(d):
 
 def get_invalid_of_len(r, l, s):
 	parts = r.split("-")
-	if len(parts[0]) % l != 0:
-		parts[0] = "1" + ("0" * len(parts[0]))
-	if len(parts[1]) % l != 0:
-		parts[1] = "9" * (len(parts[1]) - 1)
-	if int(parts[1]) >= int(parts[0]):
-		new_range = range(int(parts[0]), int(parts[1]) + 1)
-		half_range = range(int(parts[0][0:len(parts[0]) // l]), int(parts[1][0:len(parts[1]) // l]) + 1)
-		for i in half_range:
+	l0, l1 = len(parts[0]), len(parts[1])
+	parts[0] = "1" + ("0" * l0) if l0 % l != 0 else parts[0]
+	parts[1] = "9" * (l1 - 1) if l1 % l != 0 else parts[1]
+
+	p0, p1 = int(parts[0]), int(parts[1])
+	if p1 >= p0:
+		true_range = range(p0, p1 + 1)
+		part_range = range(int(parts[0][0:len(parts[0]) // l]), int(parts[1][0:len(parts[1]) // l]) + 1)
+		for i in part_range:
 			new_num = int(str(i) * l)
-			if new_num in new_range and new_num not in s:
+			if new_num in true_range and new_num not in s:
 				s.add(new_num)
 
 

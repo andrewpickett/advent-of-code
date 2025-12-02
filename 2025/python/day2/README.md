@@ -11,7 +11,7 @@ while I was reading the problem, so I was making it much harder than it needed t
 
 In the end, my approach was something like this:
 1. Get the true range of possible values to be checking.
-   1. We know invalid numbers MUST be even length, since it's a number duplicated
+   1. We know invalid numbers MUST be even length, since it's a number duplicated (for part 1)
    2. So for the lower bound, if it's not even, then simply round up to the nearest even power of 10.
    3. For the upper bound, if it's not even, then go to the number one less than the current power of 10.
 2. Now that we have the true range of possible values, if the end is lower than the start, there's nothing to do...so we only care when it's a valid range of numbers.
@@ -23,10 +23,30 @@ In the end, my approach was something like this:
 Example: If the original range is 998-1012, we can do the above steps to find:
   1. Find the "true" range: 1000-1012
   2. The start is less than the end, so we can continue
-  3. New range: 10-10
+  3. New range: 10-10 (first half of 1000 + first half of 1012)
   4. Iterate over this new range of numbers and check if the doubled number is in our range. 1010 is in 1000-1012, so it's invalid!
   5. Add 1010 to our set of numbers
 ```
+
+With this approach, instead of having to iterate over 15 values (998-1012), we only had to check 3.
+
+A bigger example would be something like:
+```
+Example: If the original range is 8034-10235, we can do the above steps to find:
+  1. Find the "true" range: 8034-9999
+  2. The start is less than the end, so we can continue
+  3. New range: 80-99 (first half of 8034 + first half of 9999)
+  4. Iterate over this new range of numbers and check if the doubled number is in our range.
+        8080, 8181, 8282, 8383, 8484, 8585, 8686, 8787, 8888, 8989, 9090, 9191, 9292, 9393, 9494, 9595, 9696, 9797, 9898, 9999
+     Are all in our range, so they are all invalid.
+  5. Add all of them to our set of numbers
+```
+
+Instead of iterating over 2201 values (8034-10235), we only had to check 20 of them (80-99).
+
+The benefit of this, is that as you start breaking the number into smaller chunks, you have to check fewer values.
+For part 1, this doesn't really matter, because we just run it with a value of `2` as our number of chunks to break each
+number into...but for part 2 this will be extremely helpful.
 
 At the end, we are left with a set of invalid numbers, so the answer is to just return the sum. WHEW!
 
