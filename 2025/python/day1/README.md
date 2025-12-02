@@ -35,6 +35,6 @@ more than a full turn of the dial (`100`), we check how many full turns it was a
 | **Get Data** |                         2.151 |                       1.522 |
 | **Part One** |                         2.454 |                       0.529 |
 | **Part Two** |                         4.096 |                       0.711 |
-| **TOTAL**    |                         8.701 |                       2.762 |
+| **TOTAL**    |                       *8.701* |                     *2.762* |
 
 ** *Ran each part 20000 times and averaged the run times to get final execution time*
