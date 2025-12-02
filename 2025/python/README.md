@@ -17,7 +17,7 @@ For the below, I ran each part individually and then everything together.
 
 ## System Details
 
-* Python 3.10.0
+* Python 3.13 and PyPy 3.11
 * Intel(R) Core(TM) i7-6700HQ CPU @ 2.60GHz
 	* 4 Cores
    * 8 Processors

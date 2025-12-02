@@ -13,7 +13,7 @@ import day10.main as d10
 import day11.main as d11
 import day12.main as d12
 
-days = [d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12]
+days = [d2] #, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12]
 
 
 def run_all(runs):
@@ -25,7 +25,7 @@ def run_all(runs):
 			day.main(os.path.join(os.path.dirname(day.__file__), "input.txt"))
 			total_time += time.time_ns() - stime
 		runtimes.append(total_time)
-	total_avg = (sum(runtimes) // len(runtimes)) / 1000000
+	total_avg = (sum(runtimes) / len(runtimes)) / 1000000
 	print("2025 -- took {} ms (average {} ms per day over {} runs)".format(total_avg, int(total_avg // len(days)), len(runtimes)))
 
 
@@ -38,7 +38,7 @@ def run_all_get_data(runs):
 			day.get_data(os.path.join(os.path.dirname(day.__file__), "input.txt"))
 			total_time += time.time_ns() - stime
 		runtimes.append(total_time)
-	total_avg = (sum(runtimes) // len(runtimes)) / 1000000
+	total_avg = (sum(runtimes) / len(runtimes)) / 1000000
 	print("2025 get_data -- took {} ms (average {} ms per day over {} runs)".format(total_avg, int(total_avg // len(days)), len(runtimes)))
 
 
@@ -61,16 +61,16 @@ def run_part_with_no_data(runs, part2):
 			f(d)
 			total_time += time.time_ns() - stime
 		runtimes.append(total_time)
-	total_avg = (sum(runtimes) // len(runtimes)) // 1000000
+	total_avg = (sum(runtimes) / len(runtimes)) / 1000000
 	print("2025 {} -- took {} ms (average {} ms per day over {} runs)".format("part_two" if part2 else "part_one", total_avg, int(total_avg // len(days)), len(runtimes)))
 
 
 def main():
-	runs = 1
+	runs = 1000
 	run_all_get_data(runs)
 	run_all_part_one_no_data(runs)
 	run_all_part_two_no_data(runs)
-	run_all(runs)
+	# run_all(runs)
 
 
 if __name__ == "__main__":

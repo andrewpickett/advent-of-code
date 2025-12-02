@@ -30,7 +30,7 @@ more than a full turn of the dial (`100`), we check how many full turns it was a
 
 # Results
 
-|              | Exec. Time (ms) |
-|--------------|----------------:|
-| **Part One** |               1 |
-| **Part Two** |               1 |
+|              | Exec. Time (ms) - Python 3.13 | Exec. Time (ms) - PyPy 3.11 |
+|--------------|------------------------------:|----------------------------:|
+| **Part One** |                           2.4 |                         0.5 |
+| **Part Two** |                           3.8 |                         0.6 |
