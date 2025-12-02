@@ -62,6 +62,9 @@ but I was pleasantly surprised to see it finish in ~1ms...so...I really didn't h
 
 |              | Exec. Time (ms) - Python 3.13 | Exec. Time (ms) - PyPy 3.11 |
 |--------------|------------------------------:|----------------------------:|
-| **Part One** |                           0.7 |                         0.5 |
-| **Part Two** |                           1.1 |                         0.4 |
+| **Get Data** |                         0.131 |                       0.131 |
+| **Part One** |                         0.717 |                       0.220 |
+| **Part Two** |                         1.058 |                       0.276 |
+| **TOTAL**    |                         1.906 |                       0.627 |
 
+** *Ran each part 20000 times and averaged the run times to get final execution time*

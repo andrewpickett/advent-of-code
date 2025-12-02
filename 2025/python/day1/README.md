@@ -32,5 +32,9 @@ more than a full turn of the dial (`100`), we check how many full turns it was a
 
 |              | Exec. Time (ms) - Python 3.13 | Exec. Time (ms) - PyPy 3.11 |
 |--------------|------------------------------:|----------------------------:|
-| **Part One** |                           2.4 |                         0.5 |
-| **Part Two** |                           3.8 |                         0.6 |
+| **Get Data** |                         2.151 |                       1.522 |
+| **Part One** |                         2.454 |                       0.529 |
+| **Part Two** |                         4.096 |                       0.711 |
+| **TOTAL**    |                         8.701 |                       2.762 |
+
+** *Ran each part 20000 times and averaged the run times to get final execution time*

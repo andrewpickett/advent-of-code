@@ -8,20 +8,20 @@ def get_data(filename):
 def part_one(d):
 	s = set()
 	for x in d:
-		get_invalid_of_len(x, 2, s)
+		get_invalid_of_len(x.split("-").copy(), 2, s)
 	return sum(s)
 
 
 def part_two(d):
 	s = set()
 	for x in d:
-		for i in range(len(x.split("-")[1]), 1, -1):
-			get_invalid_of_len(x, i, s)
+		parts = x.split("-")
+		for i in range(len(parts[1]), 1, -1):
+			get_invalid_of_len(parts.copy(), i, s)
 	return sum(s)
 
 
-def get_invalid_of_len(r, l, s):
-	parts = r.split("-")
+def get_invalid_of_len(parts, l, s):
 	l0, l1 = len(parts[0]), len(parts[1])
 	parts[0] = "1" + ("0" * l0) if l0 % l != 0 else parts[0]
 	parts[1] = "9" * (l1 - 1) if l1 % l != 0 else parts[1]
