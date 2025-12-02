@@ -62,6 +62,6 @@ but I was pleasantly surprised to see it finish in ~1ms...so...I really didn't h
 
 |              | Exec. Time (ms) - Python 3.13 | Exec. Time (ms) - PyPy 3.11 |
 |--------------|------------------------------:|----------------------------:|
-| **Part One** |                           1.1 |                         0.5 |
-| **Part Two** |                           1.6 |                         0.5 |
+| **Part One** |                           0.7 |                         0.5 |
+| **Part Two** |                           1.1 |                         0.4 |
 
