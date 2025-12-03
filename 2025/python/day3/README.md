@@ -39,6 +39,8 @@ It's really that simple, only a couple lines of code, and it runs relatively qui
 
 This was a fun little puzzle...I actually really enjoyed it.
 
+And I mean, I improved my runtime by around 22 orders of magnitude! That deserves some type of recognition, right?!
+
 # Results
 
 |              | Exec. Time (ms) - Python 3.13 |     Exec. Time (ms) - PyPy 3.11 |
