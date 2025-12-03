@@ -19,7 +19,9 @@ after reading part 2, I realized I had to re-think this one...
 
 Ok, so just for funsies, I decided to try brute-forcing this one at first by doing 12 nested for-loops! Why not, right?!?!
 
-Yeah, that didn't work. I waited 5 minutes and it didn't even finish the first line in the input. **shrug**
+Yeah, that didn't work. I waited 5 minutes and it didn't even finish the first line in the input...I decided to do some quick "back of the napkin" maths
+and determined it would likely take over a *trillion* years to finish. After careful consideration, I decided I had better
+things to do with my time and I wasn't about to wait that long so I decided to try another approach.
 
 Ok, so once I decided to actually think through this, it wasn't too complicated in theory:
 
