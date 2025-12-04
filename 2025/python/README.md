@@ -8,14 +8,14 @@ breakdown of how long each part of my total Advent of Code takes.
 
 For the below, I ran each part individually and then everything together.
 
-|              |      Exec. Time (ms) - Python 3.13 |     Exec. Time (ms) - PyPy 3.11 |
-|--------------|-----------------------------------:|--------------------------------:|
-| **Get Data** |                              5.657 |                           2.801 |
-| **Part One** |                              4.125 |                           1.153 |
-| **Part Two** |                              8.377 |                           1.908 |
-| **TOTAL**    |                           *18.159* |                         *5.862* |
+|              |        Exec. Time (ms) - Python 3.13 | Exec. Time (ms) - PyPy 3.11 |
+|--------------|-------------------------------------:|----------------------------:|
+| **Get Data** |                              327.513 |                      50.987 |
+| **Part One** |                               40.356 |                      17.726 |
+| **Part Two** |                             1030.379 |                     269.283 |
+| **TOTAL**    |                           *1398.248* |                   *337.996* |
 
-** *Ran each part 1000 times and averaged the run times to get final execution time*
+** *Ran each part 100 times and averaged the run times to get final execution time*
 
 ## System Details
 
