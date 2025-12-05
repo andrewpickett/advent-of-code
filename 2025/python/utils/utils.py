@@ -91,3 +91,15 @@ def get_2d_array(height, width, fill_char):
 
 def rotate_matrix(matrix):
 	return [list(reversed(row)) for row in list(zip(*matrix))]
+
+
+def get_overlapping_ranges(ranges):
+	b = []
+	for r in sorted([[x.start, x.stop-1] for x in ranges]):
+		if b and b[-1].stop >= r[0] - 1:
+			old_range = b.pop(-1)
+			b.append(range(old_range.start, max(old_range.stop, r[1])))
+			# b[-1] = max(b[-1][1], r[1])
+		else:
+			b.append(range(r[0], r[1]))
+	return b

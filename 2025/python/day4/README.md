@@ -33,11 +33,11 @@ I seriously could have finished this part in about 2 minutes...but alas...I once
 
 # Results
 
-|              |        Exec. Time (ms) - Python 3.13 |      Exec. Time (ms) - PyPy 3.11 |
-|--------------|-------------------------------------:|---------------------------------:|
-| **Get Data** |                              334.266 |                           36.319 |
-| **Part One** |                               29.609 |                           11.622 |
-| **Part Two** |                              852.251 |                          233.609 |
-| **TOTAL**    |                           *1216.126* |                         *281.55* |
+|              | Exec. Time (ms) - Python 3.13 | Exec. Time (ms) - PyPy 3.11 |
+|--------------|------------------------------:|----------------------------:|
+| **Get Data** |                       233.000 |                      17.679 |
+| **Part One** |                        23.738 |                       6.430 |
+| **Part Two** |                       802.251 |                     227.365 |
+| **TOTAL**    |                    *1058.989* |                   *251.474* |
 
-** *Ran each part 100 times and averaged the run times to get final execution time*
+** *Ran each part 1000 times and averaged the run times to get final execution time*
