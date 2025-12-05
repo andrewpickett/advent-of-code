@@ -14,16 +14,13 @@ def get_data(filename):
 
 
 def part_one(d):
-	fresh = []
+	count = 0
 	for x in d["ids"]:
-		spoiled = True
 		for y in d["r"]:
 			if x in y:
-				spoiled = False
+				count += 1
 				break
-		if not spoiled:
-			fresh.append(x)
-	return len(fresh)
+	return count
 
 
 def part_two(d):

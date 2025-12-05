@@ -30,9 +30,9 @@ Well this one was extremely simple since I already had the combined ranges! All 
 
 |              | Exec. Time (ms) - Python 3.13 | Exec. Time (ms) - PyPy 3.11 |
 |--------------|------------------------------:|----------------------------:|
-| **Get Data** |                         1.560 |                       0.918 |
-| **Part One** |                        10.313 |                       0.482 |
-| **Part Two** |                         0.033 |                       0.003 |
-| **TOTAL**    |                      *11.906* |                     *1.403* |
+| **Get Data** |                         0.961 |                       0.589 |
+| **Part One** |                         6.305 |                       0.290 |
+| **Part Two** |                         0.019 |                       0.002 |
+| **TOTAL**    |                       *7.285* |                     *0.881* |
 
 ** *Ran each part 1000 times and averaged the run times to get final execution time*
