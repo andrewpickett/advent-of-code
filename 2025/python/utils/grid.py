@@ -147,6 +147,9 @@ class Grid:
 			for col in row:
 				self.set_neighbors_for_point(p=col, include_diagonals=include_diagonals)
 
+	def get_data(self):
+		return self.data
+
 	def get_row(self, row):
 		return self.data[row]
 
