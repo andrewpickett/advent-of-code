@@ -2,7 +2,6 @@ from collections import defaultdict
 
 from utils.timers import run_with_timer, get_data_with_timer
 
-import math
 
 def get_data(f):
 	coords = [tuple(map(int, parts.strip().split(","))) for parts in f.readlines()]
@@ -21,7 +20,7 @@ def part_two(d):
 
 
 def calc_dist(coords, i, j):
-	return math.sqrt((coords[i][0]-coords[j][0])**2 + (coords[i][1]-coords[j][1])**2 + (coords[i][2]-coords[j][2])**2)
+	return (coords[i][0]-coords[j][0])**2 + (coords[i][1]-coords[j][1])**2 + (coords[i][2]-coords[j][2])**2
 
 
 def run(d, distances, circuits, link_count=None):
