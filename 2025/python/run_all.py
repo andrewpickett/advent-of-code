@@ -34,9 +34,10 @@ def run_all_get_data(runs):
 	for i in range(runs):
 		total_time = 0
 		for day in days:
-			stime = time.time_ns()
-			day.get_data(os.path.join(os.path.dirname(day.__file__), "input.txt"))
-			total_time += time.time_ns() - stime
+			with open(os.path.join(os.path.dirname(day.__file__), "input.txt")) as f:
+				stime = time.time_ns()
+				day.get_data(f)
+				total_time += time.time_ns() - stime
 		runtimes.append(total_time)
 	total_avg = (sum(runtimes) / len(runtimes)) / 1000000
 	print("2025 get_data -- took {} ms (average {} ms per day over {} runs)".format(total_avg, int(total_avg // len(days)), len(runtimes)))
@@ -55,11 +56,12 @@ def run_part_with_no_data(runs, part2):
 	for i in range(runs):
 		total_time = 0
 		for day in days:
-			d = day.get_data(os.path.join(os.path.dirname(day.__file__), "input.txt"))
-			f = day.part_two if part2 else day.part_one
-			stime = time.time_ns()
-			f(d)
-			total_time += time.time_ns() - stime
+			with open(os.path.join(os.path.dirname(day.__file__), "input.txt")) as f:
+				d = day.get_data(f)
+				func = day.part_two if part2 else day.part_one
+				stime = time.time_ns()
+				func(d)
+				total_time += time.time_ns() - stime
 		runtimes.append(total_time)
 	total_avg = (sum(runtimes) / len(runtimes)) / 1000000
 	print("2025 {} -- took {} ms (average {} ms per day over {} runs)".format("part_two" if part2 else "part_one", total_avg, int(total_avg // len(days)), len(runtimes)))
