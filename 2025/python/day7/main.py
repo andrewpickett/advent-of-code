@@ -2,8 +2,8 @@ from utils.timers import run_with_timer, get_data_with_timer
 
 from collections import defaultdict
 
-def get_data(filename):
-	all_data = open(filename).readlines()
+def get_data(f):
+	all_data = f.readlines()
 	return {"lines": [x for x in all_data if "^" in x], "start": all_data[0].index("S")}
 
 def part_one(d):

@@ -1,7 +1,7 @@
 from utils.timers import run_with_timer, get_data_with_timer
 
 
-def get_data(filename):
+def get_data(f):
 	return
 
 

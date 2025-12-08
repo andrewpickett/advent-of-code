@@ -2,8 +2,8 @@ from utils.timers import run_with_timer, get_data_with_timer
 from utils.utils import get_overlapping_ranges
 
 
-def get_data(filename):
-	parts = [x.strip() for x in open(filename).read().split("\n\n")]
+def get_data(f):
+	parts = [x.strip() for x in f.read().split("\n\n")]
 	ranges = [x.strip() for x in parts[0].split("\n")]
 	ids = [int(x.strip()) for x in parts[1].split("\n")]
 	rs = []
@@ -24,7 +24,7 @@ def part_one(d):
 
 
 def part_two(d):
-	return sum(len(x) + 1 for x in d["r"])
+	return sum(len(x) for x in d["r"])
 
 
 def main(f="input.txt"):

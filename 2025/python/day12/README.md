@@ -9,13 +9,15 @@
 
 
 ### Part 2
-> _What is their similarity score?_
+> __
 
 
 
 # Results
 
-|              | Exec. Time (ms) |
-|--------------|----------------:|
-| **Part One** |                 |
-| **Part Two** |                 |
+|              |        Exec. Time (ms) - Python 3.13 |        Exec. Time (ms) - PyPy 3.11 |
+|--------------|-------------------------------------:|-----------------------------------:|
+| **Get Data** |                                      |                                    |
+| **Part One** |                                      |                                    |
+| **Part Two** |                                      |                                    |
+| **TOTAL**    |                                   ** |                                 ** |

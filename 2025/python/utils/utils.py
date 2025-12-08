@@ -95,8 +95,8 @@ def rotate_matrix(matrix):
 
 def get_overlapping_ranges(ranges):
 	b = []
-	for r in sorted([[x.start, x.stop-1] for x in ranges]):
-		if b and b[-1].stop >= r[0] - 1:
+	for r in sorted([[x.start, x.stop] for x in ranges]):
+		if b and b[-1].stop >= r[0]:
 			old_range = b.pop(-1)
 			b.append(range(old_range.start, max(old_range.stop, r[1])))
 			# b[-1] = max(b[-1][1], r[1])

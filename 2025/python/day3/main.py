@@ -1,8 +1,8 @@
 from utils.timers import run_with_timer, get_data_with_timer
 
 
-def get_data(filename):
-	return [[int(y) for y in x.strip()] for x in open(filename).readlines()]
+def get_data(f):
+	return [[int(y) for y in x.strip()] for x in f.readlines()]
 
 
 def part_one(d):

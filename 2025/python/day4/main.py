@@ -1,8 +1,8 @@
 from utils.timers import run_with_timer, get_data_with_timer
 from utils.grid import Grid
 
-def get_data(filename):
-	g = Grid(file=filename)
+def get_data(f):
+	g = Grid(file=f)
 	g.set_neighbors_for_all(include_diagonals=True)
 	return g
 

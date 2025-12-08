@@ -4,8 +4,8 @@ from utils.timers import run_with_timer, get_data_with_timer
 
 import math
 
-def get_data(filename):
-	coords = [tuple(map(int, parts.strip().split(","))) for parts in open(filename).readlines()]
+def get_data(f):
+	coords = [tuple(map(int, parts.strip().split(","))) for parts in f.readlines()]
 	distances = sorted([(calc_dist(coords, i, j), i, j) for i in range(len(coords) - 1) for j in range(i + 1, len(coords))])
 	return {"coords": coords, "distances": distances, "links": 1000}
 

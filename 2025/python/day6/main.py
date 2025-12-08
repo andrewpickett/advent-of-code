@@ -4,8 +4,8 @@ from utils.timers import run_with_timer, get_data_with_timer
 from utils.utils import rotate_matrix
 
 
-def get_data(filename):
-	lines = open(filename).read().split("\n")[:-1]
+def get_data(f):
+	lines = f.read().split("\n")[:-1]
 	indices = [(i, x) for i, x in enumerate(lines[-1]) if not x.isspace()]
 	data = []
 	for line in lines[:-1]:

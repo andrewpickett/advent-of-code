@@ -108,10 +108,13 @@ class Point:
 
 
 class Grid:
-	def __init__(self, height=0, width=0, values=None, default_value="", file=None):
-		if file:
+	def __init__(self, height=0, width=0, values=None, default_value="", filename=None, file=None):
+		if filename:
 			with open(file) as f:
 				values = [[y for y in x.strip()] for x in f.readlines()]
+		elif file:
+			values = [[y for y in x.strip()] for x in file.readlines()]
+
 		if height > 0 and width > 0 and values:
 			raise RuntimeError("Cannot define both the dimensions and default values. One or the other are required.")
 		self.data = []
