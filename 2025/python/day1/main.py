@@ -1,8 +1,8 @@
 from utils.timers import run_with_timer, get_data_with_timer
 
 
-def get_data(filename):
-	return {"d": [(x[0], int(x[1:])) for x in open(filename).readlines()], "s": 50}
+def get_data(f):
+	return {"d": [(x[0], int(x[1:])) for x in f.readlines()], "s": 50}
 
 
 def part_one(d):

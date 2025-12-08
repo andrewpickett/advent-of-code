@@ -15,5 +15,7 @@
 
 input.txt
 input.js
+sample*.txt
+sample*.js
 
 **/template/*
