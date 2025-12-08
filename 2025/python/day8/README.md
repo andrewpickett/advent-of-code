@@ -7,7 +7,8 @@ at least store the number of links to make, the list of coordinates from the inp
 distances for every point to every other.
 
 Getting the distances was going to be `O(n^2)` time...which isn't great, but since we only have 1000 entries in the input,
-I figured it should be fine.
+I figured it should be fine. I did remove the sqrt from the distance calculation, because it was adding a considerable
+amount of time and it really doesn't matter in this case.
 
 I then decided to just sort the distances in this section, since I knew I would need it for both parts.
 
