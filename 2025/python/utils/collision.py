@@ -7,17 +7,7 @@ class Point2d:
 		return "({}, {})".format(self.x, self.y)
 
 
-def _orientation(pt1, pt2, pt3):
-	v = (pt2.x - pt1.x) * (pt3.y - pt1.y) - (pt2.y - pt1.y) * (pt3.x - pt1.x)
-	if v > 0:
-		return 1
-	if v < 0:
-		return -1
-	return 0
-
-
 class Line2d:
-
 	def __init__(self, start, end):
 		self.start = start
 		self.end = end
@@ -55,3 +45,12 @@ class BoundingBox:
 
 	def __repr__(self):
 		return "ul: {}, ur: {}, bl: {}, br: {}".format(self.bounds["ul"], self.bounds["ur"], self.bounds["bl"], self.bounds["br"])
+
+
+def _orientation(pt1, pt2, pt3):
+	v = (pt2.x - pt1.x) * (pt3.y - pt1.y) - (pt2.y - pt1.y) * (pt3.x - pt1.x)
+	if v > 0:
+		return 1
+	if v < 0:
+		return -1
+	return 0
