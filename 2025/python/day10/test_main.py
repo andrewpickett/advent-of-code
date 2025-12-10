@@ -12,7 +12,7 @@ class TestMain(unittest.TestCase):
 		self.sample_file.close()
 
 	def test_part_one(self):
-		self.assertEqual(None, part_one(get_data(self.sample_file)))
+		self.assertEqual(7, part_one(get_data(self.sample_file)))
 
 	def test_part_two(self):
-		self.assertEqual(None, part_two(get_data(self.sample_file)))
+		self.assertEqual(33, part_two(get_data(self.sample_file)))

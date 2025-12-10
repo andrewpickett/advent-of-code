@@ -13,7 +13,7 @@ import day10.main as d10
 import day11.main as d11
 import day12.main as d12
 
-days = [d1, d2, d3, d4, d5, d6, d7, d8, d9]
+days = [d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12]
 
 
 def run_all(runs):
@@ -68,7 +68,7 @@ def run_part_with_no_data(runs, part2):
 
 
 def main():
-	runs = 1
+	runs = 10
 	run_all_get_data(runs)
 	run_all_part_one_no_data(runs)
 	run_all_part_two_no_data(runs)
