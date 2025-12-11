@@ -102,3 +102,7 @@ def get_overlapping_ranges(ranges):
 		else:
 			b.append(range(r[0], r[1]))
 	return b
+
+class HashableDict(dict):
+	def __hash__(self):
+		return hash(tuple(sorted(self.items())))

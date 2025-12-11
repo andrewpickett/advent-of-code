@@ -5,14 +5,12 @@ from day11.main import part_one, part_two, get_data
 
 class TestMain(unittest.TestCase):
 
-	def setUp(self):
+	def test_part_one(self):
 		self.sample_file = open("day11/sample.txt")
-
-	def tearDown(self):
+		self.assertEqual(5, part_one(get_data(self.sample_file)))
 		self.sample_file.close()
 
-	def test_part_one(self):
-		self.assertEqual(None, part_one(get_data(self.sample_file)))
-
 	def test_part_two(self):
-		self.assertEqual(None, part_two(get_data(self.sample_file)))
+		self.sample_file = open("day11/sample2.txt")
+		self.assertEqual(2, part_two(get_data(self.sample_file)))
+		self.sample_file.close()
