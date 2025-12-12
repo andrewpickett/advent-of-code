@@ -8,12 +8,12 @@ def get_data(f):
 
 
 def part_one(d):
-	return len(get_forklift_accessible([x for x in d.get_points() if x.get_value() == "@"]))
+	return len(get_forklift_accessible([x for x in d.get_points() if x.value == "@"]))
 
 
 def part_two(d):
 	count = 0
-	all_points = [x for x in d.get_points() if x.get_value() == "@"]
+	all_points = [x for x in d.get_points() if x.value == "@"]
 	iters = 1
 	while True:
 		removals = get_forklift_accessible(all_points)
@@ -22,13 +22,13 @@ def part_two(d):
 		count += len(removals)
 		for x in removals:
 			all_points.remove(x)
-			x.set_value(".")
+			x.value = "."
 		iters += 1
 	return count
 
 
 def get_forklift_accessible(rolls):
-	return set([p for p in rolls if len([x for x in p.get_neighbors() if x.get_value() == "@"]) < 4])
+	return set([p for p in rolls if len([x for x in p.neighbors if x.value == "@"]) < 4])
 
 
 def main(f="input.txt"):

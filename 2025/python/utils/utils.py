@@ -1,3 +1,9 @@
+from typing import Callable
+
+ORTHOGONAL = "orthogonal"
+DIAGONAL = "diagonal"
+ALL = "all"
+
 DIRS = {
 	"U": (-1, 0),
 	"N": (-1, 0),
@@ -38,9 +44,9 @@ DIR_TURNS = {
 DIR_COORDS = [(-1, 0), (0, 1), (1, 0), (0, -1)]
 
 NEIGHBOR_COORDS = {
-	"orthogonal": [(-1, 0), (0, 1), (1, 0), (0, -1)],
-	"diagonal": [(-1, -1), (-1, 1), (1, -1), (1, 1)],
-	"all": [(-1, 0), (0, 1), (1, 0), (0, -1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
+	ORTHOGONAL: [(-1, 0), (0, 1), (1, 0), (0, -1)],
+	DIAGONAL: [(-1, -1), (-1, 1), (1, -1), (1, 1)],
+	ALL: [(-1, 0), (0, 1), (1, 0), (0, -1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
 }
 
 
@@ -56,11 +62,25 @@ def turn_around(curr_dir):
 	return DIR_TURNS[curr_dir]["B"]
 
 
-def neighbors(grid, curr_pos, condition=lambda grid, curr, n: True, include_diagonals=False):
-	ns = NEIGHBOR_COORDS["orthogonal"]
-	if include_diagonals:
-		ns.extend(NEIGHBOR_COORDS["diagonal"])
+def neighbors(grid: list[list], curr_pos: tuple, condition: Callable[[list[list], tuple, int], bool]=lambda grid, curr, n: True, neighbor_type: str=ALL):
+	ns = []
+	if neighbor_type in [ORTHOGONAL, ALL]:
+		ns.extend(NEIGHBOR_COORDS[ORTHOGONAL])
+	if neighbor_type in [DIAGONAL, ALL]:
+		ns.extend(NEIGHBOR_COORDS[DIAGONAL])
 	return [(z[0], z[1], grid[z[0]][z[1]]) for z in tuple_add(ns, (curr_pos[0], curr_pos[1])) if condition(grid, curr_pos, z)]
+
+
+def all_neighbors(grid: list[list], curr_pos: tuple, condition: Callable[[list[list], tuple, int], bool]=lambda grid, curr, n: True):
+	return neighbors(grid, curr_pos, condition, ALL)
+
+
+def orthogonal_neighbors(grid: list[list], curr_pos: tuple, condition: Callable[[list[list], tuple, int], bool]=lambda grid, curr, n: True):
+	return neighbors(grid, curr_pos, condition, ORTHOGONAL)
+
+
+def diagonal_neighbors(grid: list[list], curr_pos: tuple, condition: Callable[[list[list], tuple, int], bool]=lambda grid, curr, n: True):
+	return neighbors(grid, curr_pos, condition, DIAGONAL)
 
 
 def tuple_add(array_of_tuples, scalar_tuple):
