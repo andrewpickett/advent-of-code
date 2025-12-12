@@ -5,7 +5,7 @@ Read each line in as a tuple of (direction, amount). I then stored that in a dic
 
 #### Time Complexity
 
-We have to read every line in the file, there's no real way around that. So this portion is going to be $O(n)$.
+We have to read every line in the file, there's no real way around that. So this portion is going to be $\Theta(n)$.
 
 ### Part 1
 > _What's the actual password to open the door?_
