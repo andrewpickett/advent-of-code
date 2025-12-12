@@ -1,7 +1,8 @@
+from typing import Callable, Any
 import time
 
 
-def get_data_with_timer(f, filename) -> object:
+def get_data_with_timer(f: Callable[..., Any], filename: str) -> object:
 	with open(filename) as file_obj:
 		stime = time.time_ns()
 		result = f(file_obj)
@@ -10,7 +11,7 @@ def get_data_with_timer(f, filename) -> object:
 	return result
 
 
-def run_with_timer(f, d) -> object:
+def run_with_timer(f: Callable[..., Any], d: object) -> object:
 	stime = time.time_ns()
 	result = f(d)
 	etime = time.time_ns()

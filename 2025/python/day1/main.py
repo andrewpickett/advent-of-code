@@ -1,22 +1,23 @@
 from utils.timers import run_with_timer, get_data_with_timer
 
+DIR_LOOKUP = {"L": -1, "R": 1}
 
 def get_data(f):
 	return {"d": [(x[0], int(x[1:])) for x in f.readlines()], "s": 50}
 
 
 def part_one(d):
-	return run_steps(d["s"], d["d"], True)
+	return run_steps(d["s"], d["d"])
 
 
 def part_two(d):
 	return run_steps(d["s"], d["d"], False)
 
 
-def run_steps(start_pos, steps, p1):
+def run_steps(start_pos, steps, p1=True):
 	pos_count = {"c": 0, "p": start_pos}
 	for x in steps:
-		next_pos = pos_count["p"] - (x[1] % 100) if x[0] == "L" else pos_count["p"] + (x[1] % 100)
+		next_pos = pos_count["p"] + DIR_LOOKUP[x[0]] * (x[1] % 100)
 		if p1:
 			next_pos %= 100
 			pos_count["c"] += 1 if next_pos == 0 else 0
