@@ -3,6 +3,12 @@
 
 Just read in each range by splitting the input on `,`.
 
+#### Time Complexity
+
+While the entire input is on only 1 line, we have to split it on `,` characters. Per the python's
+built in `.split()` function, we know that the time for this would be $O(n)$ where $n$
+is the number of elements divided by `,` in the file.
+
 ### Part 1
 > _What do you get if you add up all of the invalid IDs?_
 
@@ -50,6 +56,23 @@ number into...but for part 2 this will be extremely helpful.
 
 At the end, we are left with a set of invalid numbers, so the answer is to just return the sum. WHEW!
 
+#### Time Complexity
+
+We have to iterate over every range we found, which is going to be $\Theta(n)$ where $n$
+is the number of ranges defined in the file. Now, I then `split` and `copy` every element,
+but they are only ever going to be length of 2, which is constant (so this portion would be
+$O(1)$.
+
+I then collapse the ranges down to their "true" range, which is again $O(1)$...but then comes
+dividing the ranges into the number of valid parts and iterating over each of them to find
+valid values. For this part, we are always dividing the range into ranges that have a length
+half the size...which is effectively $n^\frac{1}{2}$.
+
+This means that this whole part of the algorithm would be $O(n^\frac{1}{2})$ where $n$ is the length of the largest number in any range.
+
+Since this is run for every line, our final time complexity would be $O(n\sqrt(n))$ or simply $O(n^\frac{3}{2})$ where $n$
+is the length of the largest number in the file.
+
 ### Part 2
 > _What do you get if you add up all of the invalid IDs using these new rules?_
 
@@ -57,6 +80,13 @@ Well, like I said, I was solving this part originally, so I knew what I needed t
 as part one, but instead of doubling the value and dividing the ranges in half and everything being based on "2", I check every
 amount of numbers that evenly divide the length of the values in my range! I was afraid this was going to run for a long time,
 but I was pleasantly surprised to see it finish in ~1ms...so...I really didn't have to change much code to get this to work!
+
+#### Time Complexity
+
+Using the same analysis I did for part 1, we can say that the "worst" part of the performance is the case where we are only
+dividing it into 2 partitions (so part 1). As we divide it into more smaller partitions, the performance only gets better...
+evenaully approaching $O(n)$. So we'd really have $m$ iterations where $m$ is the number of pertitions that evenly divide
+the longest number in the input. As such, we end up with $O(mn^\frac{3}{2})$ final complexity.
 
 # Results
 
@@ -68,3 +98,14 @@ but I was pleasantly surprised to see it finish in ~1ms...so...I really didn't h
 | **TOTAL**    |                       *1.906* |                     *0.627* |
 
 ** *Ran each part 20000 times and averaged the run times to get final execution time*
+
+#### Time Complexity
+
+If we add these three parts together, we would get something like $O(l + (m+1)n^\frac{3}{2})$. But really, that `+1` doesn't
+really add anything of value, so it's essentially $O(mn^\frac{3}{2} + l)$ where $l$ is the number of ranges in the file, $m$ is the
+number of partitions that evenly divide the largest number, and $n$ is the length of the largest number in the file.
+
+#### Possible Improvements
+
+Honestly, as of right now, I don't see any obvious major improvements that I could make. This already runs very quickly, and
+is fairly efficient.
