@@ -5,7 +5,8 @@ Read each line in as a tuple of (direction, amount). I then stored that in a dic
 
 #### Time Complexity
 
-We have to read every line in the file, there's no real way around that. So this portion is going to be $\Theta(n)$.
+We have to read every line in the file, there's no real way around that. So this portion is going to be $\Theta(n)$ where $n$
+is the number of lines in the file.
 
 ### Part 1
 > _What's the actual password to open the door?_
@@ -21,7 +22,8 @@ can just use the same function to run through the steps.
 #### Time Complexity
 
 Because of the nature of the input and problem statement, we have to go over every row from the input in order to
-determine the points at which it will stop at `0`. Therefore, this portion is $\Theta(n)$.
+determine the points at which it will stop at `0`. Therefore, this portion is $\Theta(n)$ where $n$
+is again the number of lines in the file.
 
 ### Part 2
 > _Using password method 0x434C49434B, what is the password to open the door?_
@@ -40,7 +42,7 @@ more than a full turn of the dial (`100`), we check how many full turns it was a
 #### Time Complexity
 
 Once again, we have to loop over the full input in order to figure out whenever it crosses the `0` line. This portion is
-also $\Theta(n)$.
+also $\Theta(n)$ once again with $n$ being the number of lines in the file.
 
 # Results
 
@@ -56,12 +58,13 @@ also $\Theta(n)$.
 #### Time Complexity
 
 All parts of the puzzle need to read through every line of the input, so they should all run at approximately the same
-speed. The total runtime for this day would be $\Theta(3n)$
+speed. The total runtime for this day would be $\Theta(3n)$ where $n$ is the number of lines in the file.
 
 #### Possible Improvements
 
 Instead of reading the input data 3 separate times, I could just as easily have run through it once and stored
-each of the results as it processed. This would have resulted in the entire puzzle running in $\Theta(n)$.
+each of the results as it processed. This would have resulted in the entire puzzle running in $\Theta(n)$ where $n$
+is the number of lines in the file.
 
 In testing this approach, the entire program ran in an average of **1.634 ms** compared to the above **2.899 ms** (over the course of
 20,000 executions), which certainly shows an improvement in the ballpark of what we would expect to see.
