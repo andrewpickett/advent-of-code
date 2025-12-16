@@ -14,15 +14,17 @@ correct answer. So I ran it on my input, surely it'll work, since it worked on a
 Incorrect.
 
 I kept re-reading, finding potential edge cases, fixing them, and trying again. Every time, it works on all sample inputs
-but doesn't work on my input...and it keeps giving the SAME answer, no matter what things I fix/change.
+but doesn't work on my input...and it keeps giving the SAME answer, no matter what things I fix/change. The fact that
+my algorithm also is not very quick and takes over 2 minutes to run each time was just driving me nuts...
 
-I decided to look up some of the reddit posts about it, and they supplied more inputs to test and edge cases...so I would
-try those, and it STILL works on all of them, but not my input. I decided to look up a solution and run it on my input just
+So, I reluctantly decided to look up some of the reddit posts about it, and they supplied more inputs to test and edge cases...so I would
+try those, and it STILL works on all of them, but not my input. Finally, I resorted to looking up a solution and run it on my input just
 to see how far off my answer was (which killed me!).
 
 It seems like my solution is off by 1 round or something similar. I get `81 x 2627` whereas the correct answer APPEARS
 to be `82 x 2624`. So it looks like I have ONE round of attacks that isn't getting registered or something in some random
-use case...and again, I have no idea what it is. I have spent HOURS on this puzzle...
+use case...and again, I have no idea what it is. I have spent HOURS on this puzzle...I even output the final result of the correct solution
+and the final result of my solution and they were identical...somewhere I'm just not counting correctly?!?!
 
 ### Part 2
 > __
