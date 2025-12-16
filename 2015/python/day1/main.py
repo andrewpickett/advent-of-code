@@ -1,8 +1,8 @@
 from utils.timers import run_with_timer, get_data_with_timer
 
 
-def get_data(filename):
-	return open(filename).readline().strip()
+def get_data(f):
+	return f.readline().strip()
 
 
 def part_one(d):
@@ -15,6 +15,7 @@ def part_two(d):
 		floor += 1 if direction == '(' else -1
 		if floor < 0:
 			return i + 1
+	return 0
 
 
 def main(f="input.txt"):
