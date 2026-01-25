@@ -26,7 +26,7 @@ import day23.main as d23
 import day24.main as d24
 import day25.main as d25
 
-days = [d1]
+days = [d2]
 
 
 def run_all(runs):

@@ -26,7 +26,11 @@ Again, since we have the numbers already usable, it's just follow the math that 
 
 # Results
 
-|              | Exec. Time (ms) |
-|--------------|----------------:|
-| **Part One** |              <1 |
-| **Part Two** |              <1 |
+|              | Exec. Time (ms) - Python 3.13 | Exec. Time (ms) - PyPy 3.11 |
+|--------------|------------------------------:|----------------------------:|
+| **Get Data** |                         0.052 |                       0.579 |
+| **Part One** |                         0.068 |                       0.061 |
+| **Part Two** |                         0.350 |                       0.060 |
+| **TOTAL**    |                     **0.470** |                   **0.700** |
+
+** *Ran each part 20,000 times and averaged the run times to get final execution time*
